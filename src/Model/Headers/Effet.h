@@ -14,15 +14,15 @@ typedef struct s_effet
 typedef t_effet * p_effet;
 
 struct s_effetChainable {
-    p_effet effet;
-    p_effet effetSuivant;
+    struct s_effet * effet;
+    struct s_effet * effetSuivant;
 };
 
 typedef s_effetChainable t_effetChainable;
 typedef t_effetChainable* p_effetChainable;
 
 struct s_listeEffets {
-    p_effetChainable premiereEffet;
+    struct s_effetChainable * premiereEffet;
     int nombreEffets;
 };
 

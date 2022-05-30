@@ -14,7 +14,7 @@ typedef struct s_monstre
     int habitatMax;
     int pointsVie;
     int pointsDegats;
-    p_listeAttaques attaques;
+    struct s_listeAttaques * attaques;
 } t_monstre;
 
 typedef t_monstre * p_monstre;

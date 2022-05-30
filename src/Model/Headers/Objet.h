@@ -14,15 +14,15 @@ typedef struct s_objet
 typedef t_objet * p_objet;
 
 struct s_objetChainable {
-    p_objet objet;
-    p_objet objetSuivant;
+    struct s_objet * objet;
+    struct s_objet * objetSuivant;
 };
 
 typedef s_objetChainable t_objetChainable;
 typedef t_objetChainable* p_objetChainable;
 
 struct s_listeObjets {
-    p_objetChainable premiereObjet;
+    struct s_objetChainable * premiereObjet;
     int nombreObjets;
 };
 

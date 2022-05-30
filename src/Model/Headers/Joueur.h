@@ -17,8 +17,12 @@ struct s_joueur {
     int pointsEnergieMax;
     int pointsManaActuels;
     int pointsManaMax;
-    p_listeObjets listeObjets;
-    p_deck deck;
+    struct s_listeObjets * listeObjets;
+    struct deck * deck;
+    bool lenteur;
+    bool faiblesse;
+    int toursRestantsLenteur;
+    int toursRestantsFaiblesse;
 };
 
 typedef s_joueur t_joueur;

@@ -13,6 +13,6 @@ typedef struct s_event
     char* choixB;
 } t_event;
 
-typedef s_event* t_event;
+typedef s_event* p_event;
 
 #endif //THESPIRE_EVENT_H

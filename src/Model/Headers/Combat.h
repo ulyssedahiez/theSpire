@@ -9,9 +9,9 @@
 
 typedef struct s_combat
 {
-    p_monstre monstre;
+    struct s_monstre * monstre;
 } t_combat;
 
-typedef s_combat* t_combat;
+typedef s_combat* p_combat;
 
 #endif //THESPIRE_COMBAT_H

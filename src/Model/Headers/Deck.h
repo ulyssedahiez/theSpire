@@ -8,7 +8,7 @@
 #include "Carte.h"
 
 struct deck {
-    p_listeCartes listeCartes;
+    struct s_listeCartes * listeCartes;
 };
 
 typedef s_deck t_deck;
