@@ -4,7 +4,7 @@
 
 #ifndef THESPIRE_JOUEUR_H
 #define THESPIRE_JOUEUR_H
-
+#include <stdbool.h>
 #include "Objet.h"
 #include "Deck.h"
 
@@ -12,7 +12,6 @@ struct s_joueur {
     int pointsVieActuels;
     int pointsVieMax;
     int pointsEsquiveActuels;
-    int pointsEsquiveMax;
     int pointsEnergieActuels;
     int pointsEnergieMax;
     int pointsManaActuels;
@@ -28,4 +27,5 @@ struct s_joueur {
 typedef s_joueur t_joueur;
 typedef t_joueur* p_joueur;
 
+p_joueur creerJoueur();
 #endif //THESPIRE_JOUEUR_H
