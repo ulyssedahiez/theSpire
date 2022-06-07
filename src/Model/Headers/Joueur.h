@@ -28,4 +28,7 @@ typedef s_joueur t_joueur;
 typedef t_joueur* p_joueur;
 
 p_joueur creerJoueur();
+
+bool setPointsVieActuels(p_joueur joueur, )
+
 #endif //THESPIRE_JOUEUR_H

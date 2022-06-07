@@ -12,6 +12,8 @@ struct deck {
 };
 
 typedef s_deck t_deck;
-typedef t_deck* p_deck;
+typedef t_deck *p_deck;
+
+p_deck creerDeck(s_listeCartes listeCarteDeck);
 
 #endif //THESPIRE_DECK_H
