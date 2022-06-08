@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include "Headers/Map.h"
 p_joueur creerMap() {
-    p_map map = malloc(sizeof(t_joueur));
+    p_map map = malloc(sizeof(t_map));
     joueur->pointsVieActuels = 75;
     joueur->pointsVieMax = 75;
     joueur->pointsEsquiveActuels = 0;

@@ -31,4 +31,4 @@ add_executable(theSpire
         src/Model/Monstre.c
         src/Model/Objet.c
         src/Model/Salle.c
-        main.c)
+        main.c src/Vue/Menu/Menu.c src/Vue/Menu/Headers/Menu.h)

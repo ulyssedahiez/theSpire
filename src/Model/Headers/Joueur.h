@@ -29,8 +29,10 @@ typedef t_joueur * p_joueur;
 
 p_joueur creerJoueur();
 
-bool ajouterPointsVieActuels(p_joueur joueur);
-bool ajouterPointsEsquiveActuels(p_joueur joueur);
-bool ajouterPointsManaActuels(p_joueur joueur);
+void modifierPointsVieActuels(p_joueur joueur, int points);
+
+void modifierPointsEsquiveActuels(p_joueur joueur, int points);
+
+void modifierPointsManaActuels(p_joueur joueur, int points);
 
 #endif //THESPIRE_JOUEUR_H

@@ -14,12 +14,13 @@
 #include "Objet.h"
 #include "Deck.h"
 #include "stdlib.h"
+#include "Salle.h"
 
 typedef struct s_map {
     int nombreSalle;
+    struct s_map* premiereSalle;
     struct s_map* salleSuivante;
     struct s_listeObjets * listeObjets;
-    struct deck * deck;
     bool lenteur;
     bool faiblesse;
     int toursRestantsLenteur;
