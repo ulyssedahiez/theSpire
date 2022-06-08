@@ -24,15 +24,4 @@ p_joueur creerJoueur() {
     return joueur;
 }
 
-void modifierPointsVieActuels(p_joueur joueur, int points){
-    joueur->pointsVieActuels += points;
-}
 
-void modifierPointsEsquiveActuels(p_joueur joueur, int points)
-{
-
-}
-
-void modifierPointsManaActuels(p_joueur joueur, int points){
-    
-}

@@ -29,10 +29,7 @@ typedef t_joueur * p_joueur;
 
 p_joueur creerJoueur();
 
-void modifierPointsVieActuels(p_joueur joueur, int points);
-
-void modifierPointsEsquiveActuels(p_joueur joueur, int points);
-
-void modifierPointsManaActuels(p_joueur joueur, int points);
+/**  bool : La fonction renvoie true si le joueur a perdu. */
+bool verifierProprietesJoueur(p_joueur joueur, int nbProprietesAVerifier, ...);
 
 #endif //THESPIRE_JOUEUR_H
