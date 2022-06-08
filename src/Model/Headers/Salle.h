@@ -7,6 +7,7 @@
 
 #include "Event.h"
 #include "Combat.h"
+#include "stdlib.h"
 
 typedef struct s_salle
 {
@@ -20,7 +21,6 @@ typedef struct s_salle
 typedef t_salle * p_salle;
 
 
-
 typedef struct s_salleDebut
 {
     struct s_salle * salleGauche;
@@ -30,7 +30,6 @@ typedef struct s_salleDebut
 } t_salleDebut;
 
 typedef t_salleDebut * p_salleDebut;
-
 
 
 typedef struct s_salleFin

@@ -4,6 +4,7 @@
 
 #ifndef THESPIRE_EVENT_H
 #define THESPIRE_EVENT_H
+#include "stdlib.h"
 
 typedef struct s_event
 {
@@ -13,6 +14,6 @@ typedef struct s_event
     char* choixB;
 } t_event;
 
-typedef s_event* p_event;
+typedef t_event * p_event;
 
 #endif //THESPIRE_EVENT_H

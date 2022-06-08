@@ -4,7 +4,7 @@
 
 #ifndef THESPIRE_PARTIE_H
 #define THESPIRE_PARTIE_H
-
+#include "stdlib.h"
 
 
 #endif //THESPIRE_PARTIE_H

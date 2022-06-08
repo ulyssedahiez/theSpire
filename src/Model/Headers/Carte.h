@@ -6,8 +6,9 @@
 #define THESPIRE_CARTE_H
 
 #include "Effet.h"
+#include "stdlib.h"
 
-struct s_carte {
+typedef struct s_carte {
     char *nom;
     char *rarete;
     int pointsEnergie;
@@ -15,25 +16,22 @@ struct s_carte {
     struct s_listeEffets *listeEffets;
     char *texteTechnique;
     char *texteDescription;
-};
+} t_carte;
 
-typedef s_carte t_carte;
 typedef t_carte *p_carte;
 
-struct s_carteChainable {
+typedef struct s_carteChainable {
     struct s_carte *carte;
     struct s_carte *carteSuivante;
-};
+} t_carteChainable;
 
-typedef s_carteChainable t_carteChainable;
 typedef t_carteChainable *p_carteChainable;
 
-struct s_listeCartes {
+typedef struct s_listeCartes {
     struct s_carteChainable *premiereCarte;
     int nombreCartes;
-};
+} t_listeCartes;
 
-typedef s_listeCartes t_listeCartes;
 typedef t_listeCartes *p_listeCartes;
 
 #endif //THESPIRE_CARTE_H
