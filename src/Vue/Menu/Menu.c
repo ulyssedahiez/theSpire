@@ -82,3 +82,7 @@ void lancerMenu(){
     }
     printf("\n\n");
 }
+
+int menuChoixSalle(char* choix1, char* choix2, char* choix3, char* choix4) {
+    printf("swag !");
+}

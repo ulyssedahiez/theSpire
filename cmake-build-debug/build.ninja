@@ -147,6 +147,20 @@ build CMakeFiles/theSpire.dir/src/Vue/Menu/Menu.c.obj: C_COMPILER__theSpire_Debu
   OBJECT_DIR = CMakeFiles\theSpire.dir
   OBJECT_FILE_DIR = CMakeFiles\theSpire.dir\src\Vue\Menu
 
+build CMakeFiles/theSpire.dir/src/Controllers/Round.c.obj: C_COMPILER__theSpire_Debug C$:/Users/Ulysse$ Dahiez/Documents/AP3/Algorithmique/C/theSpire/src/Controllers/Round.c || cmake_object_order_depends_target_theSpire
+  DEP_FILE = CMakeFiles\theSpire.dir\src\Controllers\Round.c.obj.d
+  FLAGS = -g -std=gnu11
+  INCLUDES = -I"C:/Users/Ulysse Dahiez/Documents/AP3/Algorithmique/C/theSpire/src/Controllers/Headers" -I"C:/Users/Ulysse Dahiez/Documents/AP3/Algorithmique/C/theSpire/src/Model/Headers"
+  OBJECT_DIR = CMakeFiles\theSpire.dir
+  OBJECT_FILE_DIR = CMakeFiles\theSpire.dir\src\Controllers
+
+build CMakeFiles/theSpire.dir/src/Services/JoueurService.c.obj: C_COMPILER__theSpire_Debug C$:/Users/Ulysse$ Dahiez/Documents/AP3/Algorithmique/C/theSpire/src/Services/JoueurService.c || cmake_object_order_depends_target_theSpire
+  DEP_FILE = CMakeFiles\theSpire.dir\src\Services\JoueurService.c.obj.d
+  FLAGS = -g -std=gnu11
+  INCLUDES = -I"C:/Users/Ulysse Dahiez/Documents/AP3/Algorithmique/C/theSpire/src/Controllers/Headers" -I"C:/Users/Ulysse Dahiez/Documents/AP3/Algorithmique/C/theSpire/src/Model/Headers"
+  OBJECT_DIR = CMakeFiles\theSpire.dir
+  OBJECT_FILE_DIR = CMakeFiles\theSpire.dir\src\Services
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target theSpire
@@ -155,7 +169,7 @@ build CMakeFiles/theSpire.dir/src/Vue/Menu/Menu.c.obj: C_COMPILER__theSpire_Debu
 #############################################
 # Link the executable theSpire.exe
 
-build theSpire.exe: C_EXECUTABLE_LINKER__theSpire_Debug CMakeFiles/theSpire.dir/src/Controllers/Partie.c.obj CMakeFiles/theSpire.dir/src/Model/Attaque.c.obj CMakeFiles/theSpire.dir/src/Model/Carte.c.obj CMakeFiles/theSpire.dir/src/Model/Combat.c.obj CMakeFiles/theSpire.dir/src/Model/Deck.c.obj CMakeFiles/theSpire.dir/src/Model/Effet.c.obj CMakeFiles/theSpire.dir/src/Model/Event.c.obj CMakeFiles/theSpire.dir/src/Model/Joueur.c.obj CMakeFiles/theSpire.dir/src/Model/Map.c.obj CMakeFiles/theSpire.dir/src/Model/Monstre.c.obj CMakeFiles/theSpire.dir/src/Model/Objet.c.obj CMakeFiles/theSpire.dir/src/Model/Salle.c.obj CMakeFiles/theSpire.dir/main.c.obj CMakeFiles/theSpire.dir/src/Vue/Menu/Menu.c.obj
+build theSpire.exe: C_EXECUTABLE_LINKER__theSpire_Debug CMakeFiles/theSpire.dir/src/Controllers/Partie.c.obj CMakeFiles/theSpire.dir/src/Model/Attaque.c.obj CMakeFiles/theSpire.dir/src/Model/Carte.c.obj CMakeFiles/theSpire.dir/src/Model/Combat.c.obj CMakeFiles/theSpire.dir/src/Model/Deck.c.obj CMakeFiles/theSpire.dir/src/Model/Effet.c.obj CMakeFiles/theSpire.dir/src/Model/Event.c.obj CMakeFiles/theSpire.dir/src/Model/Joueur.c.obj CMakeFiles/theSpire.dir/src/Model/Map.c.obj CMakeFiles/theSpire.dir/src/Model/Monstre.c.obj CMakeFiles/theSpire.dir/src/Model/Objet.c.obj CMakeFiles/theSpire.dir/src/Model/Salle.c.obj CMakeFiles/theSpire.dir/main.c.obj CMakeFiles/theSpire.dir/src/Vue/Menu/Menu.c.obj CMakeFiles/theSpire.dir/src/Controllers/Round.c.obj CMakeFiles/theSpire.dir/src/Services/JoueurService.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\theSpire.dir

@@ -25,11 +25,8 @@ typedef struct s_joueur {
     int toursRestantsFaiblesse;
 } t_joueur;
 
-typedef t_joueur * p_joueur;
+typedef t_joueur* p_joueur;
 
 p_joueur creerJoueur();
-
-/**  bool : La fonction renvoie true si le joueur a perdu. */
-bool verifierProprietesJoueur(p_joueur joueur, int nbProprietesAVerifier, ...);
 
 #endif //THESPIRE_JOUEUR_H
