@@ -7,8 +7,9 @@
 #include <stdbool.h>
 #include "Objet.h"
 #include "Deck.h"
+#include "stdlib.h"
 
-struct s_joueur {
+typedef struct s_joueur {
     int pointsVieActuels;
     int pointsVieMax;
     int pointsEsquiveActuels;
@@ -22,10 +23,10 @@ struct s_joueur {
     bool faiblesse;
     int toursRestantsLenteur;
     int toursRestantsFaiblesse;
-};
+} t_joueur;
 
-typedef s_joueur t_joueur;
 typedef t_joueur* p_joueur;
 
 p_joueur creerJoueur();
+
 #endif //THESPIRE_JOUEUR_H

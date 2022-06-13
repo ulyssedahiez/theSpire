@@ -1,0 +1,3 @@
+C:/Users/Ulysse Dahiez/Documents/AP3/Algorithmique/C/theSpire/cmake-build-debug/CMakeFiles/theSpire.dir
+C:/Users/Ulysse Dahiez/Documents/AP3/Algorithmique/C/theSpire/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Ulysse Dahiez/Documents/AP3/Algorithmique/C/theSpire/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -6,12 +6,13 @@
 #define THESPIRE_COMBAT_H
 
 #include "Monstre.h"
+#include "stdlib.h"
 
 typedef struct s_combat
 {
     struct s_monstre * monstre;
 } t_combat;
 
-typedef s_combat* p_combat;
+typedef t_combat * p_combat;
 
 #endif //THESPIRE_COMBAT_H

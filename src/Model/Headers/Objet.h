@@ -5,6 +5,8 @@
 #ifndef THESPIRE_OBJET_H
 #define THESPIRE_OBJET_H
 
+#include "stdlib.h"
+
 typedef struct s_objet
 {
     char* nom;
@@ -13,20 +15,18 @@ typedef struct s_objet
 
 typedef t_objet * p_objet;
 
-struct s_objetChainable {
+typedef struct s_objetChainable {
     struct s_objet * objet;
     struct s_objet * objetSuivant;
-};
+} t_objetChainable;
 
-typedef s_objetChainable t_objetChainable;
 typedef t_objetChainable* p_objetChainable;
 
-struct s_listeObjets {
+typedef struct s_listeObjets {
     struct s_objetChainable * premiereObjet;
     int nombreObjets;
-};
+} t_listeObjets;
 
-typedef s_listeObjets t_listeObjets;
 typedef t_listeObjets* p_listeObjets;
 
 #endif //THESPIRE_OBJET_H

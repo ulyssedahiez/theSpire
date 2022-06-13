@@ -6,6 +6,7 @@
 #define THESPIRE_MONSTRE_H
 
 #include "Attaque.h"
+#include "stdlib.h"
 
 typedef struct s_monstre
 {

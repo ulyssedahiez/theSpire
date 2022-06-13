@@ -4,7 +4,25 @@
 
 #ifndef THESPIRE_MAP_H
 #define THESPIRE_MAP_H
+#include <stdbool.h>
+#include "stdlib.h"
+#include "Objet.h"
+#include "Deck.h"
+#include "stdlib.h"
+#include "Salle.h"
 
+typedef struct s_map {
+    int nombreSalle;
+    struct s_salleDebut* premiereSalle;
+    struct s_salle * derniereSalle;
+    struct s_listeObjets * listeObjets;
+} t_map;
+
+typedef t_map* p_map;
+
+p_map creerMap();
+
+p_salle retournerSalle();
 
 
 #endif //THESPIRE_MAP_H

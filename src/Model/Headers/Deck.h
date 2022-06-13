@@ -6,12 +6,14 @@
 #define THESPIRE_DECK_H
 
 #include "Carte.h"
+#include "stdlib.h"
 
-struct deck {
-    struct s_listeCartes * listeCartes;
-};
+typedef struct s_deck {
+    struct s_listeCartes *listeCartes;
+} t_deck;
 
-typedef s_deck t_deck;
-typedef t_deck* p_deck;
+typedef t_deck * p_deck;
+
+p_deck creerDeck(p_listeCartes listeCarteDeck);
 
 #endif //THESPIRE_DECK_H
