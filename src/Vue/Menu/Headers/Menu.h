@@ -10,5 +10,6 @@ int lancerMenu();
 int menuChoixSalle(char* choix1, char* choix2, char* choix3, char* choix4);
 
 int credit();
+int regles();
 
 #endif //THESPIRE_MENU_H

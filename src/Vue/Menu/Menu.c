@@ -18,7 +18,7 @@ int lancerMenu(){
     printf("\n\n");
     printf("1) Lancer une partie\n2) Regles du jeu\n3) Credit\n4) Quitter\n");
     printf("\n\n");
-    printf("Quel est votre choix? taper 1, 2 ou 3 \n\n");
+    printf("Quel est votre choix ? \n\n");
     scanf("%d", &choix);
 
     printf("\n");
@@ -27,11 +27,13 @@ int lancerMenu(){
         case 1:
             return 1;
         case 2:
-            return 2;
+            regles();
+            return lancerMenu();
         case 3:
             credit();
             return lancerMenu();
         case 4:
+            printf("\nBye Bye !\n");
             return 0;
         default:
             printf("Vous n'avez pas rentre un nombre correct.\n\n");
@@ -47,9 +49,33 @@ int menuChoixSalle(char* choix1, char* choix2, char* choix3, char* choix4) {
 }
 
 int credit(){
-    printf("Developped by Cod@net\n\nTeam :\n\n\tCodeur Informatique : Julien Lecat.\n\tManager des Fichiers : Mael Bizot.\n\tInventeur Informatique : Charles Chaudron.\n\tResponsable Indentation : Ulysse Dahiez.\n\n\nversion 0.0.1 Jun 2022.\n");
+    int choix;//(char*) calloc(50, sizeof(char));//'r';
 
-    printf("tapez entrer pour revenir au menu");
-    getchar();
+    printf("Developped by Cod@net\n\nTeam :\n\n\tCodeur Informatique : Julien Lecat.\n\tManager des Fichiers : Mael Bizot.\n\tInventeur Informatique : Charles Chaudron.\n\tResponsable Indentation : Ulysse Dahiez.\n\n\nversion 0.0.1 Jun 2022.\n");
+    printf("\ntapez 0 pour revenir au menu\n");
+    scanf("%d", &choix);
+    if(choix == 0){
+        return 0;
+    }else{
+        return credit();
+    }
     return 0;
 }
+
+int regles() {
+    int choix;//(char*) calloc(50, sizeof(char));//'r';
+
+    printf("Developped by Cod@net\n\nTeam :\n\n\tCodeur Informatique : Julien Lecat.\n\tManager des Fichiers : Mael Bizot.\n\tInventeur Informatique : Charles Chaudron.\n\tResponsable Indentation : Ulysse Dahiez.\n\n\nversion 0.0.1 Jun 2022.\n");
+    printf("\ntapez 0 pour revenir au menu\n");
+    scanf("%d", &choix);
+    if (choix == 0) {
+        return 0;
+    } else {
+        return credit();
+    }
+    return 0;
+
+}
+
+
+
