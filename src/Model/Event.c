@@ -13,9 +13,15 @@ p_event creerEvent(int idEvent, char *descriptionEvent, char *choixAEvent, char 
     return event;
 }
 
-typedef struct s_listeEvent {
-    struct s_eventChainable *premierEvent;
-} t_listeEvent;
+/*
+
+t_listeEvent creerListeEvent(){
+    for(int i = 0; i<5; i++){
+        t_listeEvent laListeEvent= malloc(sizeof(t_listeEvent))
+    }
+}
+
+*/
 
 /*
 p_event eventA = creerEvent(1,"Peter découvre un miniboss en train de dormir", " Lancer un combat contre un miniboss (gains normaux en cas de victoire)", "Ne pas faire le combat et avancer normalement" );

@@ -16,12 +16,10 @@ void processusPartie()
     }
 
     if (verifierDefaite(peter)) {
-
-    } else if (verifierVictoire(map)) {
-
+        printf("T'as perdu !");
+    } else if (verifierVictoire(salleActuelle)) {
+        printf("Bravo, gagné !");
     }
-
-    return;
 }
 
 void remplirMap(p_map map)
@@ -30,10 +28,17 @@ void remplirMap(p_map map)
 }
 
 bool verifierDefaite(p_joueur joueur) {
-
+    if (0 == joueur->pointsVieActuels) {
+        return true;
+    }
+    return false;
 }
 
-bool verifierVictoire(p_map map) {
+bool verifierVictoire(p_salle salleActuelle) {
+    if (NULL == salleActuelle->salleGauche && NULL == salleActuelle->salleMilieu && NULL == salleActuelle->salleDroite) {
+        return true;
+    }
+    return false;
 
 }
 

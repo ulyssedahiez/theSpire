@@ -31,7 +31,6 @@ typedef struct s_salleDebut
 
 typedef t_salleDebut * p_salleDebut;
 
-
 typedef struct s_salleFin
 {
     struct s_combat * combat;

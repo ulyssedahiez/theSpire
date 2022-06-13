@@ -5,6 +5,7 @@
 #ifndef THESPIRE_PARTIE_H
 #define THESPIRE_PARTIE_H
 #include "stdlib.h"
+#include "stdio.h"
 #include "Map.h"
 #include "Joueur.h"
 #include "../../Services/Headers/JoueurService.h"
@@ -16,7 +17,7 @@ void remplirMap(p_map map);
 
 bool verifierDefaite(p_joueur joueur);
 
-bool verifierVictoire(p_map map);
+bool verifierVictoire(p_salle salleActuelle);
 
 p_salle choisirPremiereSalle(p_salleDebut salleActuelle);
 
