@@ -2,10 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "theSpire.exe"
-		},
-		{
-			"path" : "theSpire.pdb"
+			"path" : "theSpire"
 		}
 	],
 	"backtrace" : 1,
@@ -61,11 +58,11 @@
 			[
 				{
 					"backtrace" : 2,
-					"path" : "C:/Users/Ulysse Dahiez/Documents/AP3/Algorithmique/C/theSpire/src/Controllers/Headers"
+					"path" : "/home/charles/Documents/dev/theSpire/src/Controllers/Headers"
 				},
 				{
 					"backtrace" : 3,
-					"path" : "C:/Users/Ulysse Dahiez/Documents/AP3/Algorithmique/C/theSpire/src/Model/Headers"
+					"path" : "/home/charles/Documents/dev/theSpire/src/Model/Headers"
 				}
 			],
 			"language" : "C",
@@ -110,16 +107,12 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
-			},
-			{
-				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
-				"role" : "libraries"
 			}
 		],
 		"language" : "C"
 	},
 	"name" : "theSpire",
-	"nameOnDisk" : "theSpire.exe",
+	"nameOnDisk" : "theSpire",
 	"paths" : 
 	{
 		"build" : ".",
