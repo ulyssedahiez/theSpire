@@ -5,8 +5,10 @@
 #ifndef THESPIRE_MENU_H
 #define THESPIRE_MENU_H
 
-void lancerMenu();
+int lancerMenu();
 
 int menuChoixSalle(char* choix1, char* choix2, char* choix3, char* choix4);
+
+int credit();
 
 #endif //THESPIRE_MENU_H

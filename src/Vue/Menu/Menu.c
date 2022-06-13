@@ -7,10 +7,17 @@
 #include <stdlib.h>
 
 
-void lancerMenu(){
+int lancerMenu(){
+
 
     int choix;
-    printf("THE SPIRE \n\n");
+    printf("\n");
+    printf("      _____ _          ___      _         \n     |_   _| |_  ___  / __|_ __(_)_ _ ___ \n       | | | ' \\/ -_) \\__ \\ '_ \\ | '_/ -_)\n       |_| |_||_\\___| |___/ .__/_|_| \\___|\n                            |_|             \n");
+    printf("\n");
+    printf("Bienvenue dans the Spire, veuillez selectionner un numero.");
+    printf("\n\n");
+    printf("1) Lancer une partie\n2) Regles du jeu\n3) Credit\n4) Quitter\n");
+    printf("\n\n");
     printf("Quel est votre choix? taper 1, 2 ou 3 \n\n");
     scanf("%d", &choix);
 
@@ -18,66 +25,18 @@ void lancerMenu(){
     switch (choix)
     {
         case 1:
-            printf("Vous avez choisi le premier choix\n\n");
-            int i = 0;
-            printf("Quel est votre choix? taper 1, 2 ou 3\n\n");
-            scanf("%d", &i);
-            switch(i){
-                case 1:
-                    printf("choix 1 du sous menu 1\n\n");
-                    break;
-                case 2:
-                    printf("choix 2 du sous menu 1\n\n");
-                    break;
-                case 3:
-                    printf("choix 3 du sous menu 1 \n\n");
-                    break;
-                default:
-                    printf("Vous n'avez pas rentre un nombre correct.\n\n");
-                    break;
-            }
-            break;
+            return 1;
         case 2:
-            printf("Vous avez choisi le deuxieme choix\n\n");
-            printf("Quel est votre choix?taper 1, 2 ou 3\n\n");
-            scanf("%d", &i);
-            switch(i){
-                case 1:
-                    printf("choix 1 du sous menu 2\n\n");
-                    break;
-                case 2:
-                    printf("choix 2 du sous menu 2\n\n");
-                    break;
-                case 3:
-                    printf("choix 3 du sous menu 2 \n\n");
-                    break;
-                default:
-                    printf("Vous n'avez pas rentre un nombre correct.\n\n");
-                    break;
-            }
-            break;
+            return 2;
         case 3:
-            printf("Vous avez choisi le troisieme choix\n\n");
-            printf("Quel est votre choix?taper 1, 2 ou 3\n\n");
-            scanf("%d", &i);
-            switch(i){
-                case 1:
-                    printf("choix 1 du sous menu 3\n\n");
-                    break;
-                case 2:
-                    printf("choix 2 du sous menu 3\n\n");
-                    break;
-                case 3:
-                    printf("choix 3 du sous menu 3 \n\n");
-                    break;
-                default:
-                    printf("Vous n'avez pas rentre un nombre correct.\n\n");
-                    break;
-            }
-            break;
+            credit();
+            return lancerMenu();
+        case 4:
+            return 0;
         default:
             printf("Vous n'avez pas rentre un nombre correct.\n\n");
-            break;
+            return lancerMenu();
+
 
     }
     printf("\n\n");
@@ -85,4 +44,12 @@ void lancerMenu(){
 
 int menuChoixSalle(char* choix1, char* choix2, char* choix3, char* choix4) {
     printf("swag !");
+}
+
+int credit(){
+    printf("Developped by Cod@net\n\nTeam :\n\n\tCodeur Informatique : Julien Lecat.\n\tManager des Fichiers : Mael Bizot.\n\tInventeur Informatique : Charles Chaudron.\n\tResponsable Indentation : Ulysse Dahiez.\n\n\nversion 0.0.1 Jun 2022.\n");
+
+    printf("tapez entrer pour revenir au menu");
+    getchar();
+    return 0;
 }
