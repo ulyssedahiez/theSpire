@@ -10,13 +10,14 @@ void processusPartie()
     p_map map = creerMap();
     p_salle salleActuelle = choisirPremiereSalle(map->premiereSalle);
 
+    while (true != verifierDefaite(peter) && true != verifierVictoire(salleActuelle)) {
 
-    while (true != verifierDefaite(peter) && true != verifierVictoire(map)) {
 
+        choisirSalleSuivante(map, salleActuelle);
     }
 
     if (verifierDefaite(peter)) {
-        printf("T'as perdu !");
+        printf("Perdu !");
     } else if (verifierVictoire(salleActuelle)) {
         printf("Bravo, gagné !");
     }
