@@ -31,11 +31,10 @@ typedef struct s_salleDebut
 
 typedef t_salleDebut * p_salleDebut;
 
-typedef struct s_salleFin
-{
-    struct s_combat * combat;
-} t_salleFin;
+p_salleDebut creerSalleDebut();
 
-typedef t_salleFin * p_salleFin;
+p_salle creerSalle();
+
+void remplirSalle(p_salle salle, p_event event, p_combat combat);
 
 #endif //THESPIRE_SALLE_H
