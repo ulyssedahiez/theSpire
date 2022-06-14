@@ -1,3 +1,0 @@
-/home/charles/Documents/dev/theSpire/cmake-build-debug/CMakeFiles/theSpire.dir
-/home/charles/Documents/dev/theSpire/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/charles/Documents/dev/theSpire/cmake-build-debug/CMakeFiles/rebuild_cache.dir
