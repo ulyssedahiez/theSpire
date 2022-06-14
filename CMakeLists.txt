@@ -8,7 +8,9 @@ include_directories(src/Model/Headers)
 
 add_executable(theSpire
         src/Controllers/Headers/Partie.h
+        src/Controllers/Headers/Round.h
         src/Controllers/Partie.c
+        src/Controllers/Round.c
         src/Model/Headers/Attaque.h
         src/Model/Headers/Carte.h
         src/Model/Headers/Combat.h
@@ -31,4 +33,10 @@ add_executable(theSpire
         src/Model/Monstre.c
         src/Model/Objet.c
         src/Model/Salle.c
-        main.c src/Vue/Menu/Menu.c src/Vue/Menu/Headers/Menu.h src/Controllers/Round.c src/Controllers/Headers/Round.h src/Services/JoueurService.c src/Services/Headers/JoueurService.h)
+        src/Vue/Menu/Headers/Menu.h
+        src/Vue/Menu/Menu.c
+        src/Services/Headers/JoueurService.h
+        src/Services/Headers/CarteService.h
+        src/Services/JoueurService.c
+        src/Services/CarteService.c
+        main.c)
