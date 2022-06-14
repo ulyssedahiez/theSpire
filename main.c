@@ -3,8 +3,10 @@
 //
 
 #include "src/Vue/Menu/Headers/Menu.h"
+#include "src/Services/Headers/JoueurService.h"
 
 int main(/*int argc, char *argv[]*/) {
-
-    lancerMenu();
+    p_joueur joueur = creerJoueur();
+    verifierProprietesJoueur(joueur, 2, 'e', 'v');
+    //lancerMenu();
 }
