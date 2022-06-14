@@ -45,7 +45,8 @@ int lancerMenu(){
 }
 
 int menuChoixSalle(char* choix1, char* choix2, char* choix3, char* choix4) {
-    printf("swag !");
+    printf("Choisissez la prochaine salle !");
+    printf("");
 }
 
 int credit(){

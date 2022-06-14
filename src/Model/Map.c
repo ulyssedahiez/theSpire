@@ -21,6 +21,7 @@ p_salle trouverPointeurNiemeSuivante(p_salle salle, int nCherche) {
 
         nActuel++;
     }
+    return salle;
 }
 
 p_map creerMap(){
@@ -48,14 +49,14 @@ p_map creerMap(){
     creerCouloirSalle(actuelleDroite,map->derniereSalle);
 
 
-    for (int i = 0; i < 7; ++i) {
+    for (int i = 0; i < 8; ++i) {
         actuelleGauche->salleDroite = trouverPointeurNiemeSuivante(premiereMilieuGauche, i+1);
 
         actuelleMilieuGauche->salleGauche = trouverPointeurNiemeSuivante(premiereGauche, i+1);
-        actuelleMilieuGauche->salleGauche = trouverPointeurNiemeSuivante(premiereMilieuDroite, i+1);
+        actuelleMilieuGauche->salleDroite = trouverPointeurNiemeSuivante(premiereMilieuDroite, i+1);
 
+        actuelleMilieuDroite->salleGauche = trouverPointeurNiemeSuivante(premiereMilieuGauche, i+1);
         actuelleMilieuDroite->salleDroite = trouverPointeurNiemeSuivante(premiereDroite, i+1);
-        actuelleMilieuDroite->salleDroite = trouverPointeurNiemeSuivante(premiereMilieuDroite, i+1);
 
         actuelleDroite->salleGauche = trouverPointeurNiemeSuivante(premiereMilieuDroite, i+1);
 
@@ -64,9 +65,6 @@ p_map creerMap(){
         actuelleMilieuDroite = actuelleMilieuDroite->salleMilieu;
         actuelleDroite = actuelleDroite->salleMilieu;
     }
-
-
-    // TODO: problème liaisons transversales pointeurs salles gauches et droites
 
 
     return map;
