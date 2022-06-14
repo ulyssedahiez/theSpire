@@ -45,8 +45,11 @@ int lancerMenu(){
 }
 
 int menuChoixSalle(char* choix1, char* choix2, char* choix3, char* choix4) {
-    printf("Choisissez la prochaine salle !");
-    printf("");
+    printf("Choisissez la prochaine salle !\n");
+    printf("1 - %s\n2 - %s\n3 - %s\n4 - %s\n>>>", choix1, choix2, choix3, choix4);
+    int choix;
+    scanf("%d", &choix);
+    return choix;
 }
 
 int credit(){
