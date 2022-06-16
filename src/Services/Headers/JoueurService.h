@@ -8,6 +8,6 @@
 #include  <stdio.h>
 #include  <stdarg.h>
 
-void verifierProprietesJoueur(p_joueur joueur, int nbProprietesAVerifier, ...);
+void corrigerProprietesJoueur(p_joueur joueur, int nbProprietesAVerifier, ...);
 
 #endif //THESPIRE_PLAYERSERVICE_H

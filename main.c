@@ -9,11 +9,11 @@
 
 int main(/*int argc, char *argv[]*/) {
 
-    processusPartie();
-    lancerMenu();
-    creerMap();
+    //processusPartie();
+    //lancerMenu();
+    //creerMap();
 
     p_joueur joueur = creerJoueur();
-    verifierProprietesJoueur(joueur, 2, 'e', 'v');
+    corrigerProprietesJoueur(joueur, 2, 'e', 'v');
     //lancerMenu();
 }
