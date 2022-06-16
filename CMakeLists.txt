@@ -37,6 +37,8 @@ add_executable(theSpire
         src/Vue/Menu/Menu.c
         src/Services/Headers/JoueurService.h
         src/Services/Headers/CarteService.h
+        src/Services/Headers/MonstreService.h
         src/Services/JoueurService.c
         src/Services/CarteService.c
-        main.c)
+        src/Services/MonstreService.c
+        main.c src/Services/UtilsService.c src/Services/Headers/UtilsService.h)

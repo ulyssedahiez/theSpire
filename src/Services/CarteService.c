@@ -72,7 +72,4 @@ void genererListesCartes(p_listeCartes basiques, p_listeCartes communes, p_liste
     ajouterEffetListe(listeEffetsAcceleration, creerEffet("Esquive", true, 5, 1));
     ajouterEffetListe(listeEffetsPulveriser, creerEffet("Abyssal", false, 0, -1));
     ajouterCarteListe(rares, creerCarte("Spectre complet", "rare", 2, 20, NULL , "Donne différents bonus. Abyssal.", "Un bonus pour chaque couleur de l’arc-en-ciel."));
-
-    // TODO: Terminer génération des cartes
-    // TODO: Faire la gérération des effet et des listes pour les ajouter aux cartes
 }
