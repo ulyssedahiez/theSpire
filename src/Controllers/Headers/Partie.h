@@ -10,11 +10,10 @@
 #include "Joueur.h"
 #include "../../Services/Headers/JoueurService.h"
 #include "../../Services/Headers/CarteService.h"
+#include "../../Services/Headers/MonstreService.h"
 #include "../../Vue/Menu/Headers/Menu.h"
 
 void processusPartie();
-
-void remplirMap(p_map map);
 
 bool verifierDefaite(p_joueur joueur);
 

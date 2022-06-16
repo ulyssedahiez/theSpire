@@ -12,7 +12,8 @@
 typedef struct s_salle
 {
     struct s_event * event;
-    struct s_combat * combat;
+    // struct s_combat * combat;
+    struct s_monstre * monstre;
     struct s_salle * salleGauche;
     struct s_salle * salleMilieu;
     struct s_salle * salleDroite;
@@ -35,6 +36,6 @@ p_salleDebut creerSalleDebut();
 
 p_salle creerSalle();
 
-void remplirSalle(p_salle salle, p_event event, p_combat combat);
+void remplirSalle(p_salle salle, p_event event, p_monstre monstre);
 
 #endif //THESPIRE_SALLE_H

@@ -13,6 +13,10 @@ void processusPartie()
     p_listeCartes cartesBasiques, cartesCommunes, cartesAtypiques, cartesRares;
     genererListesCartes(cartesBasiques, cartesCommunes, cartesAtypiques, cartesRares);
 
+    p_listeMonstres listeMonstresEtage1A4, listeMonstresEtage5A9, miniBosses;
+    p_monstre dernierBoss;
+    genererListesMonstres(listeMonstresEtage1A4, listeMonstresEtage5A9, miniBosses, dernierBoss);
+
 
 
     while (true != verifierDefaite(peter) && true != verifierVictoire(salleActuelle)) {
@@ -26,11 +30,6 @@ void processusPartie()
     } else if (verifierVictoire(salleActuelle)) {
         printf("Bravo, gagné !");
     }
-}
-
-void remplirMap(p_map map)
-{
-
 }
 
 bool verifierDefaite(p_joueur joueur) {

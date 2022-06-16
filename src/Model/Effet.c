@@ -4,14 +4,18 @@
 #include <stdlib.h>
 #include "Headers/Effet.h"
 
-p_effet creerEffet(char* nom/*, char* propriete*/, bool surJoueur, int valeur, int nombreTours) {
+p_effet creerEffet(char *nom, bool surJoueur, int valeur) {
     p_effet effet = malloc(sizeof(t_effet));
     effet->nom = nom;
     effet->surJoueur = surJoueur;
-    //effet->propriete = propriete;
     effet->valeur = valeur;
-    effet->nombreTours = nombreTours;
-    effet->nombreToursRestants = nombreTours;
+    if (0 == strcmp("Faible", nom) || 0 == strcmp("Lent", nom)) {
+        effet->nombreToursRestants = valeur;
+        effet->permanent = false;
+    } else {
+        effet->nombreToursRestants = 0;
+        effet->permanent = true;
+    }
 
     return effet;
 }
