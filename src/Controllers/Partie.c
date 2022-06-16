@@ -10,6 +10,9 @@ void processusPartie()
     p_map map = creerMap();
     p_salle salleActuelle = choisirPremiereSalle(map->premiereSalle);
 
+    p_listeCartes cartesBasiques, cartesCommunes, cartesAtypiques, cartesRares;
+    genererListesCartes(cartesBasiques, cartesCommunes, cartesAtypiques, cartesRares);
+
     while (true != verifierDefaite(peter) && true != verifierVictoire(salleActuelle)) {
 
 

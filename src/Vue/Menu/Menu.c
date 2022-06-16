@@ -49,6 +49,10 @@ int menuChoixSalle(char* choix1, char* choix2, char* choix3, char* choix4) {
     printf("1 - %s\n2 - %s\n3 - %s\n4 - %s\n>>>", choix1, choix2, choix3, choix4);
     int choix;
     scanf("%d", &choix);
+    if (choix != 1 && choix != 2 && choix != 3 && choix != 4) {
+        printf("%d est impossible, recommencer\n", choix);
+        return menuChoixSalle(choix1, choix2, choix3, choix4);
+    }
     return choix;
 }
 
