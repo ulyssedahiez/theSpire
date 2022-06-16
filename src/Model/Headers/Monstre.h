@@ -18,6 +18,6 @@ typedef struct s_monstre
     struct s_listeAttaques * attaques;
 } t_monstre;
 
-typedef t_monstre * p_monstre;
+typedef t_monstre* p_monstre;
 
 #endif //THESPIRE_MONSTRE_H

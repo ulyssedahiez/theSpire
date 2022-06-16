@@ -4,19 +4,25 @@
 
 #ifndef THESPIRE_EFFET_H
 #define THESPIRE_EFFET_H
+
+#include <stdbool.h>
 #include "stdlib.h"
 
 typedef struct s_effet
 {
     char* nom;
-    int value;
+    bool surJoueur;
+    //char* propriete;
+    int valeur;
+    int nombreTours; // -1 si infini
+    int nombreToursRestants;
 } t_effet;
 
 typedef t_effet * p_effet;
 
 typedef struct s_effetChainable {
     struct s_effet * effet;
-    struct s_effet * effetSuivant;
+    struct s_effetChainable * effetSuivant;
 } t_effetChainable;
 
 typedef t_effetChainable* p_effetChainable;
@@ -27,5 +33,22 @@ typedef struct s_listeEffets {
 } t_listeEffets;
 
 typedef t_listeEffets* p_listeEffets;
+
+
+
+p_effet creerEffet(char* nom, /*char* propriete,*/bool surJoueur, int valeur, int nombreTours);
+
+p_listeEffets creerListeEffets();
+
+void ajouterEffetListe(p_listeEffets listeEffets, p_effet effet);
+
+/** retourne true si supprimée, false si non présente dans la liste */
+bool enleverEffetListe(p_listeEffets listeEffets, p_effet effet);
+
+void supprimerEffetChainable(p_effetChainable effetChainable);
+
+void supprimerEffet(p_effet effet);
+
+p_effetChainable creerEffetChainable(p_effet effet);
 
 #endif //THESPIRE_EFFET_H

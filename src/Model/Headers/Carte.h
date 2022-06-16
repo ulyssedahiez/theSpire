@@ -35,7 +35,7 @@ typedef struct s_listeCartes {
 
 typedef t_listeCartes *p_listeCartes;
 
-p_carte creerCarte(char *nomCarte, char *rareteCarte, int coutEnergie, int coutMana, p_listeEffets listeEffetsCarte, char *texteTechniqueCarte, char *texteDescriptionCarte);
+p_carte creerCarte(char *nomCarte, char *rareteCarte, int coutEnergie, int coutMana, p_listeEffets listeEffets, char *texteTechniqueCarte, char *texteDescriptionCarte);
 
 p_listeCartes creerListeCartes();
 
