@@ -17,7 +17,7 @@ typedef t_objet * p_objet;
 
 typedef struct s_objetChainable {
     struct s_objet * objet;
-    struct s_objet * objetSuivant;
+    struct s_objetChainable * objetSuivant;
 } t_objetChainable;
 
 typedef t_objetChainable* p_objetChainable;
@@ -28,5 +28,13 @@ typedef struct s_listeObjets {
 } t_listeObjets;
 
 typedef t_listeObjets* p_listeObjets;
+
+p_listeObjets creerListeObjets();
+
+p_objetChainable creerObjetChainable(p_objet objet);
+
+p_objet creerObjet(char* nom, int value);
+
+void ajouterObjetListe(p_listeObjets listeObjets, p_objet objet);
 
 #endif //THESPIRE_OBJET_H

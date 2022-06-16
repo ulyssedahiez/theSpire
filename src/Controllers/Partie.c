@@ -13,6 +13,8 @@ void processusPartie()
     p_listeCartes cartesBasiques, cartesCommunes, cartesAtypiques, cartesRares;
     genererListesCartes(cartesBasiques, cartesCommunes, cartesAtypiques, cartesRares);
 
+
+
     while (true != verifierDefaite(peter) && true != verifierVictoire(salleActuelle)) {
 
 

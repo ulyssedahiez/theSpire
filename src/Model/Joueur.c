@@ -16,10 +16,10 @@ p_joueur creerJoueur() {
     joueur->pointsManaMax = 100;
     joueur->listeObjets = NULL;
     joueur->deck = NULL;
-    joueur->lenteur = false;
+    /*joueur->lenteur = false;
     joueur->faiblesse = false;
     joueur->toursRestantsLenteur = 0;
-    joueur->toursRestantsFaiblesse = 0;
+    joueur->toursRestantsFaiblesse = 0;*/
 
     return joueur;
 }

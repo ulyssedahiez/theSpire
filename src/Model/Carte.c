@@ -2,14 +2,15 @@
 // Created by charles on 11/05/22.
 //
 #include "Headers/Carte.h"
+#include "Effet.h"
 
-p_carte creerCarte(char *nomCarte, char *rareteCarte, int coutEnergie, int coutMana, p_listeEffets listeEffetsCarte, char *texteTechniqueCarte, char *texteDescriptionCarte) {
+p_carte creerCarte(char *nomCarte, char *rareteCarte, int coutEnergie, int coutMana, p_listeEffets listeEffets, char *texteTechniqueCarte, char *texteDescriptionCarte) {
     p_carte carte = malloc(sizeof(t_carte));
     carte->nom = nomCarte;
     carte->rarete = rareteCarte;
     carte->pointsEnergie = coutEnergie;
     carte->pointsMana = coutMana;
-    carte->listeEffets = listeEffetsCarte;
+    carte->listeEffets = listeEffets;
     carte->texteDescription = texteDescriptionCarte;
     carte->texteTechnique = texteTechniqueCarte;
 
@@ -25,15 +26,15 @@ p_listeCartes creerListeCartes() {
 }
 
 void ajouterCarteListe(p_listeCartes listeCartes, p_carte carte) {
-    p_carteChainable carteChainableAAjouter = creerCarteChainable(carte);
+    p_carteChainable nouvelleCarte = creerCarteChainable(carte);
     if (0 == listeCartes->nombreCartes) {
-        listeCartes->premiereCarte = carteChainableAAjouter;
+        listeCartes->premiereCarte = nouvelleCarte;
     } else {
         p_carteChainable carteChainableActuelle = listeCartes->premiereCarte;
         while (NULL != carteChainableActuelle->carteSuivante) {
             carteChainableActuelle = carteChainableActuelle->carteSuivante;
         }
-        carteChainableActuelle->carteSuivante = carteChainableAAjouter;
+        carteChainableActuelle->carteSuivante = nouvelleCarte;
     }
     listeCartes->nombreCartes += 1;
 }
