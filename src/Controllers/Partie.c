@@ -17,6 +17,7 @@ void processusPartie()
 
 
     remplirMap(map);
+    debugMap(map);
 
 
 

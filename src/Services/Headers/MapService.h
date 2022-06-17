@@ -14,7 +14,8 @@ p_listeCoordonnees genererCoordonneesMiniBosses();
 
 p_listeCoordonnees genererCoordonneesEvents(p_listeCoordonnees coordonneesBosses);
 
-p_listeCoordonnees
-genererCoordonneesSanctuaires(p_listeCoordonnees coordonneesBosses, p_listeCoordonnees coordonneesEvents);
+p_listeCoordonnees genererCoordonneesSanctuaires(p_listeCoordonnees coordonneesBosses, p_listeCoordonnees coordonneesEvents);
+
+void debugMap(p_map map);
 
 #endif //THESPIRE_MAPSERVICE_H

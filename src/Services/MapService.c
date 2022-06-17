@@ -28,8 +28,13 @@ void remplirMap(p_map map) {
     p_listeCoordonnees coordonneesSanctuaires = genererCoordonneesSanctuaires(coordonneesMinibosses, coordonneesEvents);
 
     for (int niveau = 1; niveau <= 9; ++niveau) {
-        for (int couloir = 1; couloir <= 4; ++couloir) {
+        int couloirEvent;
+        do {
+            couloirEvent = genererEntier(1, 5);
+        } while (estDansListe(coordonneesMinibosses, niveau, couloirEvent) ||
+                 estDansListe(coordonneesSanctuaires, niveau, couloirEvent));
 
+        for (int couloir = 1; couloir <= 4; ++couloir) {
             if (1 == couloir) {
                 salleActuelle = salleGaucheActuelle;
             } else if (2 == couloir) {
@@ -50,20 +55,17 @@ void remplirMap(p_map map) {
                                                                          genererEntier(0, miniBosses->nombreMonstres));
                 } else if (estDansListe(coordonneesSanctuaires, niveau, couloir)) {
 
-                } else if (estDansListe(coordonneesEvents, niveau, couloir)) {
+                } else if (couloir == couloirEvent) {
                     salleActuelle->event = trouverPointeurNiemeEvent(selectionEvents,
                                                                      genererEntier(0, selectionEvents->nombreEvents));
                 } else {
                     if (1 <= niveau && niveau <= 4) {
-                        // salleActuelle->monstre = trouverPointeurNiemeMonstre(listeMonstresEtage1A4, genererEntier(0, selectionMonstres->nombreMonstres));
                         selectionMonstres = listeMonstresEtage1A4;
                     } else if (6 <= niveau && niveau <= 9) {
-                        // salleActuelle->monstre = trouverPointeurNiemeMonstre(listeMonstresEtage5A9, genererEntier(0, selectionMonstres->nombreMonstres));
                         selectionMonstres = listeMonstresEtage5A9;
                     }
                     salleActuelle->monstre = trouverPointeurNiemeMonstre(selectionMonstres, genererEntier(0,
                                                                                                           selectionMonstres->nombreMonstres));
-
                 }
             }
             if (1 == couloir) {
@@ -126,3 +128,31 @@ p_listeCoordonnees genererCoordonneesSanctuaires(p_listeCoordonnees coordonneesB
     return sanctuaires;
 }
 
+void debugMap(p_map map) {
+    p_salle salleActuelle = map->premiereSalle->salleGauche;
+    int couloir = 1;
+    do {
+        if (salleActuelle->monstre != NULL) {
+            printf("%s --- ", salleActuelle->monstre->nom);
+        } else if (salleActuelle->event != NULL) {
+            printf("Event%d --- ", salleActuelle->event->id);
+        } else {
+            printf("SANCT --- ");
+        }
+        if (salleActuelle->salleMilieu == map->derniereSalle) {
+            printf("\n");
+            if (couloir == 1) {
+                salleActuelle = map->premiereSalle->salleMilieuGauche;
+            } else if (couloir == 2) {
+                salleActuelle = map->premiereSalle->salleMilieuDroite;
+            } else if (couloir == 3) {
+                salleActuelle = map->premiereSalle->salleDroite;
+            } else {
+                break;
+            }
+            couloir++;
+        } else {
+            salleActuelle = salleActuelle->salleMilieu;
+        }
+    } while (true);
+}
