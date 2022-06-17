@@ -4,8 +4,17 @@
 
 #include "Headers/UtilsService.h"
 
-p_coordonneesTour creerCoordonneesTour(int niveau, int couloir) {
-    p_coordonneesTour coordonneesTour = malloc(sizeof(t_coordonneesTour));
+p_listeCoordonnees creerListeCoordonnees() {
+    p_listeCoordonnees listeCoordonnees = malloc(sizeof(t_listeCoordonnees));
+
+    listeCoordonnees->premierCoordonnees = NULL;
+    listeCoordonnees->nombreCoordonnees = 0;
+
+    return listeCoordonnees;
+}
+
+p_coordonnees creerCoordonnees(int niveau, int couloir) {
+    p_coordonnees coordonneesTour = malloc(sizeof(t_coordonnees));
 
     coordonneesTour->niveau = niveau;
     coordonneesTour->couloir = couloir;
@@ -15,21 +24,28 @@ p_coordonneesTour creerCoordonneesTour(int niveau, int couloir) {
     return coordonneesTour;
 }
 
-bool estDansListe(p_coordonneesTour coordonneesTour, int niveau, int couloir) {
-    while (coordonneesTour != NULL) {
-        if (coordonneesTour->niveau != niveau && coordonneesTour->couloir != couloir) {
+bool estDansListe(p_listeCoordonnees listeCoordonnees, int niveau, int couloir) {
+    p_coordonnees coordonnees = listeCoordonnees->premierCoordonnees;
+    while (coordonnees != NULL) {
+        if (coordonnees->niveau == niveau && coordonnees->couloir == couloir) {
             return true;
         }
-        coordonneesTour = coordonneesTour->suivant;
+        coordonnees = coordonnees->suivant;
     }
     return false;
 }
 
-void ajouterCoordonnee(p_coordonneesTour coordonneesTour, p_coordonneesTour nouveau) {
-    while (coordonneesTour->suivant != NULL) {
-        coordonneesTour = coordonneesTour->suivant;
+void ajouterCoordonnee(p_listeCoordonnees listeCoordonnees, p_coordonnees nouveau) {
+    if (listeCoordonnees->nombreCoordonnees == 0) {
+        listeCoordonnees->premierCoordonnees = nouveau;
+    } else {
+        p_coordonnees coordonnees = listeCoordonnees->premierCoordonnees;
+        while (coordonnees->suivant != NULL) {
+            coordonnees = coordonnees->suivant;
+        }
+        coordonnees->suivant = nouveau;
     }
-    coordonneesTour->suivant = nouveau;
+    listeCoordonnees->nombreCoordonnees += 1;
 }
 
 int genererEntier(int borneInfInclue, int borneSupExclue) {

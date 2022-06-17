@@ -42,3 +42,15 @@ p_monstreChainable creerMonstreChainable(p_monstre monstre) {
 
     return monstreChainable;
 }
+
+p_monstre trouverPointeurNiemeMonstre(p_listeMonstres listeMonstre, int n) {
+    int nActuel = 0;
+    p_monstreChainable monstreActuel = listeMonstre->premiereMonstre;
+    while (nActuel < n) {
+        monstreActuel = monstreActuel->monstreSuivante;
+
+        nActuel++;
+    }
+    return monstreActuel->monstre;
+}
+

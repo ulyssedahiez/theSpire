@@ -43,4 +43,6 @@ void ajouterMonstreListe(p_listeMonstres listeMonstres, p_monstre monstre);
 
 p_monstreChainable creerMonstreChainable(p_monstre monstre);
 
+p_monstre trouverPointeurNiemeMonstre(p_listeMonstres listeMonstre, int n);
+
 #endif //THESPIRE_MONSTRE_H

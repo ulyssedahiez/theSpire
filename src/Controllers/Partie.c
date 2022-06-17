@@ -10,12 +10,13 @@ void processusPartie()
     p_map map = creerMap();
     p_salle salleActuelle = choisirPremiereSalle(map->premiereSalle);
 
-    p_listeCartes cartesBasiques, cartesCommunes, cartesAtypiques, cartesRares;
-    genererListesCartes(cartesBasiques, cartesCommunes, cartesAtypiques, cartesRares);
+    p_listeCartes cartesBasiques = genererListeCartesBasiques();
+    p_listeCartes cartesCommunes = genererListeCartesCommunes();
+    p_listeCartes cartesAtypiques = genererListeCartesAtypiques();
+    p_listeCartes cartesRares = genererListeCartesRares();
 
-    p_listeMonstres listeMonstresEtage1A4, listeMonstresEtage5A9, miniBosses;
-    p_monstre dernierBoss;
-    genererListesMonstres(listeMonstresEtage1A4, listeMonstresEtage5A9, miniBosses, dernierBoss);
+
+    remplirMap(map);
 
 
 

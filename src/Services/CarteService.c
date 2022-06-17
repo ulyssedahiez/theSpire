@@ -4,9 +4,9 @@
 
 #include "Headers/CarteService.h"
 
-void genererListesCartes(p_listeCartes basiques, p_listeCartes communes, p_listeCartes atypiques, p_listeCartes rares) {
-    /* Création des cartes basiques */
-    basiques = creerListeCartes();
+p_listeCartes genererListeCartesBasiques() {
+    p_listeCartes basiques = creerListeCartes();
+
     p_listeEffets listeEffetsStrike = creerListeEffets();
     ajouterEffetListe(listeEffetsStrike, creerEffet("Dégats", false, 6));
     ajouterCarteListe(basiques, creerCarte("Strike", "basique", 1, 0, listeEffetsStrike, "Inﬂige 6 dégâts", "L’attaque de base"));
@@ -15,8 +15,12 @@ void genererListesCartes(p_listeCartes basiques, p_listeCartes communes, p_liste
     ajouterEffetListe(listeEffetsEsquive, creerEffet("Esquive", true, 5));
     ajouterCarteListe(basiques, creerCarte("Esquive", "basique", 1, 0, NULL, "Donne 5 points d’esquive", "L’esquive de base"));
 
-    /* création des cartes communes */
-    communes = creerListeCartes();
+    return basiques;
+}
+
+p_listeCartes genererListeCartesCommunes() {
+    p_listeCartes communes = creerListeCartes();
+
     p_listeEffets listeEffetsDoubleStrike = creerListeEffets();
     ajouterEffetListe(listeEffetsDoubleStrike, creerEffet("Dégâts", false, 4));
     ajouterEffetListe(listeEffetsDoubleStrike, creerEffet("Dégâts", false, 4));
@@ -36,7 +40,12 @@ void genererListesCartes(p_listeCartes basiques, p_listeCartes communes, p_liste
     ajouterEffetListe(listeEffetsAcceleration, creerEffet("Lenteur", false, 1));
     ajouterCarteListe(communes, creerCarte("Acceleration", "commune", 1, 10, listeEffetsAcceleration, "Inﬂige Lent pour un tour et donne 4 points d’esquive", "Ne ralenti pas exactement les adversaires ; tout est question de perception."));
 
-    atypiques = creerListeCartes();
+    return communes;
+}
+
+p_listeCartes genererListeCartesAtypiques() {
+    p_listeCartes atypiques = creerListeCartes();
+
     p_listeEffets listeEffetsSurmenage = creerListeEffets();
     ajouterEffetListe(listeEffetsSurmenage, creerEffet("Force", true, 2));
     ajouterEffetListe(listeEffetsSurmenage, creerEffet("Dégâts", true, 5));
@@ -56,20 +65,27 @@ void genererListesCartes(p_listeCartes basiques, p_listeCartes communes, p_liste
     ajouterEffetListe(listeEffetsIncendie, creerEffet("Feu", true, 5));
     ajouterCarteListe(atypiques, creerCarte("Incendie", "atypique", 2, 20, listeEffetsIncendie, "Inﬂige 10 de feu à l’adversaire et 5 de feu à soi", "Aidera à terminer les combats, d’une manière ou l’autre"));
 
-    rares = creerListeCartes();
+    return atypiques;
+}
+
+p_listeCartes genererListeCartesRares() {
+    p_listeCartes rares = creerListeCartes();
+
     p_listeEffets listeEffetsPulveriser = creerListeEffets();
     ajouterEffetListe(listeEffetsPulveriser, creerEffet("Dégâts", false, 30));
     ajouterEffetListe(listeEffetsPulveriser, creerEffet("Abyssal", false, 0));
     ajouterCarteListe(rares, creerCarte("Pulvériser", "rare", 3, 0, NULL , "Inﬂige 30 dégâts, Abyssal", "Blam !"));
 
     p_listeEffets listeEffetsSpectreComplet = creerListeEffets();
-    ajouterEffetListe(listeEffetsIncendie, creerEffet("Feu", false, 3));
-    ajouterEffetListe(listeEffetsPulveriser, creerEffet("Dégâts", false, 6));
-    ajouterEffetListe(listeEffetsPostureDefensive, creerEffet("Force", true, 1));
-    ajouterEffetListe(listeEffetsAcceleration, creerEffet("Lenteur", false, 1));
-    ajouterEffetListe(listeEffetsCoupAffaiblissant, creerEffet("Faible", false, 1));
-    ajouterEffetListe(listeEffetsPostureDefensive, creerEffet("Dextérité", true, 1));
-    ajouterEffetListe(listeEffetsAcceleration, creerEffet("Esquive", true, 5));
-    ajouterEffetListe(listeEffetsPulveriser, creerEffet("Abyssal", false, 0));
+    ajouterEffetListe(listeEffetsSpectreComplet, creerEffet("Feu", false, 3));
+    ajouterEffetListe(listeEffetsSpectreComplet, creerEffet("Dégâts", false, 6));
+    ajouterEffetListe(listeEffetsSpectreComplet, creerEffet("Force", true, 1));
+    ajouterEffetListe(listeEffetsSpectreComplet, creerEffet("Lenteur", false, 1));
+    ajouterEffetListe(listeEffetsSpectreComplet, creerEffet("Faible", false, 1));
+    ajouterEffetListe(listeEffetsSpectreComplet, creerEffet("Dextérité", true, 1));
+    ajouterEffetListe(listeEffetsSpectreComplet, creerEffet("Esquive", true, 5));
+    ajouterEffetListe(listeEffetsSpectreComplet, creerEffet("Abyssal", false, 0));
     ajouterCarteListe(rares, creerCarte("Spectre complet", "rare", 2, 20, NULL , "Donne différents bonus. Abyssal.", "Un bonus pour chaque couleur de l’arc-en-ciel."));
+
+    return rares;
 }

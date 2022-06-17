@@ -8,12 +8,13 @@
 #include "../../Model/Headers/Map.h"
 #include "UtilsService.h"
 
-void remplirMap(p_map map, p_listeMonstres listeMonstresEtage1A4, p_listeMonstres listeMonstresEtage5A9, p_listeMonstres miniBosses, p_monstre dernierBoss);
+void remplirMap(p_map map);
 
-p_coordonneesTour genererCoordonneesMiniBosses();
+p_listeCoordonnees genererCoordonneesMiniBosses();
 
-p_coordonneesTour genererCoordonneesEvents(p_coordonneesTour coordonneesBosses);
+p_listeCoordonnees genererCoordonneesEvents(p_listeCoordonnees coordonneesBosses);
 
-p_coordonneesTour genererCoordonneesSanctuaires(p_coordonneesTour coordonneesBosses, p_coordonneesTour coordonneesEvents);
+p_listeCoordonnees
+genererCoordonneesSanctuaires(p_listeCoordonnees coordonneesBosses, p_listeCoordonnees coordonneesEvents);
 
 #endif //THESPIRE_MAPSERVICE_H

@@ -3,17 +3,33 @@
 //
 
 #include "Headers/MapService.h"
+#include "Headers/MonstreService.h"
+#include "Headers/EventService.h"
+#include "stdio.h"
+#include "../../Model/Headers/Monstre.h"
 
-void remplirMap(p_map map, p_listeMonstres listeMonstresEtage1A4, p_listeMonstres listeMonstresEtage5A9, p_listeMonstres miniBosses, p_monstre dernierBoss) {
+void remplirMap(p_map map) {
+    p_listeMonstres listeMonstresEtage1A4 = creerListeMonstresEtage1A4();
+    p_listeMonstres listeMonstresEtage5A9 = creerListeMonstresEtage5A9();
+    p_listeMonstres miniBosses = creerListeMiniBosses();
+    p_monstre dernierBoss = creerDernierBoss();
+
     p_salle salleGaucheActuelle = map->premiereSalle->salleGauche;
     p_salle salleMilieuGaucheActuelle = map->premiereSalle->salleMilieuGauche;
     p_salle salleMilieuDroiteActuelle = map->premiereSalle->salleMilieuDroite;
     p_salle salleDroiteActuelle = map->premiereSalle->salleDroite;
 
-    p_listeMonstres selectionMonstres;
     p_salle salleActuelle;
+    p_listeEvent selectionEvents = genererListesEvents();
+    p_listeMonstres selectionMonstres;
+
+    p_listeCoordonnees coordonneesMinibosses = genererCoordonneesMiniBosses();
+    p_listeCoordonnees coordonneesEvents = genererCoordonneesEvents(coordonneesMinibosses);
+    p_listeCoordonnees coordonneesSanctuaires = genererCoordonneesSanctuaires(coordonneesMinibosses, coordonneesEvents);
+
     for (int niveau = 1; niveau <= 9; ++niveau) {
         for (int couloir = 1; couloir <= 4; ++couloir) {
+
             if (1 == couloir) {
                 salleActuelle = salleGaucheActuelle;
             } else if (2 == couloir) {
@@ -25,71 +41,88 @@ void remplirMap(p_map map, p_listeMonstres listeMonstresEtage1A4, p_listeMonstre
             }
 
 
-            if (1 <= niveau && niveau <= 4) {
-                selectionMonstres = listeMonstresEtage1A4;
-                // TODO: Bail monstres niveau 1 à 4
-            } else if (5 == niveau) {
-                salleActuelle->monstre = NULL;
-                salleActuelle->event = NULL;
-                break;
-            } else if (6 <= niveau && niveau <= 9) {
-                selectionMonstres = listeMonstresEtage5A9;
-                // TODO: Bail monstres niveau 5 à 9
+            salleActuelle->monstre = NULL;
+            salleActuelle->event = NULL;
+
+            if (5 != niveau) {
+                if (estDansListe(coordonneesMinibosses, niveau, couloir)) {
+                    salleActuelle->monstre = trouverPointeurNiemeMonstre(miniBosses,
+                                                                         genererEntier(0, miniBosses->nombreMonstres));
+                } else if (estDansListe(coordonneesSanctuaires, niveau, couloir)) {
+
+                } else if (estDansListe(coordonneesEvents, niveau, couloir)) {
+                    salleActuelle->event = trouverPointeurNiemeEvent(selectionEvents,
+                                                                     genererEntier(0, selectionEvents->nombreEvents));
+                } else {
+                    if (1 <= niveau && niveau <= 4) {
+                        // salleActuelle->monstre = trouverPointeurNiemeMonstre(listeMonstresEtage1A4, genererEntier(0, selectionMonstres->nombreMonstres));
+                        selectionMonstres = listeMonstresEtage1A4;
+                    } else if (6 <= niveau && niveau <= 9) {
+                        // salleActuelle->monstre = trouverPointeurNiemeMonstre(listeMonstresEtage5A9, genererEntier(0, selectionMonstres->nombreMonstres));
+                        selectionMonstres = listeMonstresEtage5A9;
+                    }
+                    salleActuelle->monstre = trouverPointeurNiemeMonstre(selectionMonstres, genererEntier(0,
+                                                                                                          selectionMonstres->nombreMonstres));
+
+                }
             }
-
-
-
+            if (1 == couloir) {
+                salleGaucheActuelle = salleGaucheActuelle->salleMilieu;
+            } else if (2 == couloir) {
+                salleMilieuGaucheActuelle = salleMilieuGaucheActuelle->salleMilieu;
+            } else if (3 == couloir) {
+                salleMilieuDroiteActuelle = salleMilieuDroiteActuelle->salleMilieu;
+            } else if (4 == couloir) {
+                salleDroiteActuelle = salleDroiteActuelle->salleMilieu;
+            }
         }
     }
 
     map->derniereSalle->monstre = dernierBoss;
 }
 
-p_coordonneesTour genererCoordonneesMiniBosses() {
-    p_coordonneesTour premier = creerCoordonneesTour(genererEntier(1, 10), genererEntier(1, 5));
+p_listeCoordonnees genererCoordonneesMiniBosses() {
+    p_listeCoordonnees minibosses = creerListeCoordonnees();
 
-    int nb = 1;
-    while (nb < 3) {
-        p_coordonneesTour nouveau = creerCoordonneesTour(genererEntier(1, 10), genererEntier(1, 5));
-        while (nouveau->niveau == 5 && estDansListe(premier, nouveau->niveau, nouveau->couloir) == true) {
-            nouveau = creerCoordonneesTour(genererEntier(1, 10), genererEntier(1, 5));
-        }
-        ajouterCoordonnee(premier, nouveau);
-        nb++;
+    while (minibosses->nombreCoordonnees != 3) {
+        p_coordonnees nouveau;
+        do {
+            nouveau = creerCoordonnees(genererEntier(1, 10), genererEntier(1, 5));
+        } while (nouveau->niveau == 5 || estDansListe(minibosses, nouveau->niveau, nouveau->couloir) == true);
+        ajouterCoordonnee(minibosses, nouveau);
     }
-    return premier;
+
+    return minibosses;
 }
 
-p_coordonneesTour genererCoordonneesEvents(p_coordonneesTour coordonneesBosses) {
-    p_coordonneesTour premier = creerCoordonneesTour(genererEntier(1, 10), genererEntier(1, 5));
+p_listeCoordonnees genererCoordonneesEvents(p_listeCoordonnees coordonneesBosses) {
+    p_listeCoordonnees events = creerListeCoordonnees();
 
-    int nb = 1;
-    while (nb < 3) {
-        p_coordonneesTour nouveau = creerCoordonneesTour(genererEntier(1, 10), genererEntier(1, 5));
-        while (nouveau->niveau == 5 && estDansListe(premier, nouveau->niveau, nouveau->couloir) == true
-                && estDansListe(coordonneesBosses, nouveau->niveau, nouveau->couloir) == true) {
-            nouveau = creerCoordonneesTour(genererEntier(1, 10), genererEntier(1, 5));
-        }
-        ajouterCoordonnee(premier, nouveau);
-        nb++;
+    while (events->nombreCoordonnees != 3) {
+        p_coordonnees nouveau;
+        do {
+            nouveau = creerCoordonnees(genererEntier(1, 10), genererEntier(1, 5));
+        } while (nouveau->niveau == 5 || estDansListe(events, nouveau->niveau, nouveau->couloir) == true
+                || estDansListe(coordonneesBosses, nouveau->niveau, nouveau->couloir) == true);
+        ajouterCoordonnee(events, nouveau);
     }
-    return premier;
+
+    return events;
 }
 
-p_coordonneesTour genererCoordonneesSanctuaires(p_coordonneesTour coordonneesBosses, p_coordonneesTour coordonneesEvents) {
-    p_coordonneesTour premier = creerCoordonneesTour(genererEntier(1, 10), genererEntier(1, 5));
+p_listeCoordonnees genererCoordonneesSanctuaires(p_listeCoordonnees coordonneesBosses, p_listeCoordonnees coordonneesEvents) {
+    p_listeCoordonnees sanctuaires = creerListeCoordonnees();
 
-    int nb = 1;
-    while (nb < 3) {
-        p_coordonneesTour nouveau = creerCoordonneesTour(genererEntier(1, 10), genererEntier(1, 5));
-        while (nouveau->niveau == 5 && estDansListe(premier, nouveau->niveau, nouveau->couloir) == true
-               && estDansListe(coordonneesBosses, nouveau->niveau, nouveau->couloir) == true
-                  && estDansListe(coordonneesEvents, nouveau->niveau, nouveau->couloir) == true) {
-            nouveau = creerCoordonneesTour(genererEntier(1, 10), genererEntier(1, 5));
-        }
-        ajouterCoordonnee(premier, nouveau);
-        nb++;
+    while (sanctuaires->nombreCoordonnees != 5) {
+        p_coordonnees nouveau;
+        do {
+            nouveau = creerCoordonnees(genererEntier(1, 10), genererEntier(1, 5));
+        } while (nouveau->niveau == 5 || estDansListe(sanctuaires, nouveau->niveau, nouveau->couloir) == true
+                || estDansListe(coordonneesBosses, nouveau->niveau, nouveau->couloir) == true
+                || estDansListe(coordonneesEvents, nouveau->niveau, nouveau->couloir) == true);
+        ajouterCoordonnee(sanctuaires, nouveau);
     }
-    return premier;
+
+    return sanctuaires;
 }
 

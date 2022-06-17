@@ -8,19 +8,28 @@
 #include <stdbool.h>
 #include "stdlib.h"
 
-typedef struct s_coordonneesTour {
+typedef struct s_coordonnees {
     int niveau;
     int couloir;
-    struct s_coordonneesTour* suivant;
-}t_coordonneesTour;
+    struct s_coordonnees* suivant;
+}t_coordonnees;
 
-typedef t_coordonneesTour * p_coordonneesTour;
+typedef t_coordonnees * p_coordonnees;
 
-p_coordonneesTour creerCoordonneesTour(int niveau, int couloir);
+typedef struct s_listeCoordonnees {
+    struct s_coordonnees * premierCoordonnees;
+    int nombreCoordonnees;
+} t_listeCoordonnees;
 
-bool estDansListe(p_coordonneesTour coordonneesTour, int niveau, int couloir);
+typedef t_listeCoordonnees * p_listeCoordonnees;
 
-void ajouterCoordonnee(p_coordonneesTour coordonneesTour, p_coordonneesTour nouveau);
+p_listeCoordonnees creerListeCoordonnees();
+
+p_coordonnees creerCoordonnees(int niveau, int couloir);
+
+bool estDansListe(p_listeCoordonnees listeCoordonnees, int niveau, int couloir);
+
+void ajouterCoordonnee(p_listeCoordonnees listeCoordonnees, p_coordonnees nouveau);
 
 int genererEntier(int borneInfInclue, int borneSupExclue);
 

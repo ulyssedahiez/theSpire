@@ -3,10 +3,11 @@
 //
 
 #include "Headers/MonstreService.h"
+#include "stdio.h"
 
-void genererListesMonstres(p_listeMonstres listeMonstresEtage1A4, p_listeMonstres listeMonstresEtage5A9, p_listeMonstres miniBosses, p_monstre dernierBoss) {
+p_listeMonstres creerListeMonstresEtage1A4() {
     /* Génération monstres etage 1 à 4 */
-    listeMonstresEtage1A4 = creerListeMonstres();
+    p_listeMonstres listeMonstresEtage1A4 = creerListeMonstres();
     /* Jawurm */
     p_listeEffets listeEffetsAttaqueAJawurm = creerListeEffets();
     ajouterEffetListe(listeEffetsAttaqueAJawurm, creerEffet("Dégâts", true, 11));
@@ -49,8 +50,12 @@ void genererListesMonstres(p_listeMonstres listeMonstresEtage1A4, p_listeMonstre
     ajouterAttaqueListe(listeAttaquesKeliko, creerAttaque(listeEffetsAttaqueBKeliko, 50));
     ajouterMonstreListe(listeMonstresEtage1A4, creerMonstre("Keliko", 0, listeAttaquesKeliko, 60, 70));
 
+    return listeMonstresEtage1A4;
+}
+
+p_listeMonstres creerListeMonstresEtage5A9() {
     /* Génération monstres etage 5 à 9 */
-    listeMonstresEtage5A9 = creerListeMonstres();
+    p_listeMonstres listeMonstresEtage5A9 = creerListeMonstres();
     /* Jawurm2 */
     p_listeEffets listeEffetsAttaqueAJawurm2 = creerListeEffets();
     ajouterEffetListe(listeEffetsAttaqueAJawurm2, creerEffet("Dégâts", true, 15));
@@ -90,8 +95,12 @@ void genererListesMonstres(p_listeMonstres listeMonstresEtage1A4, p_listeMonstre
     ajouterAttaqueListe(listeAttaquesMangoustine, creerAttaque(listeEffetsAttaqueAMangoustine, 100));
     ajouterMonstreListe(listeMonstresEtage5A9, creerMonstre("Mangoustine", 0, listeAttaquesMangoustine, 70, 80));
 
+    return listeMonstresEtage5A9;
+}
+
+p_listeMonstres creerListeMiniBosses() {
     /* Génération Mini bosses */
-    miniBosses = creerListeMonstres();
+    p_listeMonstres miniBosses = creerListeMonstres();
     /* Eldan */
     p_listeEffets listeEffetsAttaqueAEldan = creerListeEffets();
     ajouterEffetListe(listeEffetsAttaqueAEldan, creerEffet("Dégâts", true, 15));
@@ -122,6 +131,10 @@ void genererListesMonstres(p_listeMonstres listeMonstresEtage1A4, p_listeMonstre
     ajouterAttaqueListe(listeAttaquesPyrox, creerAttaque(listeEffetsAttaqueBPyrox, 50));
     ajouterMonstreListe(miniBosses, creerMonstre("Pyrox", 120, listeAttaquesPyrox, 120, 120));
 
+    return miniBosses;
+}
+
+p_monstre creerDernierBoss() {
     /* Dernier Boss */
     p_listeEffets listeEffetsAGardienDeLaPlume = creerListeEffets(); // Comme spectre complet
     ajouterEffetListe(listeEffetsAGardienDeLaPlume, creerEffet("Feu", true, 3));
@@ -151,7 +164,7 @@ void genererListesMonstres(p_listeMonstres listeMonstresEtage1A4, p_listeMonstre
     ajouterAttaqueListe(listeAttaquesDernierBoss, creerAttaque(listeEffetsBGardienDeLaPlume, 25));
     ajouterAttaqueListe(listeAttaquesDernierBoss, creerAttaque(listeEffetsCGardienDeLaPlume, 25));
     ajouterAttaqueListe(listeAttaquesDernierBoss, creerAttaque(listeEffetsDGardienDeLaPlume, 25));
-    dernierBoss = creerMonstre("Gardien de la plume", 150, listeAttaquesDernierBoss, 150, 150);
+    return creerMonstre("Gardien de la plume", 150, listeAttaquesDernierBoss, 150, 150);
 }
 
 void remplirPointsVieMonstre(p_monstre monstre) {

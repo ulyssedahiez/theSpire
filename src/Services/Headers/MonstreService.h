@@ -7,7 +7,13 @@
 #include "../../Model/Headers/Monstre.h"
 #include "UtilsService.h"
 
-void genererListesMonstres(p_listeMonstres listeMonstresEtage1A4, p_listeMonstres listeMonstresEtage5A9, p_listeMonstres miniBosses, p_monstre dernierBoss);
+p_listeMonstres creerListeMonstresEtage1A4();
+
+p_listeMonstres creerListeMonstresEtage5A9();
+
+p_listeMonstres creerListeMiniBosses();
+
+p_monstre creerDernierBoss();
 
 void remplirPointsVieMonstre(p_monstre monstre);
 
