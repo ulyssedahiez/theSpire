@@ -4,11 +4,14 @@
 #include <stdlib.h>
 #include "Headers/Monstre.h"
 
-p_monstre creerMonstre(char* nom, int pointsVie, p_listeAttaques attaques, int borneInfPV, int borneSupPV) {
+p_monstre creerMonstre(char *nom, int pointsVie, p_listeAttaques attaques, int borneInfPV, int borneSupPV, char* type) {
     p_monstre monstre = malloc(sizeof(t_monstre));
     monstre->nom = nom;
     monstre->attaques = attaques;
     monstre->pointsVie = pointsVie;
+    monstre->borneInfPointsVie = borneInfPV;
+    monstre->borneSupPointsVie = borneSupPV;
+    monstre->type = type;
 
     return monstre;
 }
@@ -52,5 +55,12 @@ p_monstre trouverPointeurNiemeMonstre(p_listeMonstres listeMonstre, int n) {
         nActuel++;
     }
     return monstreActuel->monstre;
+}
+
+p_monstre copierMonstre(p_monstre monstre) {
+    p_monstre nouveauMonstre = creerMonstre(monstre->nom, monstre->pointsVie, monstre->attaques,
+                                            monstre->borneInfPointsVie, monstre->borneSupPointsVie, false);
+
+    return nouveauMonstre;
 }
 

@@ -16,6 +16,6 @@ p_listeCoordonnees genererCoordonneesEvents(p_listeCoordonnees coordonneesBosses
 
 p_listeCoordonnees genererCoordonneesSanctuaires(p_listeCoordonnees coordonneesBosses, p_listeCoordonnees coordonneesEvents);
 
-void debugMap(p_map map);
+void debugMap(p_map map, p_salle salleJoueur);
 
 #endif //THESPIRE_MAPSERVICE_H

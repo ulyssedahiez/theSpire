@@ -83,3 +83,8 @@ p_effetChainable creerEffetChainable(p_effet effet) {
 
     return effetChainable;
 }
+
+p_effet copierEffet(p_effet effet) {
+    p_effet nouvelEffet = creerEffet(effet->nom, effet->surJoueur, effet->valeur);
+    return nouvelEffet;
+}

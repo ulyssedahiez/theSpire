@@ -19,11 +19,7 @@ typedef struct s_joueur {
     int pointsManaMax;
     struct s_listeObjets * listeObjets;
     struct deck * deck;
-    struct s_listeEffets * listeEffets; // nouveau
-    /*bool lenteur;
-    bool faiblesse;
-    int toursRestantsLenteur;
-    int toursRestantsFaiblesse;*/
+    struct s_listeEffets * listeEffets;
 } t_joueur;
 
 typedef t_joueur* p_joueur;

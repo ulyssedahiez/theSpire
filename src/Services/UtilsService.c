@@ -3,6 +3,7 @@
 //
 
 #include "Headers/UtilsService.h"
+#include "stdio.h"
 
 p_listeCoordonnees creerListeCoordonnees() {
     p_listeCoordonnees listeCoordonnees = malloc(sizeof(t_listeCoordonnees));
@@ -49,5 +50,11 @@ void ajouterCoordonnee(p_listeCoordonnees listeCoordonnees, p_coordonnees nouvea
 }
 
 int genererEntier(int borneInfInclue, int borneSupExclue) {
-    return (borneInfInclue + (rand()) % (int)(borneSupExclue - borneInfInclue));
+    int result;
+    if (borneInfInclue == borneSupExclue) {
+        result = borneInfInclue;
+    } else {
+        result = (borneInfInclue + (rand()) % (int)(borneSupExclue - borneInfInclue));
+    }
+    return result;
 }

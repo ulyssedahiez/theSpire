@@ -34,8 +34,6 @@ typedef struct s_listeEffets {
 
 typedef t_listeEffets* p_listeEffets;
 
-
-
 p_effet creerEffet(char *nom, bool surJoueur, int valeur);
 
 p_listeEffets creerListeEffets();
@@ -50,5 +48,7 @@ void supprimerEffetChainable(p_effetChainable effetChainable);
 void supprimerEffet(p_effet effet);
 
 p_effetChainable creerEffetChainable(p_effet effet);
+
+p_effet copierEffet(p_effet effet);
 
 #endif //THESPIRE_EFFET_H

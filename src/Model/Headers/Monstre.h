@@ -11,12 +11,11 @@
 typedef struct s_monstre
 {
     char* nom;
-    /*int habitatMin;
-    int habitatMax;*/
     int pointsVie;
     struct s_listeAttaques * attaques;
     int borneInfPointsVie;
     int borneSupPointsVie;
+    char*  type;
 } t_monstre;
 
 typedef t_monstre* p_monstre;
@@ -35,7 +34,7 @@ typedef struct s_listeMonstres {
 
 typedef t_listeMonstres *p_listeMonstres;
 
-p_monstre creerMonstre(char* nom, int pointsVie, p_listeAttaques attaques, int borneInfPV, int borneSupPV);
+p_monstre creerMonstre(char *nom, int pointsVie, p_listeAttaques attaques, int borneInfPV, int borneSupPV, char *type);
 
 p_listeMonstres creerListeMonstres();
 
@@ -44,5 +43,7 @@ void ajouterMonstreListe(p_listeMonstres listeMonstres, p_monstre monstre);
 p_monstreChainable creerMonstreChainable(p_monstre monstre);
 
 p_monstre trouverPointeurNiemeMonstre(p_listeMonstres listeMonstre, int n);
+
+p_monstre copierMonstre(p_monstre monstre);
 
 #endif //THESPIRE_MONSTRE_H

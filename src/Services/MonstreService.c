@@ -22,7 +22,7 @@ p_listeMonstres creerListeMonstresEtage1A4() {
     ajouterAttaqueListe(listeAttaquesJawurm, creerAttaque(listeEffetsAttaqueAJawurm, 33));
     ajouterAttaqueListe(listeAttaquesJawurm, creerAttaque(listeEffetsAttaqueBJawurm, 33));
     ajouterAttaqueListe(listeAttaquesJawurm, creerAttaque(listeEffetsAttaqueCJawurm, 33));
-    ajouterMonstreListe(listeMonstresEtage1A4, creerMonstre("Jawurm", 0, listeAttaquesJawurm, 40, 44));
+    ajouterMonstreListe(listeMonstresEtage1A4, creerMonstre("Jawurm", 0, listeAttaquesJawurm, 40, 44, "monstre"));
 
     /* Blouni */
     p_listeEffets listeEffetsAttaqueABlouni = creerListeEffets();
@@ -34,7 +34,7 @@ p_listeMonstres creerListeMonstresEtage1A4() {
     p_listeAttaques listeAttaquesBlouni = creerListeAttaques();
     ajouterAttaqueListe(listeAttaquesBlouni, creerAttaque(listeEffetsAttaqueABlouni, 50));
     ajouterAttaqueListe(listeAttaquesBlouni, creerAttaque(listeEffetsAttaqueBBlouni, 50));
-    ajouterMonstreListe(listeMonstresEtage1A4, creerMonstre("Blouni", 0, listeAttaquesBlouni, 46, 50));
+    ajouterMonstreListe(listeMonstresEtage1A4, creerMonstre("Blouni", 0, listeAttaquesBlouni, 46, 50, "monstre"));
 
     /* Keliko */
     p_listeEffets listeEffetsAttaqueAKeliko = creerListeEffets();
@@ -48,7 +48,7 @@ p_listeMonstres creerListeMonstresEtage1A4() {
     p_listeAttaques listeAttaquesKeliko = creerListeAttaques();
     ajouterAttaqueListe(listeAttaquesKeliko, creerAttaque(listeEffetsAttaqueAKeliko, 50));
     ajouterAttaqueListe(listeAttaquesKeliko, creerAttaque(listeEffetsAttaqueBKeliko, 50));
-    ajouterMonstreListe(listeMonstresEtage1A4, creerMonstre("Keliko", 0, listeAttaquesKeliko, 60, 70));
+    ajouterMonstreListe(listeMonstresEtage1A4, creerMonstre("Keliko", 0, listeAttaquesKeliko, 60, 70, "monstre"));
 
     return listeMonstresEtage1A4;
 }
@@ -70,7 +70,7 @@ p_listeMonstres creerListeMonstresEtage5A9() {
     ajouterAttaqueListe(listeAttaquesJawurm2, creerAttaque(listeEffetsAttaqueAJawurm2, 33));
     ajouterAttaqueListe(listeAttaquesJawurm2, creerAttaque(listeEffetsAttaqueBJawurm2, 33));
     ajouterAttaqueListe(listeAttaquesJawurm2, creerAttaque(listeEffetsAttaqueCJawurm2, 33));
-    ajouterMonstreListe(listeMonstresEtage5A9, creerMonstre("Jawurm2", 0, listeAttaquesJawurm2, 55, 62));
+    ajouterMonstreListe(listeMonstresEtage5A9, creerMonstre("Jawurm2", 0, listeAttaquesJawurm2, 55, 62, "monstre"));
 
     /* Redoni */
     p_listeEffets listeEffetsAttaqueARedoni = creerListeEffets();
@@ -82,7 +82,7 @@ p_listeMonstres creerListeMonstresEtage5A9() {
     p_listeAttaques listeAttaquesRedoni = creerListeAttaques();
     ajouterAttaqueListe(listeAttaquesRedoni, creerAttaque(listeEffetsAttaqueARedoni, 50));
     ajouterAttaqueListe(listeAttaquesRedoni, creerAttaque(listeEffetsAttaqueBRedoni, 50));
-    ajouterMonstreListe(listeMonstresEtage5A9, creerMonstre("Redoni", 0, listeAttaquesRedoni, 50, 54));
+    ajouterMonstreListe(listeMonstresEtage5A9, creerMonstre("Redoni", 0, listeAttaquesRedoni, 50, 54, "monstre"));
 
     /* Mangoustine */
     p_listeEffets listeEffetsAttaqueAMangoustine = creerListeEffets();
@@ -93,7 +93,7 @@ p_listeMonstres creerListeMonstresEtage5A9() {
 
     p_listeAttaques listeAttaquesMangoustine = creerListeAttaques();
     ajouterAttaqueListe(listeAttaquesMangoustine, creerAttaque(listeEffetsAttaqueAMangoustine, 100));
-    ajouterMonstreListe(listeMonstresEtage5A9, creerMonstre("Mangoustine", 0, listeAttaquesMangoustine, 70, 80));
+    ajouterMonstreListe(listeMonstresEtage5A9, creerMonstre("Mangoustine", 0, listeAttaquesMangoustine, 70, 80, "monstre"));
 
     return listeMonstresEtage5A9;
 }
@@ -116,7 +116,7 @@ p_listeMonstres creerListeMiniBosses() {
     ajouterAttaqueListe(listeAttaquesEldan, creerAttaque(listeEffetsAttaqueAEldan, 33));
     ajouterAttaqueListe(listeAttaquesEldan, creerAttaque(listeEffetsAttaqueBEldan, 33));
     ajouterAttaqueListe(listeAttaquesEldan, creerAttaque(listeEffetsAttaqueCEldan, 33));
-    ajouterMonstreListe(miniBosses, creerMonstre("Eldan", 80, listeAttaquesEldan, 80, 80));
+    ajouterMonstreListe(miniBosses, creerMonstre("Eldan", 80, listeAttaquesEldan, 80, 80, "miniboss"));
 
     /* Pyrox */
     p_listeEffets listeEffetsAttaqueAPyrox = creerListeEffets();
@@ -129,7 +129,7 @@ p_listeMonstres creerListeMiniBosses() {
     p_listeAttaques listeAttaquesPyrox = creerListeAttaques();
     ajouterAttaqueListe(listeAttaquesPyrox, creerAttaque(listeEffetsAttaqueAPyrox, 50));
     ajouterAttaqueListe(listeAttaquesPyrox, creerAttaque(listeEffetsAttaqueBPyrox, 50));
-    ajouterMonstreListe(miniBosses, creerMonstre("Pyrox", 120, listeAttaquesPyrox, 120, 120));
+    ajouterMonstreListe(miniBosses, creerMonstre("Pyrox", 120, listeAttaquesPyrox, 120, 120, "miniboss"));
 
     return miniBosses;
 }
@@ -164,7 +164,7 @@ p_monstre creerDernierBoss() {
     ajouterAttaqueListe(listeAttaquesDernierBoss, creerAttaque(listeEffetsBGardienDeLaPlume, 25));
     ajouterAttaqueListe(listeAttaquesDernierBoss, creerAttaque(listeEffetsCGardienDeLaPlume, 25));
     ajouterAttaqueListe(listeAttaquesDernierBoss, creerAttaque(listeEffetsDGardienDeLaPlume, 25));
-    return creerMonstre("Gardien de la plume", 150, listeAttaquesDernierBoss, 150, 150);
+    return creerMonstre("Gardien de la plume", 150, listeAttaquesDernierBoss, 150, 150, "boss");
 }
 
 void remplirPointsVieMonstre(p_monstre monstre) {

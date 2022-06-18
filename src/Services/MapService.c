@@ -51,8 +51,9 @@ void remplirMap(p_map map) {
 
             if (5 != niveau) {
                 if (estDansListe(coordonneesMinibosses, niveau, couloir)) {
-                    salleActuelle->monstre = trouverPointeurNiemeMonstre(miniBosses,
-                                                                         genererEntier(0, miniBosses->nombreMonstres));
+                    salleActuelle->monstre = copierMonstre(trouverPointeurNiemeMonstre(miniBosses,
+                                                                         genererEntier(0, miniBosses->nombreMonstres)));
+                    remplirPointsVieMonstre(salleActuelle->monstre);
                 } else if (estDansListe(coordonneesSanctuaires, niveau, couloir)) {
 
                 } else if (couloir == couloirEvent) {
@@ -64,8 +65,9 @@ void remplirMap(p_map map) {
                     } else if (6 <= niveau && niveau <= 9) {
                         selectionMonstres = listeMonstresEtage5A9;
                     }
-                    salleActuelle->monstre = trouverPointeurNiemeMonstre(selectionMonstres, genererEntier(0,
-                                                                                                          selectionMonstres->nombreMonstres));
+                    salleActuelle->monstre = copierMonstre(trouverPointeurNiemeMonstre(selectionMonstres, genererEntier(0,
+                                                                                                          selectionMonstres->nombreMonstres)));
+                    remplirPointsVieMonstre(salleActuelle->monstre);
                 }
             }
             if (1 == couloir) {
@@ -81,6 +83,9 @@ void remplirMap(p_map map) {
     }
 
     map->derniereSalle->monstre = dernierBoss;
+    p_salle sanctuaireFinal = creerSalle();
+    remplirSalle(sanctuaireFinal, NULL, NULL);
+    map->derniereSalle->salleMilieu = sanctuaireFinal;
 }
 
 p_listeCoordonnees genererCoordonneesMiniBosses() {
@@ -128,12 +133,15 @@ p_listeCoordonnees genererCoordonneesSanctuaires(p_listeCoordonnees coordonneesB
     return sanctuaires;
 }
 
-void debugMap(p_map map) {
+void debugMap(p_map map, p_salle salleJoueur) {
     p_salle salleActuelle = map->premiereSalle->salleGauche;
     int couloir = 1;
     do {
+        if (salleActuelle == salleJoueur) {
+            printf("*");
+        }
         if (salleActuelle->monstre != NULL) {
-            printf("%s --- ", salleActuelle->monstre->nom);
+            printf("%s, %dpv --- ", salleActuelle->monstre->nom, salleActuelle->monstre->pointsVie);
         } else if (salleActuelle->event != NULL) {
             printf("Event%d --- ", salleActuelle->event->id);
         } else {

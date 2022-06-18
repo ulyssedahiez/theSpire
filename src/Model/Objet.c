@@ -4,10 +4,10 @@
 #include <stdlib.h>
 #include "Headers/Objet.h"
 
-p_objet creerObjet(char *nom, int value) {
+p_objet creerObjet(char *nom, p_effet effet) {
     p_objet objet = malloc(sizeof(t_objet));
     objet->nom = nom;
-    objet->value = value;
+    objet->effet = effet;
 
     return objet;
 }
@@ -45,3 +45,16 @@ void ajouterObjetListe(p_listeObjets listeObjets, p_objet objet) {
 
     listeObjets->nombreObjets += 1;
 }
+
+p_objet trouverPointeurObjet(p_listeObjets listeObjets, char* nomCherche) {
+    p_objetChainable objet = listeObjets->premiereObjet;
+
+    while (objet != NULL) {
+        if (strcmp(nomCherche, objet->objet->nom) == 0) {
+            return objet->objet;
+        }
+        objet = objet->objetSuivant;
+    }
+    return NULL;
+}
+
