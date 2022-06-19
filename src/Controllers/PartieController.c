@@ -3,14 +3,15 @@
 //
 
 #include "Headers/PartieController.h"
-
+#include "Map.h"
+#include "../Vue/Menu//Headers/Affichages.h"
 void processusPartie()
 {
     p_joueur peter = creerJoueur();
 
     p_map map = creerMap();
     remplirMap(map);
-    debugMap(map, NULL);
+    afficherMap(map, NULL);
 
     p_salle salleActuelle = choisirPremiereSalle(map->premiereSalle);
 
@@ -33,7 +34,7 @@ void processusPartie()
     initialiserDeckPrincipal(peter->deckPrincipal, cartesBasiques, cartesRares);
 
     while (true != defaite && true != victoire) {
-        debugMap(map, salleActuelle);
+        afficherMap(map, salleActuelle);
 
 
 

@@ -6,11 +6,16 @@
 #include "src/Services/Headers/JoueurService.h"
 #include "src/Services/Headers/UtilsService.h"
 #include "src/Controllers/Headers/PartieController.h"
-#include "src/Model/Headers/Map.h"
-#include "time.h"
 
+#include "src/Model/Headers/Salle.h"
+#include "time.h"
+#include "src/Vue/Menu/Headers/Affichages.h"
 int main(/*int argc, char *argv[]*/) {
     srand(time(NULL));
+    p_map map = creerMap();
+    p_salle salle = creerSalle();
+    //afficherMap(map, salle);
+
 
     processusPartie();
     //lancerMenu();
