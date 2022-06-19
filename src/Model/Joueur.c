@@ -10,16 +10,12 @@ p_joueur creerJoueur() {
     joueur->pointsVieActuels = 75; // v
     joueur->pointsVieMax = 75;
     joueur->pointsEsquiveActuels = 0; //q
-    joueur->pointsEnergieActuels = 0; //e
+    joueur->pointsEnergieActuels = 0; //s_donneesCombat
     joueur->pointsEnergieMax = 3;
     joueur->pointsManaActuels = 100; //m
     joueur->pointsManaMax = 100;
-    joueur->listeObjets = NULL;
-    joueur->deck = NULL;
-    /*joueur->lenteur = false;
-    joueur->faiblesse = false;
-    joueur->toursRestantsLenteur = 0;
-    joueur->toursRestantsFaiblesse = 0;*/
+    joueur->listeObjets = creerListeObjets();
+    joueur->deckPrincipal = creerListeCartes();
 
     return joueur;
 }

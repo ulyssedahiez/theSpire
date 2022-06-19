@@ -7,14 +7,14 @@
 
 #include <stdbool.h>
 #include "stdlib.h"
+#include "string.h"
 
 typedef struct s_effet
 {
     char* nom;
     bool surJoueur;
-    //char* propriete;
+    bool permanent;
     int valeur;
-    int nombreTours; // -1 si infini
     int nombreToursRestants;
 } t_effet;
 
@@ -34,9 +34,7 @@ typedef struct s_listeEffets {
 
 typedef t_listeEffets* p_listeEffets;
 
-
-
-p_effet creerEffet(char* nom, /*char* propriete,*/bool surJoueur, int valeur, int nombreTours);
+p_effet creerEffet(char *nom, bool surJoueur, int valeur);
 
 p_listeEffets creerListeEffets();
 
@@ -50,5 +48,7 @@ void supprimerEffetChainable(p_effetChainable effetChainable);
 void supprimerEffet(p_effet effet);
 
 p_effetChainable creerEffetChainable(p_effet effet);
+
+p_effet copierEffet(p_effet effet);
 
 #endif //THESPIRE_EFFET_H

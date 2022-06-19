@@ -76,3 +76,40 @@ p_carteChainable creerCarteChainable(p_carte carte) {
     return carteChainable;
 }
 
+p_carte trouverPointeurCarte(p_listeCartes listeCartes, char* nom) {
+    p_carteChainable carteChainable = listeCartes->premiereCarte;
+
+    while (carteChainable != NULL) {
+        if (strcmp(nom, carteChainable->carte->nom) == 0) {
+            return carteChainable->carte;
+        }
+        carteChainable = carteChainable->carteSuivante;
+    }
+    return NULL;
+}
+
+p_listeCartes copierListeCartes(p_listeCartes listeCartes) {
+    p_listeCartes nouvelleListeCartes = creerListeCartes();
+
+    p_carteChainable carteChainableAAjouter = listeCartes->premiereCarte;
+
+    while (carteChainableAAjouter != NULL) {
+        ajouterCarteListe(nouvelleListeCartes, carteChainableAAjouter->carte);
+
+        carteChainableAAjouter = carteChainableAAjouter->carteSuivante;
+    }
+
+    return nouvelleListeCartes;
+}
+
+p_carte trouverPointeurNiemeCarte(p_listeCartes listeCartes, int nCherche) {
+    int nActuel = 1;
+    p_carteChainable carteChainable = listeCartes->premiereCarte;
+    while (nActuel <= nCherche) {
+        carteChainable = carteChainable->carteSuivante;
+
+        nActuel++;
+    }
+    return carteChainable->carte;
+}
+

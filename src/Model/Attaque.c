@@ -45,3 +45,6 @@ void ajouterAttaqueListe(p_listeAttaques listeAttaques, p_attaque attaque) {
 
     listeAttaques->nombreAttaques += 1;
 }
+
+
+

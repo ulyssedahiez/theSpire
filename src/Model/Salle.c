@@ -21,7 +21,6 @@ p_salle creerSalle() {
     salle->salleGauche = NULL;
     salle->salleMilieu = NULL;
     salle->salleDroite = NULL;
-    salle->combat = NULL;
     salle->event = NULL;
 
     return salle;
@@ -37,7 +36,7 @@ p_salleDebut creerSalleDebut() {
     return salleDebut;
 }
 
-void remplirSalle(p_salle salle, p_event event, p_combat combat) {
+void remplirSalle(p_salle salle, p_event event, p_monstre monstre) {
     salle->event = event;
-    salle->combat = combat;
+    salle->monstre = monstre;
 }

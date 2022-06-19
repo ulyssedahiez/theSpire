@@ -8,6 +8,8 @@
 #include "Effet.h"
 #include "stdlib.h"
 #include "stdbool.h"
+#include "../../Services/Headers/UtilsService.h"
+
 typedef struct s_attaque {
     int probabiliteSur100;
     p_listeEffets listeEffets;

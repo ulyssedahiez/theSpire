@@ -6,11 +6,12 @@
 #define THESPIRE_OBJET_H
 
 #include "stdlib.h"
+#include "Effet.h"
 
 typedef struct s_objet
 {
     char* nom;
-    int value;
+    p_effet effet;
 } t_objet;
 
 typedef t_objet * p_objet;
@@ -33,8 +34,10 @@ p_listeObjets creerListeObjets();
 
 p_objetChainable creerObjetChainable(p_objet objet);
 
-p_objet creerObjet(char* nom, int value);
+p_objet creerObjet(char* nom, p_effet effet);
 
 void ajouterObjetListe(p_listeObjets listeObjets, p_objet objet);
+
+p_objet trouverPointeurObjet(p_listeObjets listeObjets, char* nomCherche);
 
 #endif //THESPIRE_OBJET_H

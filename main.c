@@ -4,12 +4,15 @@
 
 #include "src/Vue/Menu/Headers/Menu.h"
 #include "src/Services/Headers/JoueurService.h"
-#include "src/Controllers/Headers/Partie.h"
+#include "src/Services/Headers/UtilsService.h"
+#include "src/Controllers/Headers/PartieController.h"
 #include "src/Model/Headers/Map.h"
+#include "time.h"
 
 int main(/*int argc, char *argv[]*/) {
+    srand(time(NULL));
 
-    //processusPartie();
+    processusPartie();
     //lancerMenu();
     //creerMap();
 
