@@ -48,4 +48,10 @@ void supprimerCarteChainable(p_carteChainable carteChainable);
 
 p_carteChainable creerCarteChainable(p_carte carte);
 
+p_carte trouverPointeurCarte(p_listeCartes listeCartes, char* nom);
+
+p_listeCartes copierListeCartes(p_listeCartes listeCartes);
+
+p_carte trouverPointeurNiemeCarte(p_listeCartes listeCartes, int nCherche);
+
 #endif //THESPIRE_CARTE_H

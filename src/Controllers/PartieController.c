@@ -25,13 +25,17 @@ void processusPartie()
 
     bool defaite = false;
     bool victoire = false;
+
+    t_donneesCombat donneesRound;
+    donneesRound.joueur = peter;
+    donneesRound.map = map;
+
+    initialiserDeckPrincipal(peter->deckPrincipal, cartesBasiques, cartesRares);
+
     while (true != defaite && true != victoire) {
         debugMap(map, salleActuelle);
 
-        t_donneesCombat donneesRound;
-        donneesRound.joueur = peter;
-        donneesRound.map = map;
-        processusRound(donneesRound);
+
 
         if (NULL != salleActuelle->monstre) {
             printf("Salle actuelle : %s\n", salleActuelle->monstre->nom);
@@ -124,11 +128,12 @@ void jouerEvent(p_event event, p_listeMonstres miniBosses, t_donneesCombat donne
 }
 
 void jouerSanctuaire(p_joueur joueur) {
-    printf("Peter arrive dans un sanctuaire, il regagne ses points de vie.\n");
+    printf("Peter arrive dans un sanctuaire, il regagne ses points de vie au maximum.\n");
     joueur->pointsVieActuels = joueur->pointsVieMax;
 }
 
 void jouerCombat(t_donneesCombat donneesRound) {
 
+    processusRounds(donneesRound);
 }
 

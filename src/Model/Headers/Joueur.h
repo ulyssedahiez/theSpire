@@ -8,6 +8,7 @@
 #include "Objet.h"
 #include "Deck.h"
 #include "stdlib.h"
+#include "Carte.h"
 
 typedef struct s_joueur {
     int pointsVieActuels;
@@ -18,7 +19,7 @@ typedef struct s_joueur {
     int pointsManaActuels;
     int pointsManaMax;
     struct s_listeObjets * listeObjets;
-    struct deck * deck;
+    p_listeCartes deckPrincipal;
     struct s_listeEffets * listeEffets;
 } t_joueur;
 

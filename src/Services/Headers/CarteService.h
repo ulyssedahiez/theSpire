@@ -14,4 +14,6 @@ p_listeCartes genererListeCartesAtypiques();
 
 p_listeCartes genererListeCartesRares();
 
+void initialiserDeckPrincipal(p_listeCartes deckPrincipal, p_listeCartes cartesBasiques, p_listeCartes cartesRares);
+
 #endif //THESPIRE_CARTESSERVICE_H

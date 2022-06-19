@@ -89,3 +89,23 @@ p_listeCartes genererListeCartesRares() {
 
     return rares;
 }
+
+void initialiserDeckPrincipal(p_listeCartes deckPrincipal, p_listeCartes cartesBasiques, p_listeCartes cartesRares) {
+    p_carte carteStrike = trouverPointeurCarte(cartesBasiques, "Strike");
+    p_carte carteEsquive = trouverPointeurCarte(cartesBasiques, "Esquive");
+    p_carte carteSpectreComplet = trouverPointeurCarte(cartesRares, "Spectre complet");
+
+    ajouterCarteListe(deckPrincipal, carteStrike);
+    ajouterCarteListe(deckPrincipal, carteStrike);
+    ajouterCarteListe(deckPrincipal, carteStrike);
+    ajouterCarteListe(deckPrincipal, carteStrike);
+    ajouterCarteListe(deckPrincipal, carteStrike);
+
+    ajouterCarteListe(deckPrincipal, carteEsquive);
+    ajouterCarteListe(deckPrincipal, carteEsquive);
+    ajouterCarteListe(deckPrincipal, carteEsquive);
+    ajouterCarteListe(deckPrincipal, carteEsquive);
+    ajouterCarteListe(deckPrincipal, carteEsquive);
+
+    ajouterCarteListe(deckPrincipal, carteSpectreComplet);
+}
