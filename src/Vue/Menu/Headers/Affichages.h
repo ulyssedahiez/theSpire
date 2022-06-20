@@ -6,7 +6,7 @@
 #define THESPIRE_AFFICHAGES_H
 #include "../../Model/Headers/Map.h"
 #include "../../Model/Headers/Salle.h"
-
+#include <stdio.h>
 void afficherMap(p_map map, p_salle salleJoueur);
 
 #endif //THESPIRE_AFFICHAGES_H

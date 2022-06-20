@@ -3,14 +3,16 @@
 //
 
 #include "Headers/PartieController.h"
-
+#include "Map.h"
+#include "../Vue/Menu//Headers/Affichages.h"
 void processusPartie()
 {
     p_joueur peter = creerJoueur();
 
     p_map map = creerMap();
     remplirMap(map);
-    debugMap(map, NULL);
+
+    afficherMap(map, map->premiereSalle);
 
     p_salle salleActuelle = choisirPremiereSalle(map->premiereSalle);
 
@@ -33,16 +35,17 @@ void processusPartie()
     initialiserDeckPrincipal(peter->deckPrincipal, cartesBasiques, cartesRares);
 
     while (true != defaite && true != victoire) {
-        debugMap(map, salleActuelle);
+
+        afficherMap(map, salleActuelle);
 
 
 
         if (NULL != salleActuelle->monstre) {
             printf("Salle actuelle : %s\n", salleActuelle->monstre->nom);
-            jouerCombat(donneesRound);
+            //jouerCombat(donneesRound);
         } else if (NULL != salleActuelle->event) {
             printf("Salle actuelle : Event%d\n", salleActuelle->event->id);
-            jouerEvent(salleActuelle->event, creerListeMiniBosses(), donneesRound);
+            //jouerEvent(salleActuelle->event, creerListeMiniBosses(), donneesRound);
         } else {
             jouerSanctuaire(peter);
         }
