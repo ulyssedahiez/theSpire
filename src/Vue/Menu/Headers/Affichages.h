@@ -6,12 +6,14 @@
 #define THESPIRE_AFFICHAGES_H
 #include "../../Model/Headers/Map.h"
 #include "../../Model/Headers/Salle.h"
+#include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 void afficherMap(p_map map, p_salle salleJoueur);
 
 void afficherAttaque(p_attaque attaque, int offset);
 
-void afficherCarte(p_carte carte, int offset);
+void afficherCarte(p_carte carte, int offset, int num);
 
 void afficherListeCartes(p_listeCartes listeCartes, int offset);
 

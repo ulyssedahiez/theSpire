@@ -135,16 +135,31 @@ void jouerSanctuaire(p_joueur joueur) {
     printf("Peter arrive dans un sanctuaire, deux choix s'offrent à lui,  faire dormir Peter pour\n"
            "lui faire regagner la moitié de ses Hp max, ou de faire méditer Peter afin d’avoir la possibilité de\n"
            "retirer définitivement une carte du deck principal.\n");
-    printf("Choisissez la prochaine salle !\n");
+    printf("Choisissez !\n");
     printf("1 - Dormir\n2 - Méditer\n>>>");
     int choix;
     scanf("%d", &choix);
      if(choix == 1){
-        joueur->pointsVieActuels = joueur->pointsVieActuels*2;
+        joueur->pointsVieActuels = floor(joueur->pointsVieActuels+=joueur->pointsVieMax/2);
+
         printf("ZZzzz Peter a bien dormi, ses HP on été multiplié par deux.\n");
     }else if(choix == 2){
+         afficherListeCartes(joueur->deckPrincipal, 0);
+         printf("Choisissez une carte à supprimer !\n>>>");
+         int choixCarte;
+         scanf("%d", &choixCarte);
+         p_carteChainable carteChainable = joueur->deckPrincipal->premiereCarte;
+         int choixCarteSauv=0;
+         for (int i=0;i<choixCarte-1; i++){
+             carteChainable = carteChainable->carteSuivante;
+             choixCarteSauv =i;
+         }
+         printf("Hhmmm Peter a bien médité,  cette carte a été retiré du deck.\pn\n");
+         afficherCarte(carteChainable->carte, 1, choixCarteSauv);
+         enleverCarteListe(joueur->deckPrincipal,carteChainable->carte);
 
-         printf("Hhmmm Peter a bien médité, retirer une carte du deck.\n");
+
+
     }else{
         printf("%d est impossible, recommencer\n", choix);
         jouerSanctuaire(joueur);

@@ -17,11 +17,20 @@ int main(/*int argc, char *argv[]*/) {
     //afficherMap(map, salle);
 
 
-    processusPartie();
+    //processusPartie();
     //lancerMenu();
     //creerMap();
 
+    p_listeCartes cartesBasiques = genererListeCartesBasiques();
+    p_listeCartes cartesCommunes = genererListeCartesCommunes();
+    p_listeCartes cartesAtypiques = genererListeCartesAtypiques();
+    p_listeCartes cartesRares = genererListeCartesRares();
+
     p_joueur joueur = creerJoueur();
-    corrigerProprietesJoueur(joueur, 2, 'e', 'v');
+
+    initialiserDeckPrincipal(joueur->deckPrincipal, cartesBasiques, cartesRares);
+    jouerSanctuaire(joueur);
+
+    //corrigerProprietesJoueur(joueur, 2, 'e', 'v');
     //lancerMenu();
 }
