@@ -13,7 +13,7 @@ p_listeCartes genererListeCartesBasiques() {
 
     p_listeEffets listeEffetsEsquive = creerListeEffets();
     ajouterEffetListe(listeEffetsEsquive, creerEffet("Esquive", true, 5));
-    ajouterCarteListe(basiques, creerCarte("Esquive", "basique", 1, 0, NULL, "Donne 5 points d’esquive", "L’esquive de base"));
+    ajouterCarteListe(basiques, creerCarte("Esquive", "basique", 1, 0, listeEffetsEsquive, "Donne 5 points d’esquive", "L’esquive de base"));
 
     return basiques;
 }
@@ -74,7 +74,7 @@ p_listeCartes genererListeCartesRares() {
     p_listeEffets listeEffetsPulveriser = creerListeEffets();
     ajouterEffetListe(listeEffetsPulveriser, creerEffet("Dégâts", false, 30));
     ajouterEffetListe(listeEffetsPulveriser, creerEffet("Abyssal", false, 0));
-    ajouterCarteListe(rares, creerCarte("Pulvériser", "rare", 3, 0, NULL , "Inﬂige 30 dégâts, Abyssal", "Blam !"));
+    ajouterCarteListe(rares, creerCarte("Pulvériser", "rare", 3, 0, listeEffetsPulveriser , "Inﬂige 30 dégâts, Abyssal", "Blam !"));
 
     p_listeEffets listeEffetsSpectreComplet = creerListeEffets();
     ajouterEffetListe(listeEffetsSpectreComplet, creerEffet("Feu", false, 3));
@@ -85,7 +85,7 @@ p_listeCartes genererListeCartesRares() {
     ajouterEffetListe(listeEffetsSpectreComplet, creerEffet("Dextérité", true, 1));
     ajouterEffetListe(listeEffetsSpectreComplet, creerEffet("Esquive", true, 5));
     ajouterEffetListe(listeEffetsSpectreComplet, creerEffet("Abyssal", false, 0));
-    ajouterCarteListe(rares, creerCarte("Spectre complet", "rare", 2, 20, NULL , "Donne différents bonus. Abyssal.", "Un bonus pour chaque couleur de l’arc-en-ciel."));
+    ajouterCarteListe(rares, creerCarte("Spectre complet", "rare", 2, 20, listeEffetsSpectreComplet , "Donne différents bonus. Abyssal.", "Un bonus pour chaque couleur de l’arc-en-ciel."));
 
     return rares;
 }

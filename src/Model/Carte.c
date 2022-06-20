@@ -50,11 +50,13 @@ bool enleverCarteListe(p_listeCartes listeCartes, p_carte carte) {
         return true;
     } else {
         p_carteChainable carteChainableActuelle = listeCartes->premiereCarte;
-        while (carte != carteChainableActuelle->carte || NULL != carteChainableActuelle->carteSuivante) {
+        while (NULL != carteChainableActuelle->carteSuivante && carte != carteChainableActuelle->carteSuivante->carte) {
             carteChainableActuelle = carteChainableActuelle->carteSuivante;
         }
-        if (carte == carteChainableActuelle->carte) {
-            supprimerCarteChainable(carteChainableActuelle);
+        if (carte == carteChainableActuelle->carteSuivante->carte) {
+            p_carteChainable aSuppr = carteChainableActuelle->carteSuivante;
+            carteChainableActuelle->carteSuivante = carteChainableActuelle->carteSuivante->carteSuivante;
+            supprimerCarteChainable(aSuppr);
             listeCartes->nombreCartes -= 1;
 
             return true;
@@ -103,9 +105,9 @@ p_listeCartes copierListeCartes(p_listeCartes listeCartes) {
 }
 
 p_carte trouverPointeurNiemeCarte(p_listeCartes listeCartes, int nCherche) {
-    int nActuel = 1;
+    int nActuel = 0;
     p_carteChainable carteChainable = listeCartes->premiereCarte;
-    while (nActuel <= nCherche) {
+    while (nActuel < nCherche) {
         carteChainable = carteChainable->carteSuivante;
 
         nActuel++;
@@ -113,3 +115,9 @@ p_carte trouverPointeurNiemeCarte(p_listeCartes listeCartes, int nCherche) {
     return carteChainable->carte;
 }
 
+void transfererNiemeCarteListe(p_listeCartes source, p_listeCartes cible, int n) {
+    p_carte carteAtransferer = trouverPointeurNiemeCarte(source, n);
+
+    enleverCarteListe(source, carteAtransferer);
+    ajouterCarteListe(cible, carteAtransferer);
+}

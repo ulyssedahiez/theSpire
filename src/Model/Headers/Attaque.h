@@ -39,5 +39,6 @@ void ajouterAttaqueListe(p_listeAttaques listeAttaques, p_attaque attaque);
 
 p_attaqueChainable creerAttaqueChainable(p_attaque attaque);
 
+p_attaque trouverNiemeAttaque(p_listeAttaques listeAttaques, int nCherche);
 
 #endif //THESPIRE_ATTAQUE_H

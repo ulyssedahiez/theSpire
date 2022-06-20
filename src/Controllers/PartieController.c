@@ -26,9 +26,9 @@ void processusPartie()
     bool defaite = false;
     bool victoire = false;
 
-    t_donneesCombat donneesRound;
-    donneesRound.joueur = peter;
-    donneesRound.map = map;
+    p_donneesCombat donneesRound = creerDonneesCombat();
+    donneesRound->joueur = peter;
+    donneesRound->map = map;
 
     initialiserDeckPrincipal(peter->deckPrincipal, cartesBasiques, cartesRares);
 
@@ -39,6 +39,7 @@ void processusPartie()
 
         if (NULL != salleActuelle->monstre) {
             printf("Salle actuelle : %s\n", salleActuelle->monstre->nom);
+            donneesRound->salleActuelle = salleActuelle;
             jouerCombat(donneesRound);
         } else if (NULL != salleActuelle->event) {
             printf("Salle actuelle : Event%d\n", salleActuelle->event->id);
@@ -123,7 +124,7 @@ p_salle choisirSalleSuivante(p_map map, p_salle salleActuelle) {
     return salleSuivante;
 }
 
-void jouerEvent(p_event event, p_listeMonstres miniBosses, t_donneesCombat donneesRound) {
+void jouerEvent(p_event event, p_listeMonstres miniBosses, p_donneesCombat donneesRound) {
 
 }
 
@@ -132,8 +133,8 @@ void jouerSanctuaire(p_joueur joueur) {
     joueur->pointsVieActuels = joueur->pointsVieMax;
 }
 
-void jouerCombat(t_donneesCombat donneesRound) {
+void jouerCombat(p_donneesCombat donneesRound) {
 
-    processusRounds(donneesRound);
+    processusCombat(donneesRound);
 }
 

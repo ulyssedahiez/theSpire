@@ -16,6 +16,7 @@ p_joueur creerJoueur() {
     joueur->pointsManaMax = 100;
     joueur->listeObjets = creerListeObjets();
     joueur->deckPrincipal = creerListeCartes();
+    joueur->listeEffets = creerListeEffets();
 
     return joueur;
 }
