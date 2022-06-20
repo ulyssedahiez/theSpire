@@ -39,4 +39,6 @@ void processusDebutRound(p_donneesCombat donneesCombat);
 
 void piocher5Cartes(p_donneesCombat donneesCombat);
 
+void jouerListeCartes(p_donneesCombat donneesCombat);
+
 #endif //THESPIRE_COMBATCONTROLLER_H

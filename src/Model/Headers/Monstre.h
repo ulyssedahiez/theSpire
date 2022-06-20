@@ -16,6 +16,7 @@ typedef struct s_monstre
     int borneInfPointsVie;
     int borneSupPointsVie;
     char*  type;
+    struct s_listeEffets * listeEffetsSubis;
 } t_monstre;
 
 typedef t_monstre* p_monstre;

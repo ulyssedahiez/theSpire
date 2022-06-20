@@ -4,10 +4,19 @@
 
 #ifndef THESPIRE_MENU_H
 #define THESPIRE_MENU_H
+#include "../../Model/Headers/Carte.h"
+#include "Affichages.h"
 
 int lancerMenu();
 
 int menuChoixSalle(char* choix1, char* choix2, char* choix3, char* choix4);
+
+/**
+ * retourne l'index de la carte choisie
+ * @param choixMax
+ * @return position carte dans la main
+ */
+int menuChoixCarteMain(p_listeCartes listeCartes);
 
 int credit();
 int regles();

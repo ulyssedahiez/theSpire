@@ -16,8 +16,12 @@ void afficherCarte(p_carte carte, int offset) {
     afficherNChar(' ', offset);
     printf("Carte %s\n", carte->nom);
     afficherNChar(' ', 5);
-    afficherListeEffets(carte->listeEffets, 10);
+    afficherListeEffets(carte->listeEffets, 5);
     printf("\n");
+    afficherNChar(' ', 10);
+    printf("Cout en mana : %d\n", carte->pointsMana);
+    afficherNChar(' ', 10);
+    printf("Cout en energie : %d\n", carte->pointsEnergie);
 
 }
 

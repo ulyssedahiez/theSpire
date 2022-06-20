@@ -56,6 +56,26 @@ int menuChoixSalle(char* choix1, char* choix2, char* choix3, char* choix4) {
     return choix;
 }
 
+int menuChoixCarteMain(p_listeCartes listeCartes) {
+    printf("Il est temps de choisir les cartes à jouer ! Voici celles que Peter a en main :\n");
+    p_carteChainable carteChainable = listeCartes->premiereCarte;
+    int choix = 1;
+    int choixRetour;
+    afficherListeCartes(listeCartes, 0);
+    printf("0 - Quitter la selection\n");
+    while (carteChainable != NULL) {
+        printf("%d - %s\n", choix, carteChainable->carte->nom);
+
+        choix++;
+        carteChainable = carteChainable->carteSuivante;
+    }
+    printf(">>>");
+    scanf("%d", &choixRetour);
+
+
+    return choixRetour;
+}
+
 int credit(){
     int choix;//(char*) calloc(50, sizeof(char));//'r';
 

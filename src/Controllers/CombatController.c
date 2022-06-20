@@ -5,6 +5,7 @@
 #include "CombatController.h"
 #include "stdio.h"
 #include "../../Vue/Menu/Headers/Affichages.h"
+#include "../../Vue/Menu/Headers/Menu.h"
 
 p_donneesCombat creerDonneesCombat() {
     p_donneesCombat donneesCombat = malloc(sizeof(t_donneesCombat));
@@ -22,8 +23,6 @@ p_donneesCombat creerDonneesCombat() {
 
 void processusCombat(p_donneesCombat donneesCombat) {
     processusDebutCombat(donneesCombat);
-    processusTourMonstre(donneesCombat);
-    processusTourJoueur(donneesCombat);
     while (donneesCombat->joueur->pointsVieActuels > 0 && donneesCombat->salleActuelle->monstre->pointsVie > 0) {
         processusRound(donneesCombat);
     }
@@ -60,9 +59,21 @@ void processusRound(p_donneesCombat donneesCombat) {
 }
 
 void processusTourJoueur(p_donneesCombat donneesCombat) {
-    printf("Il est temps de choisir les cartes à jouer ! Voici celles que Peter a en main :\n");
-    afficherListeCartes(donneesCombat->mainJoueur, 5);
-    // TODO: le joueur choisit les cartes à jouer
+    int choixCarte;
+    do {
+        do {
+            choixCarte = menuChoixCarteMain(donneesCombat->mainJoueur);
+        } while (choixCarte < 0 || donneesCombat->pioche->nombreCartes < choixCarte);
+        transfererNiemeCarteListe(donneesCombat->mainJoueur, donneesCombat->cartesAJouer, choixCarte - 1);
+    } while (choixCarte != 0);
+    printf("Fin de la selection de cartes, les cartes restantes partent à la défausse\n");
+
+    while (donneesCombat->pioche->nombreCartes != 0) {
+        transfererNiemeCarteListe(donneesCombat->pioche, donneesCombat->defausse, 0);
+    }
+
+    jouerListeCartes(donneesCombat);
+
 
 
     // TODO: on joue les cartes (affichage des actions successives)
@@ -71,7 +82,11 @@ void processusTourJoueur(p_donneesCombat donneesCombat) {
 }
 
 void processusTourMonstre(p_donneesCombat donneesCombat) {
-    // TODO: jouer l'attaque choisie
+    while(donneesCombat->attaqueRoundMonstre->listeEffets->premiereEffet->effetSuivant != NULL) {
+        ajouterEffetListe(donneesCombat->attaqueRoundMonstre->listeEffets, copierEffet(donneesCombat->attaqueRoundMonstre->listeEffets->premiereEffet->effet));
+        donneesCombat->attaqueRoundMonstre->listeEffets->premiereEffet = donneesCombat->attaqueRoundMonstre->listeEffets->premiereEffet->effetSuivant;
+    }
+    donneesCombat->attaqueRoundMonstre = NULL;
 }
 
 void piocher5Cartes(p_donneesCombat donneesCombat) {
@@ -87,5 +102,35 @@ void piocher5Cartes(p_donneesCombat donneesCombat) {
             break;
         }
         transfererNiemeCarteListe(donneesCombat->pioche, donneesCombat->mainJoueur, genererEntier(0, donneesCombat->pioche->nombreCartes));
+    }
+}
+
+void jouerListeCartes(p_donneesCombat donneesCombat) {
+    p_carteChainable carteAJouer = donneesCombat->mainJoueur->premiereCarte;
+
+    int nCarte = 0;
+    while (carteAJouer != NULL) {
+        p_effetChainable effetAJouer = carteAJouer->carte->listeEffets->premiereEffet;
+        p_listeEffets listeEffetsDestination;
+        bool abyssal = false;
+        while (effetAJouer != NULL) {
+            if (strcmp(effetAJouer->effet->nom, "Abyssal") == 0) {
+                abyssal = true;
+            }
+            if (effetAJouer->effet->surJoueur) {
+                listeEffetsDestination = donneesCombat->joueur->listeEffetsSubis;
+            } else {
+                listeEffetsDestination = donneesCombat->salleActuelle->monstre->listeEffetsSubis;
+            }
+            ajouterEffetListe(listeEffetsDestination, copierEffet(effetAJouer->effet));
+            effetAJouer = effetAJouer->effetSuivant;
+        }
+        if (abyssal == true) {
+            transfererNiemeCarteListe(donneesCombat->mainJoueur, donneesCombat->abysses, nCarte);
+        } else {
+            transfererNiemeCarteListe(donneesCombat->mainJoueur, donneesCombat->defausse, nCarte);
+        }
+        nCarte++;
+        carteAJouer = carteAJouer->carteSuivante;
     }
 }
