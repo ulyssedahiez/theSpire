@@ -54,4 +54,6 @@ p_listeCartes copierListeCartes(p_listeCartes listeCartes);
 
 p_carte trouverPointeurNiemeCarte(p_listeCartes listeCartes, int nCherche);
 
+void transfererNiemeCarteListe(p_listeCartes source, p_listeCartes cible, int n);
+
 #endif //THESPIRE_CARTE_H

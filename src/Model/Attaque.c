@@ -46,5 +46,15 @@ void ajouterAttaqueListe(p_listeAttaques listeAttaques, p_attaque attaque) {
     listeAttaques->nombreAttaques += 1;
 }
 
+p_attaque trouverNiemeAttaque(p_listeAttaques listeAttaques, int nCherche) {
+    int nActuel = 0;
+    p_attaqueChainable pAttaqueChainable = listeAttaques->premiereAttaque;
+    while (nActuel < nCherche) {
+        pAttaqueChainable = pAttaqueChainable->attaqueSuivante;
+
+        nActuel++;
+    }
+    return pAttaqueChainable->attaque;
+}
 
 

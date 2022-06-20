@@ -26,9 +26,9 @@ p_salle choisirPremiereSalle(p_salleDebut salleActuelle);
 
 p_salle choisirSalleSuivante(p_map map, p_salle salleActuelle);
 
-void jouerCombat(t_donneesCombat donneesRound);
+void jouerCombat(p_donneesCombat donneesRound);
 
-void jouerEvent(p_event event, p_listeMonstres miniBosses, t_donneesCombat donneesRound);
+void jouerEvent(p_event event, p_listeMonstres miniBosses, p_donneesCombat donneesRound);
 
 void jouerSanctuaire(p_joueur joueur);
 

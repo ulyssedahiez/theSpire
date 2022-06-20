@@ -8,6 +8,7 @@
 #include "../../Model/Headers/Carte.h"
 #include "../../Model/Headers/Joueur.h"
 
+
 typedef struct s_donneesCombat {
     p_map map;
     p_joueur joueur;
@@ -20,18 +21,24 @@ typedef struct s_donneesCombat {
     p_listeCartes cartesAJouer;
 } t_donneesCombat;
 
-void processusRounds(t_donneesCombat donneesCombat);
+typedef t_donneesCombat * p_donneesCombat;
 
-void processusDebutCombat(t_donneesCombat donneesCombat);
+p_donneesCombat creerDonneesCombat();
 
-void processusRound(t_donneesCombat donneesCombat);
+void processusCombat(p_donneesCombat donneesCombat);
 
-void processusTourJoueur(t_donneesCombat donneesCombat);
+void processusDebutCombat(p_donneesCombat donneesCombat);
 
-void processusTourMonstre(t_donneesCombat donneesCombat);
+void processusRound(p_donneesCombat donneesCombat);
 
-void processusDebutRound(t_donneesCombat donneesCombat);
+void processusTourJoueur(p_donneesCombat donneesCombat);
 
-void piocher5Cartes(t_donneesCombat donneesCombat);
+void processusTourMonstre(p_donneesCombat donneesCombat);
+
+void processusDebutRound(p_donneesCombat donneesCombat);
+
+void piocher5Cartes(p_donneesCombat donneesCombat);
+
+void jouerListeCartes(p_donneesCombat donneesCombat);
 
 #endif //THESPIRE_COMBATCONTROLLER_H
