@@ -4,7 +4,7 @@
 
 #include "Menu/Headers/Affichages.h"
 void afficherMap(p_map map, p_salle salleJoueur) {
-    p_salle salleActuelle = salleJoueur;
+    p_salle salleActuelle = map->premiereSalle->salleGauche;
     int nbLigneSalle = 0;
     int couloir = 1;
     bool deuxiemeSalle = true;
@@ -24,14 +24,21 @@ void afficherMap(p_map map, p_salle salleJoueur) {
             printf(" [ ]");
         }
 
-        if (salleActuelle->salleMilieu == map->derniereSalle) {
+        if(nbLigneSalle == 2) {
+
+        }
+
+
+         if (salleActuelle->salleMilieu == map->derniereSalle) {
             printf("\n");
             deuxiemeSalle = true;
             nbLigneSalle++;
             if(nbLigneSalle == 2){
-                if(salleActuelle == map->derniereSalle){
+                if (salleJoueur == map->premiereSalle) {
+                    printf("[*]                                     [ ]\n");
+                } else if (salleJoueur == map->derniereSalle) {
                     printf("[ ]                                     [*]\n");
-                }else{
+                }else {
                     printf("[ ]                                     [ ]\n");
                 }
             }

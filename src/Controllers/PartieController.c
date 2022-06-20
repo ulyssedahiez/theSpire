@@ -11,7 +11,8 @@ void processusPartie()
 
     p_map map = creerMap();
     remplirMap(map);
-    afficherMap(map, NULL);
+
+    afficherMap(map, map->premiereSalle);
 
     p_salle salleActuelle = choisirPremiereSalle(map->premiereSalle);
 
@@ -34,16 +35,17 @@ void processusPartie()
     initialiserDeckPrincipal(peter->deckPrincipal, cartesBasiques, cartesRares);
 
     while (true != defaite && true != victoire) {
+
         afficherMap(map, salleActuelle);
 
 
 
         if (NULL != salleActuelle->monstre) {
             printf("Salle actuelle : %s\n", salleActuelle->monstre->nom);
-            jouerCombat(donneesRound);
+            //jouerCombat(donneesRound);
         } else if (NULL != salleActuelle->event) {
             printf("Salle actuelle : Event%d\n", salleActuelle->event->id);
-            jouerEvent(salleActuelle->event, creerListeMiniBosses(), donneesRound);
+            //jouerEvent(salleActuelle->event, creerListeMiniBosses(), donneesRound);
         } else {
             jouerSanctuaire(peter);
         }
