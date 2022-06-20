@@ -66,9 +66,9 @@ void afficherAttaque(p_attaque attaque, int offset) {
     afficherListeEffets(attaque->listeEffets, offset);
 }
 
-void afficherCarte(p_carte carte, int offset) {
+void afficherCarte(p_carte carte, int offset, int num) {
     afficherNChar(' ', offset);
-    printf("Carte %s\n", carte->nom);
+    printf("(%i) Carte %s\n",num, carte->nom);
     afficherNChar(' ', 5);
     afficherListeEffets(carte->listeEffets, 5);
     printf("\n");
@@ -81,9 +81,11 @@ void afficherCarte(p_carte carte, int offset) {
 
 void afficherListeCartes(p_listeCartes listeCartes, int offset) {
     p_carteChainable carteChainable = listeCartes->premiereCarte;
+    int count = 1;
     while (carteChainable != NULL) {
-        afficherCarte(carteChainable->carte, offset);
+        afficherCarte(carteChainable->carte, offset, count);
         carteChainable = carteChainable->carteSuivante;
+        count+=1;
     }
 }
 

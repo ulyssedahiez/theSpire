@@ -132,8 +132,40 @@ void jouerEvent(p_event event, p_listeMonstres miniBosses, p_donneesCombat donne
 }
 
 void jouerSanctuaire(p_joueur joueur) {
-    printf("Peter arrive dans un sanctuaire, il regagne ses points de vie au maximum.\n");
-    joueur->pointsVieActuels = joueur->pointsVieMax;
+    printf("Peter arrive dans un sanctuaire, deux choix s'offrent à lui,  faire dormir Peter pour\n"
+           "lui faire regagner la moitié de ses Hp max, ou de faire méditer Peter afin d’avoir la possibilité de\n"
+           "retirer définitivement une carte du deck principal.\n");
+    printf("Choisissez !\n");
+    printf("1 - Dormir\n2 - Méditer\n>>>");
+    int choix;
+    scanf("%d", &choix);
+     if(choix == 1){
+        joueur->pointsVieActuels = floor(joueur->pointsVieActuels+=joueur->pointsVieMax/2);
+
+        printf("ZZzzz Peter a bien dormi, ses HP on été multiplié par deux.\n");
+    }else if(choix == 2){
+         afficherListeCartes(joueur->deckPrincipal, 0);
+         printf("Choisissez une carte à supprimer !\n>>>");
+         int choixCarte;
+         scanf("%d", &choixCarte);
+         p_carteChainable carteChainable = joueur->deckPrincipal->premiereCarte;
+         int choixCarteSauv=0;
+         for (int i=0;i<choixCarte-1; i++){
+             carteChainable = carteChainable->carteSuivante;
+             choixCarteSauv =i;
+         }
+         printf("Hhmmm Peter a bien médité,  cette carte a été retiré du deck.\n\n");
+         afficherCarte(carteChainable->carte, 1, choixCarteSauv);
+         enleverCarteListe(joueur->deckPrincipal,carteChainable->carte);
+
+
+
+    }else{
+        printf("%d est impossible, recommencer\n", choix);
+        jouerSanctuaire(joueur);
+    }
+
+
 }
 
 void jouerCombat(p_donneesCombat donneesRound) {
