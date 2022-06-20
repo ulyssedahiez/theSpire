@@ -154,7 +154,7 @@ void jouerSanctuaire(p_joueur joueur) {
              carteChainable = carteChainable->carteSuivante;
              choixCarteSauv =i;
          }
-         printf("Hhmmm Peter a bien médité,  cette carte a été retiré du deck.\pn\n");
+         printf("Hhmmm Peter a bien médité,  cette carte a été retiré du deck.\n\n");
          afficherCarte(carteChainable->carte, 1, choixCarteSauv);
          enleverCarteListe(joueur->deckPrincipal,carteChainable->carte);
 
