@@ -3,9 +3,9 @@
 //
 #include "Headers/Event.h"
 p_event trouverPointeurNiemeEvent(p_listeEvent listeEvent, int nCherche) {
-    int nActuel = 1;
+    int nActuel = 0;
     p_eventChainable eventChainable = listeEvent->premierEvent;
-    while (nActuel <= nCherche) {
+    while (nActuel < nCherche) {
         eventChainable = eventChainable->eventSuivant;
 
         nActuel++;

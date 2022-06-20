@@ -12,6 +12,7 @@ p_monstre creerMonstre(char *nom, int pointsVie, p_listeAttaques attaques, int b
     monstre->borneInfPointsVie = borneInfPV;
     monstre->borneSupPointsVie = borneSupPV;
     monstre->type = type;
+    monstre->listeEffetsSubis = creerListeEffets();
 
     return monstre;
 }

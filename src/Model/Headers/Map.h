@@ -12,10 +12,8 @@
 #include "Salle.h"
 
 typedef struct s_map {
-    int nombreSalle;
     struct s_salleDebut* premiereSalle;
     struct s_salle* derniereSalle;
-    struct s_listeObjets * listeObjets;
 } t_map;
 
 typedef t_map* p_map;
