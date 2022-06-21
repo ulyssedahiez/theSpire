@@ -5,6 +5,8 @@
 #include <sys/time.h>
 #include "Headers/PartieController.h"
 #include "Map.h"
+#include <time.h>
+#include <stdlib.h>
 #include "../Vue/Menu//Headers/Affichages.h"
 
 void processusPartie() {
@@ -30,6 +32,7 @@ void processusPartie() {
     bool victoire = false;
 
     p_donneesCombat donneesRound = creerDonneesCombat();
+    donneesRound->carteBasique = cartesBasiques;
     donneesRound->joueur = peter;
     donneesRound->map = map;
 

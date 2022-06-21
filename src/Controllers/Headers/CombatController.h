@@ -19,6 +19,7 @@ typedef struct s_donneesCombat {
     p_listeCartes defausse;
     p_attaque attaqueRoundMonstre;
     p_listeCartes cartesAJouer;
+    p_listeCartes carteBasique;
 } t_donneesCombat;
 
 typedef t_donneesCombat * p_donneesCombat;
