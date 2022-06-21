@@ -170,7 +170,7 @@ void jouerSanctuaire(p_joueur joueur) {
     scanf("%d", &choix);
      if(choix == 1){
         joueur->pointsVieActuels = floor(joueur->pointsVieActuels+=joueur->pointsVieMax/2);
-
+         corrigerProprietesJoueur(joueur, 1, 'p');
         printf("ZZzzz Peter a bien dormi, ses HP on été multiplié par deux.\n");
     }else if(choix == 2){
          afficherListeCartes(joueur->deckPrincipal, 0);
