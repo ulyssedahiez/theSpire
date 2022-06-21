@@ -49,7 +49,7 @@ void processusPartie() {
             jouerCombat(donneesRound);
         } else if (NULL != salleActuelle->event) {
             printf("Salle actuelle : Event%d\n", salleActuelle->event->id);
-            //jouerEvent(salleActuelle->event, creerListeMiniBosses(), donneesRound);
+            jouerEvent(creerListeMiniBosses(), donneesRound);
         } else {
             jouerSanctuaire(peter);
         }
@@ -171,70 +171,71 @@ void tranformerEsquiveEnStrike(p_donneesCombat donneesRound) {
     }
 }
 
-void
-jouerEvent(p_event event, p_listeMonstres miniBosses, p_donneesCombat donneesRound, p_map map, p_salle salleActuelle) {
+void jouerEvent(p_listeMonstres miniBosses, p_donneesCombat donneesRound) {
 
-    struct s_event *eventDeLaSalle = donneesRound->salleActuelle->event;
     printf("Bonjour voyageur ! Deux choix vont vous être confronté. À vous de faire le bon choix ! \n");
-    char choixJoueur = 'N';
+    int rock=0;
+    printf("fuck you");
     do {
-        if (eventDeLaSalle->id == 1) {
-            printf("%s", eventDeLaSalle->description);
-            printf("%s \n %s", eventDeLaSalle->choixA, eventDeLaSalle->choixB);
+        if (donneesRound->salleActuelle->event->id == 1) {
+            printf("Oulalalalalalalala");
+            printf("%s", donneesRound->salleActuelle->event->description);
+            printf("%s \n %s", donneesRound->salleActuelle->event->choixA, donneesRound->salleActuelle->event->choixB);
             printf("Faites votre choix mon ami ! (Taper A pour selectionner le choix A et B pour sélectionner le choix B)\n");
-            scanf("%c", &choixJoueur);
-            if (choixJoueur == 'A') {
+            scanf("%i", &rock);
+            if (rock == 1) {
                 printf("Vous venez de lancer le combat avec ce monstre ! Quel courage, Bonne chance aventurier ! \n");
                 donneesRound->salleActuelle->monstre = trouverPointeurNiemeMonstre(miniBosses, genererEntier(0,
                                                                                                              miniBosses->nombreMonstres));
                 jouerCombat(donneesRound);
 
-            } else if (choixJoueur == 'B') {
+            } else if (rock == 2) {
                 printf("Très bien aventurier, vous décider de passer ce MiniBoss ! \n");
-                choisirSalleSuivante(map, salleActuelle);
             }
-        } else if (eventDeLaSalle->id == 2) {
-            printf("%s", eventDeLaSalle->description);
-            printf("%s \n %s", eventDeLaSalle->choixA, eventDeLaSalle->choixB);
+        } else if (donneesRound->salleActuelle->event->id == 2) {
+            printf("Oulalalalalalalala");
+            printf("%s", donneesRound->salleActuelle->event->description);
+            printf("%s \n %s", donneesRound->salleActuelle->event->choixA, donneesRound->salleActuelle->event->choixB);
             printf("Faites votre choix mon ami ! (Taper A pour selectionner le choix A et B pour sélectionner le choix B)\n");
-            scanf("%c", &choixJoueur);
-            if (choixJoueur == 'A') {
+            scanf("%i", &rock);
+            if (rock == 1) {
                 printf("Vous aller être téléporter dans une autre salle aventurier ! \n");
                 //TODO : Mettre la fonciton pour se téléporter dans des salles adjacente.
-            } else if (choixJoueur == 'B') {
+            } else if (rock == 2) {
                 printf("Vous avez décidé de dépenser 10 points de vie. En échange, vous pouvez aller ou vous le désirez. \n");
                 donneesRound->joueur->pointsVieActuels -= 10;
                 corrigerProprietesJoueur(donneesRound->joueur, 1, 'v');
-                choisirSalleSuivante(map, salleActuelle);
             }
-        } else if (eventDeLaSalle->id == 3) {
-            printf("%s", eventDeLaSalle->description);
-            printf("%s \n %s", eventDeLaSalle->choixA, eventDeLaSalle->choixB);
+        } else if (donneesRound->salleActuelle->event->id == 3) {
+            printf("Oulalalalalalalala");
+            printf("%s", donneesRound->salleActuelle->event->description);
+            printf("%s \n %s", donneesRound->salleActuelle->event->choixA, donneesRound->salleActuelle->event->choixB);
             printf("Faites votre choix mon ami ! (Taper A pour selectionner le choix A et B pour sélectionner le choix B)\n");
-            scanf("%c", &choixJoueur);
-            if (choixJoueur == 'A') {
+            scanf("%i", &rock);
+            if (rock == 1) {
                 printf("Toutes vos strikes sont changé en esquive !  \n");
                 tranformerStrikeEnEsquive(donneesRound);
-            } else if (choixJoueur == 'B') {
+            } else if (rock == 2) {
                 printf("Toutes vos esquives sont changé en strike ! \n");
                 tranformerEsquiveEnStrike(donneesRound);
             }
-        } else if (eventDeLaSalle->id == 4) {
-            printf("%s", eventDeLaSalle->description);
-            printf("%s \n %s", eventDeLaSalle->choixA, eventDeLaSalle->choixB);
+        } else if (donneesRound->salleActuelle->event->id == 4) {
+            printf("Oulalalalalalalala");
+            printf("%s", donneesRound->salleActuelle->event->description);
+            printf("%s \n %s", donneesRound->salleActuelle->event->choixA, donneesRound->salleActuelle->event->choixB);
             printf("Faites votre choix mon ami ! (Taper A pour selectionner le choix A et B pour sélectionner le choix B)\n");
-            scanf("%c", &choixJoueur);
-            if (choixJoueur == 'A') {
+            scanf("%i", &rock);
+            if (rock == 1) {
                 printf("Une potion de santé ? Très bon choix ! \n");
                 donneesRound->joueur->pointsVieActuels += 10;
                 corrigerProprietesJoueur(donneesRound->joueur, 1, 'v');
-            } else if (choixJoueur == 'B') {
+            } else if (rock == 2) {
                 printf("Une potion de mana ? Très bon choix ! \n");
                 donneesRound->joueur->pointsManaActuels += 10;
                 corrigerProprietesJoueur(donneesRound->joueur, 1, 'm');
             }
         }
-    } while (choixJoueur != 'A' || choixJoueur != 'B');
+    } while (rock != 1 || rock != 2);
 }
 
 void jouerSanctuaire(p_joueur joueur) {
@@ -245,28 +246,27 @@ void jouerSanctuaire(p_joueur joueur) {
     printf("1 - Dormir\n2 - Méditer\n>>>");
     int choix;
     scanf("%d", &choix);
-     if(choix == 1){
-        joueur->pointsVieActuels = floor(joueur->pointsVieActuels+=joueur->pointsVieMax/2);
-         corrigerProprietesJoueur(joueur, 1, 'v');
+    if (choix == 1) {
+        joueur->pointsVieActuels = floor(joueur->pointsVieActuels += joueur->pointsVieMax / 2);
+        corrigerProprietesJoueur(joueur, 1, 'v');
         printf("ZZzzz Peter a bien dormi, il a regagné la moitié de ses PV max.\n");
-    }else if(choix == 2){
-         afficherListeCartes(joueur->deckPrincipal, 0);
-         printf("Choisissez une carte à supprimer !\n>>>");
-         int choixCarte;
-         scanf("%d", &choixCarte);
-         p_carteChainable carteChainable = joueur->deckPrincipal->premiereCarte;
-         int choixCarteSauv=0;
-         for (int i=0;i<choixCarte-1; i++){
-             carteChainable = carteChainable->carteSuivante;
-             choixCarteSauv =i;
-         }
-         printf("Hhmmm Peter a bien médité,  cette carte a été retiré du deck.\n\n");
-         afficherCarte(carteChainable->carte, 1, choixCarteSauv);
-         enleverCarteListe(joueur->deckPrincipal,carteChainable->carte);
+    } else if (choix == 2) {
+        afficherListeCartes(joueur->deckPrincipal, 0);
+        printf("Choisissez une carte à supprimer !\n>>>");
+        int choixCarte;
+        scanf("%d", &choixCarte);
+        p_carteChainable carteChainable = joueur->deckPrincipal->premiereCarte;
+        int choixCarteSauv = 0;
+        for (int i = 0; i < choixCarte - 1; i++) {
+            carteChainable = carteChainable->carteSuivante;
+            choixCarteSauv = i;
+        }
+        printf("Hhmmm Peter a bien médité,  cette carte a été retiré du deck.\n\n");
+        afficherCarte(carteChainable->carte, 1, choixCarteSauv);
+        enleverCarteListe(joueur->deckPrincipal, carteChainable->carte);
 
 
-
-    }else{
+    } else {
         printf("%d est impossible, recommencer\n", choix);
         jouerSanctuaire(joueur);
     }

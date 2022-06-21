@@ -36,7 +36,7 @@ void jouerCombat(p_donneesCombat donneesRound);
 
 void choixJoueurEvent();
 
-void jouerEvent(p_event event, p_listeMonstres miniBosses, p_donneesCombat donneesRound,p_map map, p_salle salleActuelle);
+void jouerEvent(p_listeMonstres miniBosses, p_donneesCombat donneesRound);
 
 void jouerSanctuaire(p_joueur joueur);
 
