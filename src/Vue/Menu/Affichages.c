@@ -35,7 +35,7 @@ void afficherMap(p_map map, p_salle salleJoueur) {
             deuxiemeSalle = true;
             nbLigneSalle++;
             if(nbLigneSalle == 2){
-                if (salleJoueur == map->premiereSalle) {
+                if (salleJoueur == NULL) {
                     printf("[*]                                     [ ]\n");
                 } else if (salleJoueur == map->derniereSalle) {
                     printf("[ ]                                     [*]\n");

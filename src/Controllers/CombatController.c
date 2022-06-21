@@ -35,10 +35,15 @@ void processusDebutCombat(p_donneesCombat donneesCombat) {
     donneesCombat->mainJoueur = creerListeCartes();
     donneesCombat->pioche = copierListeCartes(donneesCombat->joueur->deckPrincipal);
 
+    p_objetChainable objetAAppliquer = donneesCombat->joueur->listeObjets->premiereObjet;
+    while (objetAAppliquer != NULL) {// TODO: appliquer bonus objets peter
+        ajouterEffetListe(donneesCombat->joueur->listeEffetsSubis, objetAAppliquer->objet->effet);
 
+        objetAAppliquer = objetAAppliquer->objetSuivant;
+    }
+    afficherListeObjets(donneesCombat->joueur->listeObjets, 5);
 
-    // TODO: appliquer bonus objets peter
-    // TODO: préparation mana
+    donneesCombat->joueur->pointsManaActuels = donneesCombat->joueur->pointsManaMax;
 }
 
 void processusDebutRound(p_donneesCombat donneesCombat) {
@@ -59,33 +64,26 @@ void processusRound(p_donneesCombat donneesCombat) {
 }
 
 void processusTourJoueur(p_donneesCombat donneesCombat) {
-    int choixCarte;
+    int choixCarte = -1;
     do {
         do {
             choixCarte = menuChoixCarteMain(donneesCombat->mainJoueur);
         } while (choixCarte < 0 || donneesCombat->pioche->nombreCartes < choixCarte);
-        transfererNiemeCarteListe(donneesCombat->mainJoueur, donneesCombat->cartesAJouer, choixCarte - 1);
+        if (choixCarte != 0) {
+            transfererNiemeCarteListe(donneesCombat->mainJoueur, donneesCombat->cartesAJouer, choixCarte - 1);
+        }
     } while (choixCarte != 0);
     printf("Fin de la selection de cartes, les cartes restantes partent à la défausse\n");
 
-    while (donneesCombat->pioche->nombreCartes != 0) {
-        transfererNiemeCarteListe(donneesCombat->pioche, donneesCombat->defausse, 0);
+    while (donneesCombat->mainJoueur->nombreCartes != 0) {
+        transfererNiemeCarteListe(donneesCombat->mainJoueur, donneesCombat->defausse, 0);
     }
 
     jouerListeCartes(donneesCombat);
-
-
-
-    // TODO: on joue les cartes (affichage des actions successives)
-    // TODO: on met les cartes jouées à la défausse ou abysses
-    // TODO: on met les cartes restantes à la défausse
 }
 
 void processusTourMonstre(p_donneesCombat donneesCombat) {
-    while(donneesCombat->attaqueRoundMonstre->listeEffets->premiereEffet->effetSuivant != NULL) {
-        ajouterEffetListe(donneesCombat->attaqueRoundMonstre->listeEffets, copierEffet(donneesCombat->attaqueRoundMonstre->listeEffets->premiereEffet->effet));
-        donneesCombat->attaqueRoundMonstre->listeEffets->premiereEffet = donneesCombat->attaqueRoundMonstre->listeEffets->premiereEffet->effetSuivant;
-    }
+    jouerListeEffetsAttaqueMonstre(donneesCombat);
     donneesCombat->attaqueRoundMonstre = NULL;
 }
 
@@ -106,9 +104,10 @@ void piocher5Cartes(p_donneesCombat donneesCombat) {
 }
 
 void jouerListeCartes(p_donneesCombat donneesCombat) {
-    p_carteChainable carteAJouer = donneesCombat->mainJoueur->premiereCarte;
+    p_carteChainable carteAJouer = donneesCombat->cartesAJouer->premiereCarte;
+    p_carteChainable prochaineCarteAJouer;
+    afficherListeCartes(donneesCombat->cartesAJouer, 5);
 
-    int nCarte = 0;
     while (carteAJouer != NULL) {
         p_effetChainable effetAJouer = carteAJouer->carte->listeEffets->premiereEffet;
         p_listeEffets listeEffetsDestination;
@@ -117,7 +116,7 @@ void jouerListeCartes(p_donneesCombat donneesCombat) {
             if (strcmp(effetAJouer->effet->nom, "Abyssal") == 0) {
                 abyssal = true;
             }
-            if (effetAJouer->effet->surJoueur) {
+            if (true == effetAJouer->effet->surJoueur) {
                 listeEffetsDestination = donneesCombat->joueur->listeEffetsSubis;
             } else {
                 listeEffetsDestination = donneesCombat->salleActuelle->monstre->listeEffetsSubis;
@@ -125,12 +124,35 @@ void jouerListeCartes(p_donneesCombat donneesCombat) {
             ajouterEffetListe(listeEffetsDestination, copierEffet(effetAJouer->effet));
             effetAJouer = effetAJouer->effetSuivant;
         }
+        prochaineCarteAJouer = carteAJouer->carteSuivante;
         if (abyssal == true) {
-            transfererNiemeCarteListe(donneesCombat->mainJoueur, donneesCombat->abysses, nCarte);
+            transfererNiemeCarteListe(donneesCombat->cartesAJouer, donneesCombat->abysses, 0);
+            enleverCarteListe(donneesCombat->joueur->deckPrincipal, carteAJouer->carte);
         } else {
-            transfererNiemeCarteListe(donneesCombat->mainJoueur, donneesCombat->defausse, nCarte);
+            transfererNiemeCarteListe(donneesCombat->cartesAJouer, donneesCombat->defausse, 0);
         }
-        nCarte++;
-        carteAJouer = carteAJouer->carteSuivante;
+        carteAJouer = prochaineCarteAJouer;
     }
+}
+
+void jouerListeEffetsAttaqueMonstre(p_donneesCombat donneesCombat) {
+    p_effetChainable effetAJouer = donneesCombat->attaqueRoundMonstre->listeEffets->premiereEffet;
+    p_listeEffets listeEffetsDestination;
+    while (effetAJouer != NULL) {
+        if (true == effetAJouer->effet->surJoueur) {
+            listeEffetsDestination = donneesCombat->joueur->listeEffetsSubis;
+        } else {
+            listeEffetsDestination = donneesCombat->salleActuelle->monstre->listeEffetsSubis;
+        }
+        ajouterEffetListe(listeEffetsDestination, copierEffet(effetAJouer->effet));
+        effetAJouer = effetAJouer->effetSuivant;
+    }
+}
+
+void infligerEffetsJoueur(p_donneesCombat donneesCombat) {
+
+}
+
+void infligerEffetsMonstre(p_donneesCombat donneesCombat) {
+
 }

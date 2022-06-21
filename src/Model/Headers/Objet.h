@@ -40,4 +40,8 @@ void ajouterObjetListe(p_listeObjets listeObjets, p_objet objet);
 
 p_objet trouverPointeurObjet(p_listeObjets listeObjets, char* nomCherche);
 
+void afficherListeObjets(p_listeObjets listeObjets, int offset);
+
+void afficherObjet(p_objet objet, int offset);
+
 #endif //THESPIRE_OBJET_H

@@ -8,7 +8,9 @@
 #include "../../Model/Headers/Carte.h"
 #include "../../Model/Headers/Joueur.h"
 
-
+/**
+ * Structure qui contient toutes les données nécessaires au déroulement des combats
+ */
 typedef struct s_donneesCombat {
     p_map map;
     p_joueur joueur;
@@ -40,5 +42,11 @@ void processusDebutRound(p_donneesCombat donneesCombat);
 void piocher5Cartes(p_donneesCombat donneesCombat);
 
 void jouerListeCartes(p_donneesCombat donneesCombat);
+
+void jouerListeEffetsAttaqueMonstre(p_donneesCombat donneesCombat);
+
+void infligerEffetsJoueur(p_donneesCombat donneesCombat);
+
+void infligerEffetsMonstre(p_donneesCombat donneesCombat);
 
 #endif //THESPIRE_COMBATCONTROLLER_H
