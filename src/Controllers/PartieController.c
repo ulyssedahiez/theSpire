@@ -49,6 +49,7 @@ void processusPartie() {
             jouerCombat(donneesRound);
         } else if (NULL != salleActuelle->event) {
             printf("Salle actuelle : Event%d\n", salleActuelle->event->id);
+            donneesRound->salleActuelle =salleActuelle;
             jouerEvent(creerListeMiniBosses(), donneesRound);
         } else {
             jouerSanctuaire(peter);
@@ -175,14 +176,11 @@ void jouerEvent(p_listeMonstres miniBosses, p_donneesCombat donneesRound) {
 
     printf("Bonjour voyageur ! Deux choix vont vous être confronté. À vous de faire le bon choix ! \n");
     int rock=0;
-    printf("fuck you");
-
     do {
         if (donneesRound->salleActuelle->event->id == 1) {
-            printf("Oulalalalalalalala");
             printf("%s", donneesRound->salleActuelle->event->description);
-            printf("%s \n %s", donneesRound->salleActuelle->event->choixA, donneesRound->salleActuelle->event->choixB);
-            printf("Faites votre choix mon ami ! (Taper A pour selectionner le choix A et B pour sélectionner le choix B)\n");
+            printf("Choix A : %s \n Choix B : %s", donneesRound->salleActuelle->event->choixA, donneesRound->salleActuelle->event->choixB);
+            printf("Faites votre choix mon ami ! (Taper 1 pour selectionner le choix A et 2 pour sélectionner le choix B)\n");
             scanf("%i", &rock);
             if (rock == 1) {
                 printf("Vous venez de lancer le combat avec ce monstre ! Quel courage, Bonne chance aventurier ! \n");
@@ -194,10 +192,9 @@ void jouerEvent(p_listeMonstres miniBosses, p_donneesCombat donneesRound) {
                 printf("Très bien aventurier, vous décider de passer ce MiniBoss ! \n");
             }
         } else if (donneesRound->salleActuelle->event->id == 2) {
-            printf("Oulalalalalalalala");
             printf("%s", donneesRound->salleActuelle->event->description);
-            printf("%s \n %s", donneesRound->salleActuelle->event->choixA, donneesRound->salleActuelle->event->choixB);
-            printf("Faites votre choix mon ami ! (Taper A pour selectionner le choix A et B pour sélectionner le choix B)\n");
+            printf("Choix A : %s \n Choix B : %s", donneesRound->salleActuelle->event->choixA, donneesRound->salleActuelle->event->choixB);
+            printf("Faites votre choix mon ami ! (Taper 1 pour selectionner le choix A et 2 pour sélectionner le choix B)\n");
             scanf("%i", &rock);
             if (rock == 1) {
                 printf("Vous aller être téléporter dans une autre salle aventurier ! \n");
@@ -208,10 +205,9 @@ void jouerEvent(p_listeMonstres miniBosses, p_donneesCombat donneesRound) {
                 corrigerProprietesJoueur(donneesRound->joueur, 1, 'v');
             }
         } else if (donneesRound->salleActuelle->event->id == 3) {
-            printf("Oulalalalalalalala");
             printf("%s", donneesRound->salleActuelle->event->description);
-            printf("%s \n %s", donneesRound->salleActuelle->event->choixA, donneesRound->salleActuelle->event->choixB);
-            printf("Faites votre choix mon ami ! (Taper A pour selectionner le choix A et B pour sélectionner le choix B)\n");
+            printf("Choix A : %s \n Choix B : %s", donneesRound->salleActuelle->event->choixA, donneesRound->salleActuelle->event->choixB);
+            printf("Faites votre choix mon ami ! (Taper 1 pour selectionner le choix A et 2 pour sélectionner le choix B)\n");
             scanf("%i", &rock);
             if (rock == 1) {
                 printf("Toutes vos strikes sont changé en esquive !  \n");
@@ -221,10 +217,9 @@ void jouerEvent(p_listeMonstres miniBosses, p_donneesCombat donneesRound) {
                 tranformerEsquiveEnStrike(donneesRound);
             }
         } else if (donneesRound->salleActuelle->event->id == 4) {
-            printf("Oulalalalalalalala");
             printf("%s", donneesRound->salleActuelle->event->description);
-            printf("%s \n %s", donneesRound->salleActuelle->event->choixA, donneesRound->salleActuelle->event->choixB);
-            printf("Faites votre choix mon ami ! (Taper A pour selectionner le choix A et B pour sélectionner le choix B)\n");
+            printf("Choix A : %s \n Choix B : %s", donneesRound->salleActuelle->event->choixA, donneesRound->salleActuelle->event->choixB);
+            printf("Faites votre choix mon ami ! (Taper 1 pour selectionner le choix A et 2 pour sélectionner le choix B)\n");
             scanf("%i", &rock);
             if (rock == 1) {
                 printf("Une potion de santé ? Très bon choix ! \n");
@@ -236,7 +231,7 @@ void jouerEvent(p_listeMonstres miniBosses, p_donneesCombat donneesRound) {
                 corrigerProprietesJoueur(donneesRound->joueur, 1, 'm');
             }
         }
-    } while (rock != 1 || rock != 2);
+    } while (rock != 1 && rock != 2);
 }
 
 void jouerSanctuaire(p_joueur joueur) {
