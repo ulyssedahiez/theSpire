@@ -12,7 +12,7 @@ void processusPartie()
     p_map map = creerMap();
     remplirMap(map);
 
-    afficherMap(map, map->premiereSalle);
+    afficherMap(map, NULL);
 
     p_salle salleActuelle = choisirPremiereSalle(map->premiereSalle);
     p_salle premiereSalle = salleActuelle;
@@ -247,8 +247,8 @@ void jouerSanctuaire(p_joueur joueur) {
     scanf("%d", &choix);
      if(choix == 1){
         joueur->pointsVieActuels = floor(joueur->pointsVieActuels+=joueur->pointsVieMax/2);
-         corrigerProprietesJoueur(joueur, 1, 'p');
-        printf("ZZzzz Peter a bien dormi, ses HP on été multiplié par deux.\n");
+         corrigerProprietesJoueur(joueur, 1, 'v');
+        printf("ZZzzz Peter a bien dormi, il a regagné la moitié de ses PV max.\n");
     }else if(choix == 2){
          afficherListeCartes(joueur->deckPrincipal, 0);
          printf("Choisissez une carte à supprimer !\n>>>");
