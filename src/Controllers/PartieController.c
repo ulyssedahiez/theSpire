@@ -15,7 +15,7 @@ void processusPartie()
     afficherMap(map, map->premiereSalle);
 
     p_salle salleActuelle = choisirPremiereSalle(map->premiereSalle);
-
+    p_salle premiereSalle = salleActuelle;
     p_listeCartes cartesBasiques = genererListeCartesBasiques();
     p_listeCartes cartesCommunes = genererListeCartesCommunes();
     p_listeCartes cartesAtypiques = genererListeCartesAtypiques();
@@ -127,8 +127,37 @@ p_salle choisirSalleSuivante(p_map map, p_salle salleActuelle) {
     return salleSuivante;
 }
 
-void jouerEvent(p_event event, p_listeMonstres miniBosses, p_donneesCombat donneesRound) {
+void deplacementSalleAleatoire(p_salle salleActuelle, p_salleDebut premiereSalle) {
+    int numeroSalle =  trouverCoordoneesSalle(premiereSalle, salleActuelle);
+    int monRand = genererEntier(0,8);
+    p_salle salleSuivante = NULL;
+    if (1 == monRand && NULL != salleActuelle->salleGauche) {
+        salleActuelle = salleActuelle->salleGauche;
+    } else if (2 == monRand && NULL != salleActuelle->salleMilieu)
+    {
+        salleActuelle = salleActuelle->salleMilieu;
+    } else if (3 == monRand && NULL != salleActuelle->salleDroite) {
+        salleActuelle = salleActuelle->salleDroite;
+    } else if (4 == monRand && NULL != salleActuelle->salleDroite) {
+        salleActuelle = salleActuelle->salleDroite;
+    }
+    else if (5 == monRand && NULL != salleActuelle->salleDroite) {
+       trouverPointeurNiemeSuivante(premiereSalle, numeroSalle-1);
+    }
+    else if (6 == monRand && NULL != salleActuelle->salleDroite) {
+        salleActuelle = salleActuelle->salleDroite;
+    }
+    else if (7 == monRand && NULL != salleActuelle->salleDroite) {
+        salleActuelle = salleActuelle->salleDroite;
+    }
+    else if (8 == monRand && NULL != salleActuelle->salleDroite) {
+        salleActuelle = salleActuelle->salleDroite;
+    }
 
+    return salleSuivante;
+}
+
+void jouerEvent(p_event event, p_listeMonstres miniBosses, p_donneesCombat donneesRound) {
 }
 
 void jouerSanctuaire(p_joueur joueur) {
