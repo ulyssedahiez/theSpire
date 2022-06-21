@@ -16,6 +16,7 @@
 #include "../../Services/Headers/MapService.h"
 #include "../../Services/Headers/ObjetService.h"
 #include "../../Vue/Menu/Headers/Menu.h"
+#include "../../Services/Headers/JoueurService.h"
 
 void processusPartie();
 
