@@ -77,10 +77,23 @@ int menuChoixCarteMain(p_listeCartes listeCartes) {
     return choixRetour;
 }
 
-int credit(){
+int regles(){
     int choix;//(char*) calloc(50, sizeof(char));//'r';
 
-    printf("Developped by Cod@net\n\nTeam :\n\n\tCodeur Informatique : Julien Lecat.\n\tManager des Fichiers : Mael Bizot.\n\tInventeur Informatique : Charles Chaudron.\n\tResponsable Indentation : Ulysse Dahiez.\n\n\nversion 0.0.1 Jun 2022.\n");
+    printf("Bienvenue dans THE SPIRE.\n\n");
+    printf("Le jeu de carte pour les aventuriers.\n\n");
+    printf("Dans ce jeu vous allez devoir avancer dans les salles de cet immense temple.\n\n");
+    printf("Dans ce temple, il y auras des monstres à combattre, des sanctuaires et des événements aléatoires.\n\n");
+    printf("Lorsque vous vous trouverez dans une salle événement, vous aller devoir effectuer un choix.\n\n");
+    printf("Si vous vous trouvez dans une salle sanctuaire, vous aller devoir choisir entre méditer ou dormir.\n\n");
+    printf("Attention une fois arriver dans la dernière salle, vous allez devoir vous battre contre un Boss de fin.\n\n");
+    printf("Vous pourrez durant votre aventure, vous alimenter, ou utiliser divers objet, qui vous donnera ou non des buff.\n\n");
+
+    printf("Bonne chance aventurier !\n\n");
+
+
+
+
     printf("\ntapez 0 pour revenir au menu\n");
     scanf("%d", &choix);
     if(choix == 0){
@@ -91,7 +104,7 @@ int credit(){
     return 0;
 }
 
-int regles() {
+int credit() {
     int choix;//(char*) calloc(50, sizeof(char));//'r';
 
     printf("Developped by Cod@net\n\nTeam :\n\n\tCodeur Informatique : Julien Lecat.\n\tManager des Fichiers : Mael Bizot.\n\tInventeur Informatique : Charles Chaudron.\n\tResponsable Indentation : Ulysse Dahiez.\n\n\nversion 0.0.1 Jun 2022.\n");
