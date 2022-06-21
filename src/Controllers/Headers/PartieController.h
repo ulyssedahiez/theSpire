@@ -32,4 +32,8 @@ void jouerEvent(p_event event, p_listeMonstres miniBosses, p_donneesCombat donne
 
 void jouerSanctuaire(p_joueur joueur);
 
+void deplacementSalleAleatoire(p_donneesCombat donneesRound);
+
+p_coordonnees genererNouveauxCoordonnes(p_coordonnees coordonneesAChanger, int selecteur);
+
 #endif //THESPIRE_PARTIECONTROLLER_H

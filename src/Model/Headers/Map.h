@@ -20,7 +20,6 @@ typedef t_map* p_map;
 
 p_map creerMap();
 
-p_salle retournerSalle();
-
+p_coordonnees trouverCoordoneesSalle(p_map map, p_salle salle);
 
 #endif //THESPIRE_MAP_H
