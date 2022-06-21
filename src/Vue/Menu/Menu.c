@@ -5,7 +5,7 @@
 #include "Headers/Menu.h"
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "../../Controllers/Headers/PartieController.h"
 
 int lancerMenu(){
 
@@ -25,7 +25,8 @@ int lancerMenu(){
     switch (choix)
     {
         case 1:
-            return 1;
+            processusPartie();
+            return lancerMenu();
         case 2:
             regles();
             return lancerMenu();

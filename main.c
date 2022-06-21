@@ -15,7 +15,7 @@ int main(/*int argc, char *argv[]*/) {
     p_map map = creerMap();
     p_salle salle = creerSalle();
     //afficherMap(map, salle);
-
+    lancerMenu();
 
     processusPartie();
     //lancerMenu();
