@@ -3,6 +3,8 @@
 //
 #include <stdlib.h>
 #include "Headers/Objet.h"
+#include "stdio.h"
+#include "../../Vue/Menu/Headers/Affichages.h"
 
 p_objet creerObjet(char *nom, p_effet effet) {
     p_objet objet = malloc(sizeof(t_objet));
@@ -58,3 +60,18 @@ p_objet trouverPointeurObjet(p_listeObjets listeObjets, char* nomCherche) {
     return NULL;
 }
 
+void afficherListeObjets(p_listeObjets listeObjets, int offset) {
+    p_objetChainable objetChainable = listeObjets->premiereObjet;
+    printf("Liste d'objets de Peter : \n");
+    while (objetChainable != NULL) {
+        afficherObjet(objetChainable->objet, offset+5);
+        objetChainable = objetChainable->objetSuivant;
+    }
+}
+
+void afficherObjet(p_objet objet, int offset) {
+    afficherNChar(' ', offset);
+    printf("%s (", objet->nom);
+    afficherEffet(objet->effet, 0);
+    printf(")\n");
+}
