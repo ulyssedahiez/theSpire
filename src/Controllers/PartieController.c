@@ -176,6 +176,7 @@ void jouerEvent(p_listeMonstres miniBosses, p_donneesCombat donneesRound) {
     printf("Bonjour voyageur ! Deux choix vont vous être confronté. À vous de faire le bon choix ! \n");
     int rock=0;
     printf("fuck you");
+
     do {
         if (donneesRound->salleActuelle->event->id == 1) {
             printf("Oulalalalalalalala");
