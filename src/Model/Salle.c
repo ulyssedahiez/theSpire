@@ -40,3 +40,5 @@ void remplirSalle(p_salle salle, p_event event, p_monstre monstre) {
     salle->event = event;
     salle->monstre = monstre;
 }
+
+

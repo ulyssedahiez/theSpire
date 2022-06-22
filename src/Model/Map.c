@@ -24,6 +24,33 @@ p_salle trouverPointeurNiemeSuivante(p_salle salle, int nCherche) {
     return salle;
 }
 
+p_coordonnees trouverCoordoneesSalle(p_map map, p_salle salle) {
+    p_salle salleTestee = map->premiereSalle->salleGauche;
+    int couloir = 0;
+    int niveau = 0;
+
+    while (salleTestee != salle) {
+        if (salleTestee->salleMilieu == map->derniereSalle) {
+            if (couloir == 0) {
+                niveau = 0;
+                salleTestee = map->premiereSalle->salleMilieuGauche;
+            } else if (couloir == 1) {
+                niveau = 0;
+                salleTestee = map->premiereSalle->salleMilieuDroite;
+            } else if (couloir == 2) {
+                niveau = 0;
+                salleTestee = map->premiereSalle->salleDroite;
+            }
+            else{
+                return NULL;
+            }
+        } else {
+            niveau += 1;
+            salleTestee = salleTestee->salleMilieu;
+        }
+    }
+    return creerCoordonnees(niveau, couloir);
+}
 p_map creerMap(){
     p_map map = malloc(sizeof(t_map));
 

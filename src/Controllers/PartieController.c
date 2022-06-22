@@ -22,7 +22,7 @@ void processusPartie(bool debug)
     }
 
     p_salle salleActuelle = choisirPremiereSalle(map->premiereSalle);
-
+    p_salle premiereSalle = salleActuelle;
     p_listeCartes cartesBasiques = genererListeCartesBasiques();
     p_listeCartes cartesCommunes = genererListeCartesCommunes();
     p_listeCartes cartesAtypiques = genererListeCartesAtypiques();
@@ -163,20 +163,110 @@ p_salle choisirSalleSuivante(p_map map, p_salle salleActuelle) {
 
     return salleSuivante;
 }
+p_coordonnees genererNouveauxCoordonnes(p_coordonnees coordonneesAChanger, int selecteur) {
+    if (selecteur == 0) {
+        if (coordonneesAChanger->couloir == 0) {
+            coordonneesAChanger->niveau--;
+            coordonneesAChanger->couloir = genererEntier(0, 2);
+        } else if (coordonneesAChanger->couloir == 1) {
+            coordonneesAChanger->niveau--;
+            coordonneesAChanger->couloir = genererEntier(0, 3);
+        } else if (coordonneesAChanger->couloir == 2) {
+            coordonneesAChanger->niveau--;
+            coordonneesAChanger->couloir = genererEntier(1, 4);
+        } else if (coordonneesAChanger->couloir == 3) {
+            coordonneesAChanger->niveau--;
+            coordonneesAChanger->couloir = genererEntier(2, 4);
+        }
+    } else if (selecteur == 1) {
+        if (coordonneesAChanger->couloir == 0) {
+            coordonneesAChanger->niveau++;
+            coordonneesAChanger->couloir = genererEntier(0, 2);
+        } else if (coordonneesAChanger->couloir == 1) {
+            coordonneesAChanger->niveau++;
+            coordonneesAChanger->couloir = genererEntier(0, 3);
+        } else if (coordonneesAChanger->couloir == 2) {
+            coordonneesAChanger->niveau++;
+            coordonneesAChanger->couloir = genererEntier(1, 4);
+        } else if (coordonneesAChanger->couloir == 3) {
+            coordonneesAChanger->niveau++;
+            coordonneesAChanger->couloir = genererEntier(2, 4);
+        }
+    }
+    else if (selecteur == 2) {
+            if (coordonneesAChanger->couloir == 0) {
+                coordonneesAChanger->couloir = genererEntier(0, 2);
+            } else if (coordonneesAChanger->couloir == 1) {
+                coordonneesAChanger->couloir = genererEntier(0, 3);
+            } else if (coordonneesAChanger->couloir == 2) {
+                coordonneesAChanger->couloir = genererEntier(1, 4);
+            } else if (coordonneesAChanger->couloir == 3) {
+                coordonneesAChanger->couloir = genererEntier(2, 4);
+            }
+        }
+        return coordonneesAChanger;
+    }
 
 void deplacementSalleAleatoire(p_donneesCombat donneesRound) {
-    int monCouloir = genererEntier(0, 5);
-    p_salle salleDestination;
-    if (1 == monCouloir) {
-        salleDestination = donneesRound->map->premiereSalle->salleGauche;
-    } else if (2 == monCouloir) {
-        salleDestination = donneesRound->map->premiereSalle->salleMilieuGauche;
-    } else if (3 == monCouloir) {
-        salleDestination = donneesRound->map->premiereSalle->salleMilieuDroite;
-    } else if (4 == monCouloir) {
-        salleDestination = donneesRound->map->premiereSalle->salleDroite;
+    p_coordonnees mesCoordonees = trouverCoordoneesSalle(donneesRound->map, donneesRound->salleActuelle);
+    int monRand = genererEntier(0, 4);
+    if (0 == monRand) {
+        printf("on va reculer d une salle aventurier");
+        if (mesCoordonees->niveau > 0) {
+            mesCoordonees = genererNouveauxCoordonnes(mesCoordonees, 0);
+            if (mesCoordonees->couloir == 0) {
+                donneesRound->salleActuelle = trouverPointeurNiemeSuivante(
+                        donneesRound->map->premiereSalle->salleGauche, mesCoordonees->niveau);
+            } else if (mesCoordonees->couloir == 1) {
+                donneesRound->salleActuelle = trouverPointeurNiemeSuivante(
+                        donneesRound->map->premiereSalle->salleMilieuGauche, mesCoordonees->niveau);
+            } else if (mesCoordonees->couloir == 2) {
+                donneesRound->salleActuelle = trouverPointeurNiemeSuivante(
+                        donneesRound->map->premiereSalle->salleMilieuDroite, mesCoordonees->niveau);
+            } else if (mesCoordonees->couloir == 3) {
+                donneesRound->salleActuelle = trouverPointeurNiemeSuivante(
+                        donneesRound->map->premiereSalle->salleDroite, mesCoordonees->niveau);
+            }
+        } else {
+            deplacementSalleAleatoire(donneesRound);
+        }
+    } else if (1 == monRand) {
+        printf("on va avancer aventurier !! ");
+        if (mesCoordonees->niveau < 8) {
+            mesCoordonees = genererNouveauxCoordonnes(mesCoordonees, 0);
+            if (mesCoordonees->couloir == 0) {
+                donneesRound->salleActuelle = trouverPointeurNiemeSuivante(
+                        donneesRound->map->premiereSalle->salleGauche, mesCoordonees->niveau);
+            } else if (mesCoordonees->couloir == 1) {
+                donneesRound->salleActuelle = trouverPointeurNiemeSuivante(
+                        donneesRound->map->premiereSalle->salleMilieuGauche, mesCoordonees->niveau);
+            } else if (mesCoordonees->couloir == 2) {
+                donneesRound->salleActuelle = trouverPointeurNiemeSuivante(
+                        donneesRound->map->premiereSalle->salleMilieuDroite, mesCoordonees->niveau);
+            } else if (mesCoordonees->couloir == 3) {
+                donneesRound->salleActuelle = trouverPointeurNiemeSuivante(
+                        donneesRound->map->premiereSalle->salleDroite, mesCoordonees->niveau);
+            }
+        } else {
+            deplacementSalleAleatoire(donneesRound);
+        }
+    } else if (2 == monRand) {
+        printf("on reste au meme niveau aventurier !! ");
+        mesCoordonees = genererNouveauxCoordonnes(mesCoordonees, 0);
+        if (mesCoordonees->couloir == 0) {
+            donneesRound->salleActuelle = trouverPointeurNiemeSuivante(
+                    donneesRound->map->premiereSalle->salleGauche, mesCoordonees->niveau);
+        } else if (mesCoordonees->couloir == 1) {
+            donneesRound->salleActuelle = trouverPointeurNiemeSuivante(
+                    donneesRound->map->premiereSalle->salleMilieuGauche, mesCoordonees->niveau);
+        } else if (mesCoordonees->couloir == 2) {
+            donneesRound->salleActuelle = trouverPointeurNiemeSuivante(donneesRound->map->premiereSalle->salleMilieuDroite, mesCoordonees->niveau);
+        } else if (mesCoordonees->couloir == 3) {
+            donneesRound->salleActuelle = trouverPointeurNiemeSuivante(donneesRound->map->premiereSalle->salleDroite, mesCoordonees->niveau);
+        }
     }
 }
+
 
 void tranformerStrikeEnEsquive(p_donneesCombat donneesRound) {
     p_carteChainable carteChainableActuelle = donneesRound->cartesAJouer->premiereCarte;
