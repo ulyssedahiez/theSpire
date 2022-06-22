@@ -126,156 +126,152 @@ p_salle choisirSalleSuivante(p_map map, p_salle salleActuelle) {
 
     return salleSuivante;
 }
-p_coordonnees genererNouveauxCoordonnes(p_coordonnees coordonneesAChanger, int selecteur){
-    if(selecteur == 0){
-        if(coordonneesAChanger->couloir == 0){
-            coordonneesAChanger->niveau --;
+p_coordonnees genererNouveauxCoordonnes(p_coordonnees coordonneesAChanger, int selecteur) {
+    if (selecteur == 0) {
+        if (coordonneesAChanger->couloir == 0) {
+            coordonneesAChanger->niveau--;
             coordonneesAChanger->couloir = genererEntier(0, 2);
-        } else if(coordonneesAChanger->couloir == 1){
-            coordonneesAChanger->niveau --;
+        } else if (coordonneesAChanger->couloir == 1) {
+            coordonneesAChanger->niveau--;
             coordonneesAChanger->couloir = genererEntier(0, 3);
-        }
-        else if(coordonneesAChanger->couloir == 2){
-            coordonneesAChanger->niveau --;
+        } else if (coordonneesAChanger->couloir == 2) {
+            coordonneesAChanger->niveau--;
             coordonneesAChanger->couloir = genererEntier(1, 4);
-        }
-        else if(coordonneesAChanger->couloir == 3) {
+        } else if (coordonneesAChanger->couloir == 3) {
             coordonneesAChanger->niveau--;
             coordonneesAChanger->couloir = genererEntier(2, 4);
         }
-    } else if(selecteur == 1){
-        if(coordonneesAChanger->couloir == 0){
-            coordonneesAChanger->niveau ++;
+    } else if (selecteur == 1) {
+        if (coordonneesAChanger->couloir == 0) {
+            coordonneesAChanger->niveau++;
             coordonneesAChanger->couloir = genererEntier(0, 2);
-        } else if(coordonneesAChanger->couloir == 1){
-            coordonneesAChanger->niveau ++;
+        } else if (coordonneesAChanger->couloir == 1) {
+            coordonneesAChanger->niveau++;
             coordonneesAChanger->couloir = genererEntier(0, 3);
-        }
-        else if(coordonneesAChanger->couloir == 2){
-            coordonneesAChanger->niveau ++;
+        } else if (coordonneesAChanger->couloir == 2) {
+            coordonneesAChanger->niveau++;
             coordonneesAChanger->couloir = genererEntier(1, 4);
-        }
-        else if(coordonneesAChanger->couloir == 3) {
+        } else if (coordonneesAChanger->couloir == 3) {
             coordonneesAChanger->niveau++;
             coordonneesAChanger->couloir = genererEntier(2, 4);
         }
-    else if(selecteur == 2){
-        if(coordonneesAChanger->couloir == 0){
-            coordonneesAChanger->couloir = genererEntier(0, 2);
-        } else if(coordonneesAChanger->couloir == 1){
-            coordonneesAChanger->couloir = genererEntier(0, 3);
-        }
-        else if(coordonneesAChanger->couloir == 2){
-            coordonneesAChanger->couloir = genererEntier(1, 4);
-        }
-        else if(coordonneesAChanger->couloir == 3) {
-            coordonneesAChanger->couloir = genererEntier(2, 4);
-        }
     }
-    return coordonneesAChanger;
-}
+    else if (selecteur == 2) {
+            if (coordonneesAChanger->couloir == 0) {
+                coordonneesAChanger->couloir = genererEntier(0, 2);
+            } else if (coordonneesAChanger->couloir == 1) {
+                coordonneesAChanger->couloir = genererEntier(0, 3);
+            } else if (coordonneesAChanger->couloir == 2) {
+                coordonneesAChanger->couloir = genererEntier(1, 4);
+            } else if (coordonneesAChanger->couloir == 3) {
+                coordonneesAChanger->couloir = genererEntier(2, 4);
+            }
+        }
+        return coordonneesAChanger;
+    }
+
 void deplacementSalleAleatoire(p_donneesCombat donneesRound) {
-    p_coordonnees mesCoordonees = trouverCoordoneesSalle(donneesRound->salleActuelle);
-    int monRand = genererEntier(0,4);
-    if(0 == monRand){
+    p_coordonnees mesCoordonees = trouverCoordoneesSalle(donneesRound->map, donneesRound->salleActuelle);
+    int monRand = genererEntier(0, 4);
+    if (0 == monRand) {
         printf("on va reculer d une salle aventurier");
-        if(mesCoordonees->niveau > 0){
+        if (mesCoordonees->niveau > 0) {
             mesCoordonees = genererNouveauxCoordonnes(mesCoordonees, 0);
-            if(mesCoordonees->couloir == 0){
-                donneesRound->salleActuelle =  trouverPointeurNiemeSuivante(donneesRound->map->premiereSalle->salleGauche, mesCoordonees->niveau);
+            if (mesCoordonees->couloir == 0) {
+                donneesRound->salleActuelle = trouverPointeurNiemeSuivante(
+                        donneesRound->map->premiereSalle->salleGauche, mesCoordonees->niveau);
+            } else if (mesCoordonees->couloir == 1) {
+                donneesRound->salleActuelle = trouverPointeurNiemeSuivante(
+                        donneesRound->map->premiereSalle->salleMilieuGauche, mesCoordonees->niveau);
+            } else if (mesCoordonees->couloir == 2) {
+                donneesRound->salleActuelle = trouverPointeurNiemeSuivante(
+                        donneesRound->map->premiereSalle->salleMilieuDroite, mesCoordonees->niveau);
+            } else if (mesCoordonees->couloir == 3) {
+                donneesRound->salleActuelle = trouverPointeurNiemeSuivante(
+                        donneesRound->map->premiereSalle->salleDroite, mesCoordonees->niveau);
             }
-            else if(mesCoordonees->couloir == 1){
-                donneesRound->salleActuelle =  trouverPointeurNiemeSuivante(donneesRound->map->premiereSalle->salleMilieuGauche, mesCoordonees->niveau);
-            }
-            else if(mesCoordonees->couloir == 2){
-                donneesRound->salleActuelle =  trouverPointeurNiemeSuivante(donneesRound->map->premiereSalle->salleMilieuDroite, mesCoordonees->niveau);
-            }
-            else if(mesCoordonees->couloir == 3){
-                donneesRound->salleActuelle =  trouverPointeurNiemeSuivante(donneesRound->map->premiereSalle->salleDroite, mesCoordonees->niveau);
-            }
-        }else{
+        } else {
             deplacementSalleAleatoire(donneesRound);
         }
-    }else if(1 == monRand){
+    } else if (1 == monRand) {
         printf("on va avancer aventurier !! ");
-        if(mesCoordonees->niveau < 8){
+        if (mesCoordonees->niveau < 8) {
             mesCoordonees = genererNouveauxCoordonnes(mesCoordonees, 0);
-            if(mesCoordonees->couloir == 0){
-                donneesRound->salleActuelle =  trouverPointeurNiemeSuivante(donneesRound->map->premiereSalle->salleGauche, mesCoordonees->niveau);
+            if (mesCoordonees->couloir == 0) {
+                donneesRound->salleActuelle = trouverPointeurNiemeSuivante(
+                        donneesRound->map->premiereSalle->salleGauche, mesCoordonees->niveau);
+            } else if (mesCoordonees->couloir == 1) {
+                donneesRound->salleActuelle = trouverPointeurNiemeSuivante(
+                        donneesRound->map->premiereSalle->salleMilieuGauche, mesCoordonees->niveau);
+            } else if (mesCoordonees->couloir == 2) {
+                donneesRound->salleActuelle = trouverPointeurNiemeSuivante(
+                        donneesRound->map->premiereSalle->salleMilieuDroite, mesCoordonees->niveau);
+            } else if (mesCoordonees->couloir == 3) {
+                donneesRound->salleActuelle = trouverPointeurNiemeSuivante(
+                        donneesRound->map->premiereSalle->salleDroite, mesCoordonees->niveau);
             }
-            else if(mesCoordonees->couloir == 1){
-                donneesRound->salleActuelle =  trouverPointeurNiemeSuivante(donneesRound->map->premiereSalle->salleMilieuGauche, mesCoordonees->niveau);
-            }
-            else if(mesCoordonees->couloir == 2){
-                donneesRound->salleActuelle =  trouverPointeurNiemeSuivante(donneesRound->map->premiereSalle->salleMilieuDroite, mesCoordonees->niveau);
-            }
-            else if(mesCoordonees->couloir == 3){
-                donneesRound->salleActuelle =  trouverPointeurNiemeSuivante(donneesRound->map->premiereSalle->salleDroite, mesCoordonees->niveau);
-            }
-        }else{
+        } else {
             deplacementSalleAleatoire(donneesRound);
         }
-   } else if(2 == monRand){
+    } else if (2 == monRand) {
         printf("on reste au meme niveau aventurier !! ");
         mesCoordonees = genererNouveauxCoordonnes(mesCoordonees, 0);
-        if(mesCoordonees->couloir == 0){
-            donneesRound->salleActuelle =  trouverPointeurNiemeSuivante(donneesRound->map->premiereSalle->salleGauche, mesCoordonees->niveau);
-        }
-        else if(mesCoordonees->couloir == 1){
-            donneesRound->salleActuelle =  trouverPointeurNiemeSuivante(donneesRound->map->premiereSalle->salleMilieuGauche, mesCoordonees->niveau);
-        }
-        else if(mesCoordonees->couloir == 2){
-            donneesRound->salleActuelle =  trouverPointeurNiemeSuivante(donneesRound->map->premiereSalle->salleMilieuDroite, mesCoordonees->niveau);
-        }
-        else if(mesCoordonees->couloir == 3){
-            donneesRound->salleActuelle =  trouverPointeurNiemeSuivante(donneesRound->map->premiereSalle->salleDroite, mesCoordonees->niveau);
+        if (mesCoordonees->couloir == 0) {
+            donneesRound->salleActuelle = trouverPointeurNiemeSuivante(
+                    donneesRound->map->premiereSalle->salleGauche, mesCoordonees->niveau);
+        } else if (mesCoordonees->couloir == 1) {
+            donneesRound->salleActuelle = trouverPointeurNiemeSuivante(
+                    donneesRound->map->premiereSalle->salleMilieuGauche, mesCoordonees->niveau);
+        } else if (mesCoordonees->couloir == 2) {
+            donneesRound->salleActuelle = trouverPointeurNiemeSuivante(donneesRound->map->premiereSalle->salleMilieuDroite, mesCoordonees->niveau);
+        } else if (mesCoordonees->couloir == 3) {
+            donneesRound->salleActuelle = trouverPointeurNiemeSuivante(donneesRound->map->premiereSalle->salleDroite, mesCoordonees->niveau);
         }
     }
-    return donneesRound->salleActuelle;
 }
 
-void jouerEvent(p_event event, p_listeMonstres miniBosses, p_donneesCombat donneesRound) {
-}
-
-void jouerSanctuaire(p_joueur joueur) {
-    printf("Peter arrive dans un sanctuaire, deux choix s'offrent à lui,  faire dormir Peter pour\n"
-           "lui faire regagner la moitié de ses Hp max, ou de faire méditer Peter afin d’avoir la possibilité de\n"
-           "retirer définitivement une carte du deck principal.\n");
-    printf("Choisissez !\n");
-    printf("1 - Dormir\n2 - Méditer\n>>>");
-    int choix;
-    scanf("%d", &choix);
-     if(choix == 1){
-        joueur->pointsVieActuels = floor(joueur->pointsVieActuels+=joueur->pointsVieMax/2);
-         corrigerProprietesJoueur(joueur, 1, 'v');
-        printf("ZZzzz Peter a bien dormi, il a regagné la moitié de ses PV max.\n");
-    }else if(choix == 2){
-         afficherListeCartes(joueur->deckPrincipal, 0);
-         printf("Choisissez une carte à supprimer !\n>>>");
-         int choixCarte;
-         scanf("%d", &choixCarte);
-         p_carteChainable carteChainable = joueur->deckPrincipal->premiereCarte;
-         int choixCarteSauv=0;
-         for (int i=0;i<choixCarte-1; i++){
-             carteChainable = carteChainable->carteSuivante;
-             choixCarteSauv =i;
-         }
-         printf("Hhmmm Peter a bien médité,  cette carte a été retiré du deck.\n\n");
-         afficherCarte(carteChainable->carte, 1, choixCarteSauv);
-         enleverCarteListe(joueur->deckPrincipal,carteChainable->carte);
-
-
-
-    }else{
-        printf("%d est impossible, recommencer\n", choix);
-        jouerSanctuaire(joueur);
+    void jouerEvent(p_event event, p_listeMonstres miniBosses, p_donneesCombat donneesRound) {
     }
 
+    void jouerSanctuaire(p_joueur joueur) {
+        printf("Peter arrive dans un sanctuaire, deux choix s'offrent à lui,  faire dormir Peter pour\n"
+               "lui faire regagner la moitié de ses Hp max, ou de faire méditer Peter afin d’avoir la possibilité de\n"
+               "retirer définitivement une carte du deck principal.\n");
+        printf("Choisissez !\n");
+        printf("1 - Dormir\n2 - Méditer\n>>>");
+        int choix;
+        scanf("%d", &choix);
+        if (choix == 1) {
+            joueur->pointsVieActuels = floor(joueur->pointsVieActuels += joueur->pointsVieMax / 2);
+            corrigerProprietesJoueur(joueur, 1, 'v');
+            printf("ZZzzz Peter a bien dormi, il a regagné la moitié de ses PV max.\n");
+        } else if (choix == 2) {
+            afficherListeCartes(joueur->deckPrincipal, 0);
+            printf("Choisissez une carte à supprimer !\n>>>");
+            int choixCarte;
+            scanf("%d", &choixCarte);
+            p_carteChainable carteChainable = joueur->deckPrincipal->premiereCarte;
+            int choixCarteSauv = 0;
+            for (int i = 0; i < choixCarte - 1; i++) {
+                carteChainable = carteChainable->carteSuivante;
+                choixCarteSauv = i;
+            }
+            printf("Hhmmm Peter a bien médité,  cette carte a été retiré du deck.\n\n");
+            afficherCarte(carteChainable->carte, 1, choixCarteSauv);
+            enleverCarteListe(joueur->deckPrincipal, carteChainable->carte);
 
-}
 
-void jouerCombat(p_donneesCombat donneesRound) {
+        } else {
+            printf("%d est impossible, recommencer\n", choix);
+            jouerSanctuaire(joueur);
+        }
 
-    processusCombat(donneesRound);
-}
+
+    }
+
+    void jouerCombat(p_donneesCombat donneesRound) {
+
+        processusCombat(donneesRound);
+    }
+
 

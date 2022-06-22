@@ -22,4 +22,6 @@ p_map creerMap();
 
 p_coordonnees trouverCoordoneesSalle(p_map map, p_salle salle);
 
+p_salle trouverPointeurNiemeSuivante(p_salle premiereSalle, int incr);
+
 #endif //THESPIRE_MAP_H

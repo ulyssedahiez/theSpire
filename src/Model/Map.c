@@ -40,7 +40,8 @@ p_coordonnees trouverCoordoneesSalle(p_map map, p_salle salle) {
             } else if (couloir == 2) {
                 niveau = 0;
                 salleTestee = map->premiereSalle->salleDroite;
-            } else if () {
+            }
+            else{
                 return NULL;
             }
         } else {
