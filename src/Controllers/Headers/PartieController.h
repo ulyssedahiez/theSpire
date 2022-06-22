@@ -9,12 +9,14 @@
 #include "Map.h"
 #include "Joueur.h"
 #include "CombatController.h"
+#include "sys/random.h"
 #include "../../Services/Headers/JoueurService.h"
 #include "../../Services/Headers/CarteService.h"
 #include "../../Services/Headers/MonstreService.h"
 #include "../../Services/Headers/MapService.h"
 #include "../../Services/Headers/ObjetService.h"
 #include "../../Vue/Menu/Headers/Menu.h"
+#include "../../Services/Headers/JoueurService.h"
 
 void processusPartie(bool debug);
 
@@ -28,7 +30,13 @@ p_salle choisirSalleSuivante(p_map map, p_salle salleActuelle);
 
 void jouerCombat(p_donneesCombat donneesRound, bool debug);
 
-void jouerEvent(p_event event, p_listeMonstres miniBosses, p_donneesCombat donneesRound);
+void tranformerStrikeEnEsquive(p_donneesCombat donneesRound);
+
+void tranformerEsquiveEnStrike(p_donneesCombat donneesRound);
+
+void choixJoueurEvent();
+
+void jouerEvent(p_listeMonstres miniBosses, p_donneesCombat donneesRound);
 
 void jouerSanctuaire(p_joueur joueur);
 
