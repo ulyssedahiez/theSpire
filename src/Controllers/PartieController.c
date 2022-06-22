@@ -5,14 +5,18 @@
 #include "Headers/PartieController.h"
 #include "Map.h"
 #include "../Vue/Menu//Headers/Affichages.h"
-void processusPartie()
+void processusPartie(bool debug)
 {
     p_joueur peter = creerJoueur();
 
     p_map map = creerMap();
     remplirMap(map);
 
-    afficherMap(map, NULL);
+    if (debug == true) {
+        debugMap(map, NULL);
+    } else {
+        afficherMap(map, NULL);
+    }
 
     p_salle salleActuelle = choisirPremiereSalle(map->premiereSalle);
 
@@ -36,24 +40,45 @@ void processusPartie()
 
     while (true != defaite && true != victoire) {
 
-        afficherMap(map, salleActuelle);
-
-
+        if (debug == true) {
+            debugMap(map, salleActuelle);
+        } else {
+            afficherMap(map, salleActuelle);
+        }
 
         if (NULL != salleActuelle->monstre) {
             printf("Salle actuelle : %s\n", salleActuelle->monstre->nom);
             donneesRound->salleActuelle = salleActuelle;
-            jouerCombat(donneesRound);
+            if (debug == true) {
+                printf("DEBUG : Processus de combat");
+            }
+            jouerCombat(donneesRound, debug);
         } else if (NULL != salleActuelle->event) {
             printf("Salle actuelle : Event%d\n", salleActuelle->event->id);
-            //jouerEvent(salleActuelle->event, creerListeMiniBosses(), donneesRound);
+            if (debug == true) {
+                printf("DEBUG : Processus d'event");
+            } else {
+                jouerEvent(salleActuelle->event, creerListeMiniBosses(), donneesRound);
+            }
         } else {
-            jouerSanctuaire(peter);
+            printf("Salle actuelle : Sanctuaire\n");
+            if (debug == true) {
+                printf("DEBUG : Processus de sanctaire");
+            } else {
+                jouerSanctuaire(peter);
+            }
         }
-
-        salleActuelle = choisirSalleSuivante(map, salleActuelle);
         defaite = verifierDefaite(peter);
         victoire = verifierVictoire(salleActuelle);
+
+        if (defaite != true) {
+            if (debug == true) {
+                debugMap(map, salleActuelle);
+            } else {
+                afficherMap(map, donneesRound->salleActuelle);
+            }
+            salleActuelle = choisirSalleSuivante(map, salleActuelle);
+        }
     }
 
     if (true == defaite) {
@@ -168,8 +193,8 @@ void jouerSanctuaire(p_joueur joueur) {
 
 }
 
-void jouerCombat(p_donneesCombat donneesRound) {
+void jouerCombat(p_donneesCombat donneesRound, bool debug) {
 
-    processusCombat(donneesRound);
+    processusCombat(donneesRound, debug);
 }
 

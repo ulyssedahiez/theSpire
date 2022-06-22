@@ -10,16 +10,27 @@
 #include "src/Model/Headers/Salle.h"
 #include "time.h"
 #include "src/Vue/Menu/Headers/Affichages.h"
-int main(/*int argc, char *argv[]*/) {
+
+int main(int argc, char *argv[]) {
+    bool debug = false;
+    if (argc != 1) {
+        for (int i = 0; i < argc; ++i) {
+            if (strcmp(argv[i], "--debug") == 0) {
+                debug = true;
+            }
+        }
+    }
+    if (debug == true) {
+        printf("************ PARTIE LANCéE EN MODE DEBUG ************\n\n");
+    }
     srand(time(NULL));
     p_map map = creerMap();
     p_salle salle = creerSalle();
     //afficherMap(map, salle);
 
 
-    processusPartie();
+    processusPartie(debug);
     //lancerMenu();
-    //creerMap();
 /*
     p_listeCartes cartesBasiques = genererListeCartesBasiques();
     p_listeCartes cartesCommunes = genererListeCartesCommunes();
@@ -34,5 +45,4 @@ int main(/*int argc, char *argv[]*/) {
     printf("joueur->pointsVieActuels : %i \n", joueur->pointsVieActuels);
 */
     //corrigerProprietesJoueur(joueur, 2, 'e', 'v');
-    //lancerMenu();
 }

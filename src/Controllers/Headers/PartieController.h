@@ -16,7 +16,7 @@
 #include "../../Services/Headers/ObjetService.h"
 #include "../../Vue/Menu/Headers/Menu.h"
 
-void processusPartie();
+void processusPartie(bool debug);
 
 bool verifierDefaite(p_joueur joueur);
 
@@ -26,7 +26,7 @@ p_salle choisirPremiereSalle(p_salleDebut salleActuelle);
 
 p_salle choisirSalleSuivante(p_map map, p_salle salleActuelle);
 
-void jouerCombat(p_donneesCombat donneesRound);
+void jouerCombat(p_donneesCombat donneesRound, bool debug);
 
 void jouerEvent(p_event event, p_listeMonstres miniBosses, p_donneesCombat donneesRound);
 

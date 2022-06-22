@@ -21,14 +21,17 @@ p_donneesCombat creerDonneesCombat() {
     donneesCombat->attaqueRoundMonstre = NULL;
 }
 
-void processusCombat(p_donneesCombat donneesCombat) {
-    processusDebutCombat(donneesCombat);
+void processusCombat(p_donneesCombat donneesCombat, bool debug) {
+    processusDebutCombat(donneesCombat, debug);
     while (donneesCombat->joueur->pointsVieActuels > 0 && donneesCombat->salleActuelle->monstre->pointsVie > 0) {
-        processusRound(donneesCombat);
+        processusRound(donneesCombat, debug);
+        if (debug == true) {
+            donneesCombat->salleActuelle->monstre->pointsVie = 0;
+        }
     }
 }
 
-void processusDebutCombat(p_donneesCombat donneesCombat) {
+void processusDebutCombat(p_donneesCombat donneesCombat, bool debug) {
     donneesCombat->joueur->pointsManaActuels = donneesCombat->joueur->pointsManaMax;
     donneesCombat->defausse = creerListeCartes();
     donneesCombat->cartesAJouer = creerListeCartes();
@@ -46,24 +49,31 @@ void processusDebutCombat(p_donneesCombat donneesCombat) {
     donneesCombat->joueur->pointsManaActuels = donneesCombat->joueur->pointsManaMax;
 }
 
-void processusDebutRound(p_donneesCombat donneesCombat) {
+void processusDebutRound(p_donneesCombat donneesCombat, bool debug) {
     donneesCombat->attaqueRoundMonstre = trouverNiemeAttaque(donneesCombat->salleActuelle->monstre->attaques,
                                                              genererEntier(0, donneesCombat->salleActuelle->monstre->attaques->nombreAttaques));
-    printf("Mouahaha je suis %s et je vais attaquer ! (", donneesCombat->salleActuelle->monstre->nom);
+    printf("Mouahaha je suis %s et je vais attaquer ! (%d PVs) (", donneesCombat->salleActuelle->monstre->nom, donneesCombat->salleActuelle->monstre->pointsVie);
     afficherAttaque(donneesCombat->attaqueRoundMonstre, 0);
     printf(")\n");
     piocher5Cartes(donneesCombat);
 }
 
-void processusRound(p_donneesCombat donneesCombat) {
-    processusDebutRound(donneesCombat);
-    processusTourJoueur(donneesCombat);
+void processusRound(p_donneesCombat donneesCombat, bool debug) {
+    processusDebutRound(donneesCombat, debug);
+    processusTourJoueur(donneesCombat, debug);
     if (donneesCombat->salleActuelle->monstre->pointsVie > 0) {
-        processusTourMonstre(donneesCombat);
+        processusTourMonstre(donneesCombat, debug);
     }
+    if (debug == true) {
+        donneesCombat->salleActuelle->monstre->pointsVie = 0;
+        return;
+    }
+    decrementerEffets(donneesCombat->joueur->listeEffetsSubis);
+    decrementerEffets(donneesCombat->salleActuelle->monstre->listeEffetsSubis);
 }
 
-void processusTourJoueur(p_donneesCombat donneesCombat) {
+void processusTourJoueur(p_donneesCombat donneesCombat, bool debug) {
+    infligerEffetsJoueur(donneesCombat);
     int choixCarte = -1;
     do {
         do {
@@ -82,8 +92,13 @@ void processusTourJoueur(p_donneesCombat donneesCombat) {
     jouerListeCartes(donneesCombat);
 }
 
-void processusTourMonstre(p_donneesCombat donneesCombat) {
+void processusTourMonstre(p_donneesCombat donneesCombat, bool debug) {
+    if (debug == true) {
+        donneesCombat->salleActuelle->monstre->pointsVie = 0;
+        return;
+    }
     jouerListeEffetsAttaqueMonstre(donneesCombat);
+    infligerEffetsMonstre(donneesCombat);
     donneesCombat->attaqueRoundMonstre = NULL;
 }
 
@@ -150,9 +165,116 @@ void jouerListeEffetsAttaqueMonstre(p_donneesCombat donneesCombat) {
 }
 
 void infligerEffetsJoueur(p_donneesCombat donneesCombat) {
+    p_effetChainable effetActuel = donneesCombat->joueur->listeEffetsSubis->premiereEffet;
 
+    int degats = 0;
+    int esquive = 0;
+
+    float multDegats = 1;
+    double multEsquive = 1;
+
+    p_joueur joueur = donneesCombat->joueur;
+    while (effetActuel != NULL) {
+        if (effetActuel->effet->nombreToursRestants != 0) {
+            if (strcmp(effetActuel->effet->nom, "Dégats") == 0) {
+                afficherEffet(effetActuel->effet, 3);
+                degats += effetActuel->effet->valeur;
+            } else if (strcmp(effetActuel->effet->nom, "Esquive") == 0) {
+                afficherEffet(effetActuel->effet, 3);
+                esquive += effetActuel->effet->valeur;
+            } else if (strcmp(effetActuel->effet->nom, "Feu") == 0) {
+                afficherEffet(effetActuel->effet, 3);
+                degats += effetActuel->effet->valeur;
+                effetActuel->effet->valeur /= 2;
+            } else if (strcmp(effetActuel->effet->nom, "Faible") == 0) {
+                afficherEffet(effetActuel->effet, 3);
+                degats-= effetActuel->effet->valeur;
+            } else if (strcmp(effetActuel->effet->nom, "Lenteur") == 0) {
+                afficherEffet(effetActuel->effet, 3);
+                multEsquive *= 0.5;
+            } else if (strcmp(effetActuel->effet->nom, "Force") == 0) {
+                afficherEffet(effetActuel->effet, 3);
+                degats += effetActuel->effet->valeur;
+            } else if (strcmp(effetActuel->effet->nom, "Dexterité") == 0) {
+                afficherEffet(effetActuel->effet, 3);
+                esquive += effetActuel->effet->valeur;
+            } else if (strcmp(effetActuel->effet->nom, "Mana") == 0) {
+                afficherEffet(effetActuel->effet, 3);
+                joueur->pointsManaActuels += effetActuel->effet->valeur;
+            } else if (strcmp(effetActuel->effet->nom, "Soin") == 0) {
+                afficherEffet(effetActuel->effet, 3);
+                joueur->pointsVieActuels += effetActuel->effet->valeur;
+            } else if (strcmp(effetActuel->effet->nom, "PV-max") == 0) {
+                afficherEffet(effetActuel->effet, 3);
+                joueur->pointsVieMax += effetActuel->effet->valeur;
+            } else if (strcmp(effetActuel->effet->nom, "Energie-max") == 0) {
+                afficherEffet(effetActuel->effet, 3);
+                joueur->pointsEnergieMax += effetActuel->effet->valeur;
+            }
+        }
+
+        effetActuel = effetActuel->effetSuivant;
+
+    }
+
+    joueur->pointsVieActuels -= degats*multDegats-esquive*multEsquive;
 }
 
 void infligerEffetsMonstre(p_donneesCombat donneesCombat) {
+    p_effetChainable effetActuel = donneesCombat->salleActuelle->monstre->listeEffetsSubis->premiereEffet;
 
+    int degats = 0;
+    int esquive = 0;
+
+    float multDegats = 1;
+    double multEsquive = 1;
+
+    p_monstre monstre = donneesCombat->salleActuelle->monstre;
+    while (effetActuel != NULL) {
+        if (effetActuel->effet->nombreToursRestants != 0) {
+            if (strcmp(effetActuel->effet->nom, "Dégats") == 0) {
+                afficherEffet(effetActuel->effet, 3);
+                degats += effetActuel->effet->valeur;
+            } else if (strcmp(effetActuel->effet->nom, "Esquive") == 0) {
+                afficherEffet(effetActuel->effet, 3);
+                esquive += effetActuel->effet->valeur;
+            } else if (strcmp(effetActuel->effet->nom, "Feu") == 0) {
+                afficherEffet(effetActuel->effet, 3);
+                degats += effetActuel->effet->valeur;
+                effetActuel->effet->valeur /= 2;
+            } else if (strcmp(effetActuel->effet->nom, "Faible") == 0) {
+                afficherEffet(effetActuel->effet, 3);
+                degats-= effetActuel->effet->valeur;
+            } else if (strcmp(effetActuel->effet->nom, "Lenteur") == 0) {
+                afficherEffet(effetActuel->effet, 3);
+                multEsquive *= 0.5;
+            } else if (strcmp(effetActuel->effet->nom, "Force") == 0) {
+                afficherEffet(effetActuel->effet, 3);
+                degats += effetActuel->effet->valeur;
+            } else if (strcmp(effetActuel->effet->nom, "Dexterité") == 0) {
+                afficherEffet(effetActuel->effet, 3);
+                esquive += effetActuel->effet->valeur;
+            } else if (strcmp(effetActuel->effet->nom, "Soin") == 0) {
+                afficherEffet(effetActuel->effet, 3);
+                monstre->pointsVie += effetActuel->effet->valeur;
+            }
+        }
+
+        effetActuel = effetActuel->effetSuivant;
+
+    }
+
+    donneesCombat->salleActuelle->monstre->pointsVie -= degats*multDegats-esquive*multEsquive;
+}
+
+void decrementerEffets(p_listeEffets listeEffets) {
+    p_effetChainable effetActuel = listeEffets->premiereEffet;
+
+    while (effetActuel != NULL) {
+        if (effetActuel->effet->nombreToursRestants > 0 && effetActuel->effet->permanent != true) {
+            effetActuel->effet->nombreToursRestants++;
+        }
+
+        effetActuel = effetActuel->effetSuivant;
+    }
 }
