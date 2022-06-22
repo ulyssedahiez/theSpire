@@ -9,7 +9,6 @@
 #include "Map.h"
 #include "Joueur.h"
 #include "CombatController.h"
-#include "sys/random.h"
 #include "../../Services/Headers/JoueurService.h"
 #include "../../Services/Headers/CarteService.h"
 #include "../../Services/Headers/MonstreService.h"
