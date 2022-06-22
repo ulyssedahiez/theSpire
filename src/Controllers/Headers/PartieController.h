@@ -15,6 +15,7 @@
 #include "../../Services/Headers/MapService.h"
 #include "../../Services/Headers/ObjetService.h"
 #include "../../Vue/Menu/Headers/Menu.h"
+#include "../../Services/Headers/JoueurService.h"
 
 void processusPartie();
 
@@ -26,9 +27,15 @@ p_salle choisirPremiereSalle(p_salleDebut salleActuelle);
 
 p_salle choisirSalleSuivante(p_map map, p_salle salleActuelle);
 
+void tranformerStrikeEnEsquive(p_donneesCombat donneesRound);
+
+void tranformerEsquiveEnStrike(p_donneesCombat donneesRound);
+
 void jouerCombat(p_donneesCombat donneesRound);
 
-void jouerEvent(p_event event, p_listeMonstres miniBosses, p_donneesCombat donneesRound);
+void choixJoueurEvent();
+
+void jouerEvent(p_listeMonstres miniBosses, p_donneesCombat donneesRound);
 
 void jouerSanctuaire(p_joueur joueur);
 
