@@ -121,6 +121,7 @@ void piocher5Cartes(p_donneesCombat donneesCombat) {
 void jouerListeCartes(p_donneesCombat donneesCombat) {
     p_carteChainable carteAJouer = donneesCombat->cartesAJouer->premiereCarte;
     p_carteChainable prochaineCarteAJouer;
+    printf("Peter va jouer ces cartes : \n");
     afficherListeCartes(donneesCombat->cartesAJouer, 5);
 
     while (carteAJouer != NULL) {

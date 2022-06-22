@@ -57,6 +57,13 @@ void processusPartie(bool debug)
                 printf("DEBUG : Processus de combat\n");
             }
             jouerCombat(donneesRound, debug);
+            if (debug == true) {
+                if (salleActuelle == map->derniereSalle->salleMilieu) {
+                    victoire = true;
+                    exit(1);
+                    break;
+                }
+            }
         } else if (NULL != salleActuelle->event) {
             printf("Salle actuelle : Event%d\n", salleActuelle->event->id);
             if (debug == true) {
@@ -66,20 +73,20 @@ void processusPartie(bool debug)
                 jouerEvent(creerListeMiniBosses(), donneesRound, debug);
             }
         } else {
-            printf("Salle actuelle : Sanctuaire\n");
-            if (debug == true) {
-                printf("DEBUG : Processus de sanctaire\n");
-            } else {
+            if (donneesRound->salleActuelle != map->derniereSalle) {
+                printf("Salle actuelle : Sanctuaire\n");
                 jouerSanctuaire(peter);
             }
+
         }
         defaite = verifierDefaite(peter);
-        victoire = verifierVictoire(salleActuelle);
+        victoire = verifierVictoire(donneesRound->salleActuelle);
 
-        if (defaite != true) {
+        if (defaite != true && victoire != true) {
             if (debug == true) {
                 debugMap(map, salleActuelle);
             } else {
+                printf("Salle remportée !!");
                 afficherMap(map, donneesRound->salleActuelle);
             }
             salleActuelle = choisirSalleSuivante(map, salleActuelle);
