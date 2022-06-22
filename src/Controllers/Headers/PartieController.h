@@ -36,7 +36,7 @@ void tranformerEsquiveEnStrike(p_donneesCombat donneesRound);
 
 void choixJoueurEvent();
 
-void jouerEvent(p_listeMonstres miniBosses, p_donneesCombat donneesRound);
+void jouerEvent(p_listeMonstres miniBosses, p_donneesCombat donneesRound, bool debug);
 
 void jouerSanctuaire(p_joueur joueur);
 

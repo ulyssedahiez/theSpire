@@ -54,7 +54,7 @@ void processusPartie(bool debug)
             printf("Salle actuelle : %s\n", salleActuelle->monstre->nom);
             donneesRound->salleActuelle = salleActuelle;
             if (debug == true) {
-                printf("DEBUG : Processus de combat");
+                printf("DEBUG : Processus de combat\n");
             }
             jouerCombat(donneesRound, debug);
         } else if (NULL != salleActuelle->event) {
@@ -63,12 +63,12 @@ void processusPartie(bool debug)
                 printf("DEBUG : Processus d'event");
             } else {
                 donneesRound->salleActuelle =salleActuelle;
-                jouerEvent(creerListeMiniBosses(), donneesRound);
+                jouerEvent(creerListeMiniBosses(), donneesRound, debug);
             }
         } else {
             printf("Salle actuelle : Sanctuaire\n");
             if (debug == true) {
-                printf("DEBUG : Processus de sanctaire");
+                printf("DEBUG : Processus de sanctaire\n");
             } else {
                 jouerSanctuaire(peter);
             }
@@ -198,8 +198,13 @@ void tranformerEsquiveEnStrike(p_donneesCombat donneesRound) {
     }
 }
 
-void jouerEvent(p_listeMonstres miniBosses, p_donneesCombat donneesRound) {
-
+void jouerEvent(p_listeMonstres miniBosses, p_donneesCombat donneesRound, bool debug) {
+    if (debug == true) {
+        if (donneesRound->salleActuelle->event->id != 4 && donneesRound->salleActuelle->event->id != 1) {
+            printf("DEBUG : Event en cours de développement");
+            return;
+        }
+    }
     printf("Bonjour voyageur ! Deux choix vont vous être confronté. À vous de faire le bon choix ! \n");
     int rock=0;
     do {
@@ -212,7 +217,7 @@ void jouerEvent(p_listeMonstres miniBosses, p_donneesCombat donneesRound) {
                 printf("Vous venez de lancer le combat avec ce monstre ! Quel courage, Bonne chance aventurier ! \n");
                 donneesRound->salleActuelle->monstre = trouverPointeurNiemeMonstre(miniBosses, genererEntier(0,
                                                                                                              miniBosses->nombreMonstres));
-                jouerCombat(donneesRound);
+                jouerCombat(donneesRound, false);
 
             } else if (rock == 2) {
                 printf("Très bien aventurier, vous décider de passer ce MiniBoss ! \n");

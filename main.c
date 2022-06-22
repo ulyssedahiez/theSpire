@@ -17,5 +17,5 @@ int main(int argc, char *argv[]) {
     if (debug == true) {
         printf("************ PARTIE LANCéE EN MODE DEBUG ************\n\n");
     }
-    lancerMenu();
+    lancerMenu(debug);
 }

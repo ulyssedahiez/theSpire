@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include "../../Controllers/Headers/PartieController.h"
 
-int lancerMenu(){
+int lancerMenu(bool debug) {
 
 
     int choix;
@@ -25,20 +25,20 @@ int lancerMenu(){
     switch (choix)
     {
         case 1:
-            processusPartie();
-            return lancerMenu();
+            processusPartie(debug);
+            return lancerMenu(debug);
         case 2:
             regles();
-            return lancerMenu();
+            return lancerMenu(debug);
         case 3:
             credit();
-            return lancerMenu();
+            return lancerMenu(debug);
         case 4:
             printf("\nBye Bye !\n");
             return 0;
         default:
             printf("Vous n'avez pas rentre un nombre correct.\n\n");
-            return lancerMenu();
+            return lancerMenu(debug);
 
 
     }
