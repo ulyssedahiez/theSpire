@@ -17,7 +17,7 @@
 #include "../../Vue/Menu/Headers/Menu.h"
 #include "../../Services/Headers/JoueurService.h"
 
-void processusPartie();
+void processusPartie(bool debug);
 
 bool verifierDefaite(p_joueur joueur);
 
@@ -27,15 +27,15 @@ p_salle choisirPremiereSalle(p_salleDebut salleActuelle);
 
 p_salle choisirSalleSuivante(p_map map, p_salle salleActuelle);
 
+void jouerCombat(p_donneesCombat donneesRound, bool debug);
+
 void tranformerStrikeEnEsquive(p_donneesCombat donneesRound);
 
 void tranformerEsquiveEnStrike(p_donneesCombat donneesRound);
 
-void jouerCombat(p_donneesCombat donneesRound);
-
 void choixJoueurEvent();
 
-void jouerEvent(p_listeMonstres miniBosses, p_donneesCombat donneesRound);
+void jouerEvent(p_listeMonstres miniBosses, p_donneesCombat donneesRound, bool debug);
 
 void jouerSanctuaire(p_joueur joueur);
 

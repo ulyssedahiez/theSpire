@@ -28,17 +28,17 @@ typedef t_donneesCombat * p_donneesCombat;
 
 p_donneesCombat creerDonneesCombat();
 
-void processusCombat(p_donneesCombat donneesCombat);
+void processusCombat(p_donneesCombat donneesCombat, bool debug);
 
-void processusDebutCombat(p_donneesCombat donneesCombat);
+void processusDebutCombat(p_donneesCombat donneesCombat, bool debug);
 
-void processusRound(p_donneesCombat donneesCombat);
+void processusRound(p_donneesCombat donneesCombat, bool debug);
 
-void processusTourJoueur(p_donneesCombat donneesCombat);
+void processusTourJoueur(p_donneesCombat donneesCombat, bool debug);
 
-void processusTourMonstre(p_donneesCombat donneesCombat);
+void processusTourMonstre(p_donneesCombat donneesCombat, bool debug);
 
-void processusDebutRound(p_donneesCombat donneesCombat);
+void processusDebutRound(p_donneesCombat donneesCombat, bool debug);
 
 void piocher5Cartes(p_donneesCombat donneesCombat);
 
@@ -49,5 +49,7 @@ void jouerListeEffetsAttaqueMonstre(p_donneesCombat donneesCombat);
 void infligerEffetsJoueur(p_donneesCombat donneesCombat);
 
 void infligerEffetsMonstre(p_donneesCombat donneesCombat);
+
+void decrementerEffets(p_listeEffets listeEffets);
 
 #endif //THESPIRE_COMBATCONTROLLER_H

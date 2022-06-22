@@ -53,8 +53,8 @@ p_listeCartes genererListeCartesAtypiques() {
 
     p_listeEffets listeEffetsPostureDefensive = creerListeEffets();
     ajouterEffetListe(listeEffetsPostureDefensive, creerEffet("Dextérité", true, 2));
-    ajouterEffetListe(listeEffetsPostureDefensive, creerEffet("Force", true, -1));
-    ajouterCarteListe(atypiques, creerCarte("Posture défensive", "atypique", 0, 0, listeEffetsPostureDefensive, "Dextérité +2, mais Force -1", "Permet de mieux esquiver, mais faire durer les combats plus longtemps"));
+    ajouterEffetListe(listeEffetsPostureDefensive, creerEffet("Force", true, 1));
+    ajouterCarteListe(atypiques, creerCarte("Posture défensive", "atypique", 0, 0, listeEffetsPostureDefensive, "Dextérité +2, mais Force 1", "Permet de mieux esquiver, mais faire durer les combats plus longtemps"));
 
     p_listeEffets listeEffetsConcentration = creerListeEffets();
     ajouterEffetListe(listeEffetsConcentration, creerEffet("Mana", true, 50));

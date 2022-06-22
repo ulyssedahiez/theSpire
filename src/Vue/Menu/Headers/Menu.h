@@ -7,7 +7,7 @@
 #include "../../Model/Headers/Carte.h"
 #include "Affichages.h"
 
-int lancerMenu();
+int lancerMenu(bool debug);
 
 int menuChoixSalle(char* choix1, char* choix2, char* choix3, char* choix4);
 

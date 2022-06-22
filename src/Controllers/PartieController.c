@@ -8,14 +8,18 @@
 #include <time.h>
 #include <stdlib.h>
 #include "../Vue/Menu//Headers/Affichages.h"
-
-void processusPartie() {
+void processusPartie(bool debug)
+{
     p_joueur peter = creerJoueur();
 
     p_map map = creerMap();
     remplirMap(map);
 
-    afficherMap(map, NULL);
+    if (debug == true) {
+        debugMap(map, NULL);
+    } else {
+        afficherMap(map, NULL);
+    }
 
     p_salle salleActuelle = choisirPremiereSalle(map->premiereSalle);
 
@@ -40,24 +44,53 @@ void processusPartie() {
 
     while (true != defaite && true != victoire) {
 
-        afficherMap(map, salleActuelle);
-
+        if (debug == true) {
+            debugMap(map, salleActuelle);
+        } else {
+            afficherMap(map, salleActuelle);
+        }
 
         if (NULL != salleActuelle->monstre) {
             printf("Salle actuelle : %s\n", salleActuelle->monstre->nom);
             donneesRound->salleActuelle = salleActuelle;
-            jouerCombat(donneesRound);
+            if (debug == true) {
+                printf("DEBUG : Processus de combat\n");
+            }
+            jouerCombat(donneesRound, debug);
+            if (debug == true) {
+                if (salleActuelle == map->derniereSalle->salleMilieu) {
+                    victoire = true;
+                    exit(1);
+                    break;
+                }
+            }
         } else if (NULL != salleActuelle->event) {
             printf("Salle actuelle : Event%d\n", salleActuelle->event->id);
-            donneesRound->salleActuelle =salleActuelle;
-            jouerEvent(creerListeMiniBosses(), donneesRound);
+            if (debug == true) {
+                printf("DEBUG : Processus d'event");
+            } else {
+                donneesRound->salleActuelle =salleActuelle;
+                jouerEvent(creerListeMiniBosses(), donneesRound, debug);
+            }
         } else {
-            jouerSanctuaire(peter);
-        }
+            if (donneesRound->salleActuelle != map->derniereSalle) {
+                printf("Salle actuelle : Sanctuaire\n");
+                jouerSanctuaire(peter);
+            }
 
-        salleActuelle = choisirSalleSuivante(map, salleActuelle);
+        }
         defaite = verifierDefaite(peter);
-        victoire = verifierVictoire(salleActuelle);
+        victoire = verifierVictoire(donneesRound->salleActuelle);
+
+        if (defaite != true && victoire != true) {
+            if (debug == true) {
+                debugMap(map, salleActuelle);
+            } else {
+                printf("Salle remportée !!");
+                afficherMap(map, donneesRound->salleActuelle);
+            }
+            salleActuelle = choisirSalleSuivante(map, salleActuelle);
+        }
     }
 
     if (true == defaite) {
@@ -172,8 +205,13 @@ void tranformerEsquiveEnStrike(p_donneesCombat donneesRound) {
     }
 }
 
-void jouerEvent(p_listeMonstres miniBosses, p_donneesCombat donneesRound) {
-
+void jouerEvent(p_listeMonstres miniBosses, p_donneesCombat donneesRound, bool debug) {
+    if (debug == true) {
+        if (donneesRound->salleActuelle->event->id != 4 && donneesRound->salleActuelle->event->id != 1) {
+            printf("DEBUG : Event en cours de développement");
+            return;
+        }
+    }
     printf("Bonjour voyageur ! Deux choix vont vous être confronté. À vous de faire le bon choix ! \n");
     int rock=0;
     do {
@@ -186,7 +224,7 @@ void jouerEvent(p_listeMonstres miniBosses, p_donneesCombat donneesRound) {
                 printf("Vous venez de lancer le combat avec ce monstre ! Quel courage, Bonne chance aventurier ! \n");
                 donneesRound->salleActuelle->monstre = trouverPointeurNiemeMonstre(miniBosses, genererEntier(0,
                                                                                                              miniBosses->nombreMonstres));
-                jouerCombat(donneesRound);
+                jouerCombat(donneesRound, false);
 
             } else if (rock == 2) {
                 printf("Très bien aventurier, vous décider de passer ce MiniBoss ! \n");
@@ -270,8 +308,8 @@ void jouerSanctuaire(p_joueur joueur) {
 
 }
 
-void jouerCombat(p_donneesCombat donneesRound) {
+void jouerCombat(p_donneesCombat donneesRound, bool debug) {
 
-    processusCombat(donneesRound);
+    processusCombat(donneesRound, debug);
 }
 
