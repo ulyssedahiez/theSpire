@@ -1,0 +1,3 @@
+D:/Desktop/cours/AP3/C/theSpire/cmake-build-debug-mingw/CMakeFiles/theSpire.dir
+D:/Desktop/cours/AP3/C/theSpire/cmake-build-debug-mingw/CMakeFiles/edit_cache.dir
+D:/Desktop/cours/AP3/C/theSpire/cmake-build-debug-mingw/CMakeFiles/rebuild_cache.dir
